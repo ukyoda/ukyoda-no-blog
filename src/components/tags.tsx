@@ -2,8 +2,15 @@ import React from 'react'
 
 import * as styles from './tags.module.css'
 
-const Tags = ({ tags }) =>
-  tags?.length > 0 && (
+type Props = {
+  tags?: string[]
+}
+
+const Tags: React.FC<Props> = ({ tags }) => {
+  if (!tags?.length) {
+    return null
+  }
+  return (
     <small className={styles.tags}>
       {tags.map((tag) => (
         <div key={tag} className={styles.tag}>
@@ -12,5 +19,6 @@ const Tags = ({ tags }) =>
       ))}
     </small>
   )
+}
 
 export default Tags

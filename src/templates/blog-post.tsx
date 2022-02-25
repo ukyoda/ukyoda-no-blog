@@ -15,7 +15,7 @@ class BlogPostTemplate extends React.Component {
     const next = get(this.props, 'data.next')
 
     return (
-      <Layout location={this.props.location}>
+      <Layout>
         <Seo
           title={post.title}
           description={post.description.childMarkdownRemark.excerpt}
