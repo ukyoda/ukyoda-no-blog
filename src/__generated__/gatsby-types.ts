@@ -888,8 +888,6 @@ type ContentfulPerson = ContentfulReference & ContentfulEntry & Node & {
   readonly title: Maybe<Scalars['String']>;
   readonly company: Maybe<Scalars['String']>;
   readonly email: Maybe<Scalars['String']>;
-  readonly phone: Maybe<Scalars['String']>;
-  readonly facebook: Maybe<Scalars['String']>;
   readonly twitter: Maybe<Scalars['String']>;
   readonly github: Maybe<Scalars['String']>;
   readonly image: Maybe<ContentfulAsset>;
@@ -1421,8 +1419,6 @@ type Query_contentfulPersonArgs = {
   title: Maybe<StringQueryOperatorInput>;
   company: Maybe<StringQueryOperatorInput>;
   email: Maybe<StringQueryOperatorInput>;
-  phone: Maybe<StringQueryOperatorInput>;
-  facebook: Maybe<StringQueryOperatorInput>;
   twitter: Maybe<StringQueryOperatorInput>;
   github: Maybe<StringQueryOperatorInput>;
   image: Maybe<ContentfulAssetFilterInput>;
@@ -4356,8 +4352,6 @@ type ContentfulPersonFilterInput = {
   readonly title: Maybe<StringQueryOperatorInput>;
   readonly company: Maybe<StringQueryOperatorInput>;
   readonly email: Maybe<StringQueryOperatorInput>;
-  readonly phone: Maybe<StringQueryOperatorInput>;
-  readonly facebook: Maybe<StringQueryOperatorInput>;
   readonly twitter: Maybe<StringQueryOperatorInput>;
   readonly github: Maybe<StringQueryOperatorInput>;
   readonly image: Maybe<ContentfulAssetFilterInput>;
@@ -4520,8 +4514,6 @@ type ContentfulPersonFieldsEnum =
   | 'title'
   | 'company'
   | 'email'
-  | 'phone'
-  | 'facebook'
   | 'twitter'
   | 'github'
   | 'image.contentful_id'
@@ -4664,8 +4656,6 @@ type ContentfulPersonFieldsEnum =
   | 'blog_post.author.title'
   | 'blog_post.author.company'
   | 'blog_post.author.email'
-  | 'blog_post.author.phone'
-  | 'blog_post.author.facebook'
   | 'blog_post.author.twitter'
   | 'blog_post.author.github'
   | 'blog_post.author.image.contentful_id'
@@ -5562,8 +5552,6 @@ type ContentfulBlogPostFieldsEnum =
   | 'author.title'
   | 'author.company'
   | 'author.email'
-  | 'author.phone'
-  | 'author.facebook'
   | 'author.twitter'
   | 'author.github'
   | 'author.image.contentful_id'
@@ -5641,8 +5629,6 @@ type ContentfulBlogPostFieldsEnum =
   | 'author.blog_post.author.title'
   | 'author.blog_post.author.company'
   | 'author.blog_post.author.email'
-  | 'author.blog_post.author.phone'
-  | 'author.blog_post.author.facebook'
   | 'author.blog_post.author.twitter'
   | 'author.blog_post.author.github'
   | 'author.blog_post.author.blog_post'
