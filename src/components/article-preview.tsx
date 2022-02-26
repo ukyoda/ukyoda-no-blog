@@ -11,6 +11,7 @@ type Post = {
   title: string
   date: string
   tags: string[]
+  publishDate: string
   // TODO: fix any
   description: any
   heroImage: any
