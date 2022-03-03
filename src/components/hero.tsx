@@ -1,5 +1,5 @@
-import React from 'react'
 import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image'
+import React from 'react'
 
 import * as styles from './hero.module.css'
 

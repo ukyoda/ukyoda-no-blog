@@ -5,7 +5,7 @@ type Props = {
   as?: 'div' | 'footer'
 }
 
-const Container: React.VFC<Props> = ({ children, as = 'div' }) => {
+const Container: React.VFC<Props> = ({ children, as = 'div' }: Props) => {
   const style: React.CSSProperties = {
     maxWidth: 'var(--size-max-width)',
     margin: '0 auto',
@@ -16,6 +16,8 @@ const Container: React.VFC<Props> = ({ children, as = 'div' }) => {
       return <div style={style}>{children}</div>
     case 'footer':
       return <footer style={style}>{children}</footer>
+    default:
+      return null
   }
 }
 

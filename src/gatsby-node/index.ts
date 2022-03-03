@@ -1,5 +1,6 @@
 import * as path from 'path'
-import { GatsbyNode, Actions } from 'gatsby'
+
+import { GatsbyNode } from 'gatsby'
 
 type ResultNode = {
   title: string

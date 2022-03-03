@@ -1,10 +1,10 @@
-import React from 'react'
 import { Link } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'
+import React from 'react'
 
+import * as styles from './article-preview.module.css'
 import Container from './container'
 import Tags from './tags'
-import * as styles from './article-preview.module.css'
 
 type Post = {
   slug: string
@@ -13,7 +13,9 @@ type Post = {
   tags: string[]
   publishDate: string
   // TODO: fix any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   description: any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   heroImage: any
 }
 
@@ -36,6 +38,7 @@ const ArticlePreview: React.FC<Props> = ({ posts }) => {
                 <h2 className={styles.title}>{post.title}</h2>
               </Link>
               <div
+                // eslint-disable-next-line react/no-danger
                 dangerouslySetInnerHTML={{
                   __html: post.description.childMarkdownRemark.html,
                 }}
