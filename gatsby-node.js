@@ -1,4 +1,5 @@
 'use strict'
+const path = require('path')
 
 require('ts-node').register({
   compilerOptions: {
@@ -23,6 +24,11 @@ exports.createSchemaCustomization = createSchemaCustomization
 //robertmarshall.dev/blog/fix-warn-chunk-commons-mini-css-extract-plugin-error-in-gatsby-js/
 exports.onCreateWebpackConfig = ({ actions }) => {
   actions.setWebpackConfig({
+    resolve: {
+      alias: {
+        '~': path.resolve(__dirname, 'src'),
+      },
+    },
     plugins: [
       new FilterWarningsPlugin({
         exclude:
