@@ -3,7 +3,7 @@
 import React from 'react'
 
 import '~/styles/variables.css'
-import '~/styles/global.css'
+import '~/styles/global-old.css'
 import Footer from './footer'
 import Navigation from './navigation'
 import Seo from './seo'
