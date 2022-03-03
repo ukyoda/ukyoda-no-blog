@@ -1,12 +1,18 @@
+// TODO: remove eslint-disable after the ClassComponent refactor to a FunctionalComponent
+/* eslint-disable react/prefer-stateless-function */
 import React from 'react'
 
 import './variables.css'
 import './global.css'
-import Seo from './seo'
-import Navigation from './navigation'
 import Footer from './footer'
+import Navigation from './navigation'
+import Seo from './seo'
 
-class Template extends React.Component {
+type Props = {
+  children: React.ReactNode
+}
+
+class Template extends React.Component<Props> {
   render() {
     const { children } = this.props
 

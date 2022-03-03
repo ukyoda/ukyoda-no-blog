@@ -1,13 +1,17 @@
-import React from 'react'
+// TODO: remove eslint-disable after the ClassComponent refactor to a FunctionalComponent
+/* eslint-disable react/prefer-stateless-function */
 import { Link, graphql } from 'gatsby'
 import get from 'lodash/get'
+import React from 'react'
 
-import Seo from '../components/seo'
-import Layout from '../components/layout'
 import Hero from '../components/hero'
+import Layout from '../components/layout'
+import Seo from '../components/seo'
 import Tags from '../components/tags'
+
 import * as styles from './blog-post.module.css'
 
+// TODO: fix this ClassComponent to FunctionalComponent
 class BlogPostTemplate extends React.Component {
   render() {
     const post = get(this.props, 'data.contentfulBlogPost')
@@ -35,6 +39,7 @@ class BlogPostTemplate extends React.Component {
           <div className={styles.article}>
             <div
               className={styles.body}
+              // eslint-disable-next-line react/no-danger
               dangerouslySetInnerHTML={{
                 __html: post.body?.childMarkdownRemark?.html,
               }}

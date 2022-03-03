@@ -1,6 +1,6 @@
+import { useStaticQuery, graphql } from 'gatsby'
 import * as React from 'react'
 import { Helmet } from 'react-helmet'
-import { useStaticQuery, graphql } from 'gatsby'
 
 type Meta =
   | {
@@ -19,14 +19,15 @@ type Props = {
   title: string
   image: string
 }
+type OptionalProps = Partial<Props>
 
-const Seo: React.VFC<Partial<Props>> = ({
+const Seo: React.VFC<OptionalProps> = ({
   description = '',
   lang = 'en',
   meta = [],
   title,
   image,
-}) => {
+}: OptionalProps) => {
   const { site } = useStaticQuery(
     graphql`
       query {
