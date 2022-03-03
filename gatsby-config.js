@@ -51,6 +51,7 @@ module.exports = {
       options: contentfulConfig,
     },
     'gatsby-plugin-typegen',
+    'gatsby-plugin-postcss',
     'gatsby-plugin-dts-css-modules',
   ],
 }
