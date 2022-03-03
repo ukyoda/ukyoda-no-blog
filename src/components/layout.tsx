@@ -2,8 +2,8 @@
 /* eslint-disable react/prefer-stateless-function */
 import React from 'react'
 
-import './variables.css'
-import './global.css'
+import '~/styles/variables.css'
+import '~/styles/global.css'
 import Footer from './footer'
 import Navigation from './navigation'
 import Seo from './seo'

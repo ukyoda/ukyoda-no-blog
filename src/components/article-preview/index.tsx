@@ -2,9 +2,10 @@ import { Link } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'
 import React from 'react'
 
+import Container from '../container'
+import Tags from '../tags'
+
 import * as styles from './article-preview.module.css'
-import Container from './container'
-import Tags from './tags'
 
 type Post = {
   slug: string
