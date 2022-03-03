@@ -68,7 +68,7 @@
     "netlify:login": "netlify login",
     "netlify:deploy": "netlify deploy -d public -p",
     "lint": "npm run lint:eslint && npm run lint:typecheck",
-    "lint:eslint": "eslint ./src/**/*",
+    "lint:eslint": "eslint ./src",
     "lint:typecheck": "tsc --noEmit",
     "gatsby": "gatsby"
   }
