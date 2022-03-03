@@ -14,7 +14,7 @@ const {
   createPages,
   onCreateNode,
   createSchemaCustomization,
-} = require('./src/gatsby-node/index')
+} = require('./src/main')
 const FilterWarningsPlugin = require('webpack-filter-warnings-plugin')
 
 exports.createPages = createPages
