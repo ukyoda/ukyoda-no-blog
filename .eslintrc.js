@@ -18,7 +18,6 @@ module.exports = {
   },
   rules: {
     'no-nested-ternary': 'off',
-    // 'react-hooks/exhaustive-deps': 'off',
     'no-console': 'warn', // console.logがあったらwarningを出す
     'arrow-body-style': 'off', // 矢印のbodyを許可
     'import/prefer-default-export': 'off', // 名前付きexportを許可
