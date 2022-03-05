@@ -25,6 +25,7 @@ module.exports = {
     '@typescript-eslint/no-use-before-define': ['error'],
     'dot-notation': 'off',
     '@typescript-eslint/dot-notation': ['error'],
+    'import/extensions': 'off', // WANTFIX: そのうち有効にしたい
     'import/order': [
       'warn',
       {
@@ -33,7 +34,7 @@ module.exports = {
       },
     ],
     'react/react-in-jsx-scope': 'off', // jsxで使うreactを許可
-    'react/jsx-filename-extension': 'off', // jsxファイル名の拡張子を許可
+    'react/jsx-filename-extension': ['off'], // jsxファイル名の拡張子を許可
     'react/function-component-definition': 'off', // functionalコンポーネントOK（むしろ歓迎）
     'react/jsx-props-no-spreading': 'off', // propsのspreadを許可
     'react/require-default-props': [

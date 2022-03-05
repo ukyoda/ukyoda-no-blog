@@ -28,6 +28,7 @@ exports.onCreateWebpackConfig = ({ actions }) => {
       alias: {
         '~': path.resolve(__dirname, 'src'),
       },
+      extensions: ['.ts', '.tsx', '.js', '.jsx'],
     },
     plugins: [
       new FilterWarningsPlugin({
