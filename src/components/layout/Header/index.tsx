@@ -6,13 +6,14 @@ import { Container } from '../Container'
 import * as styles from './Header.module.css'
 
 export const Header: React.VFC = () => (
-  <header className={styles.header}>
-    <Container>
+  <Container>
+    <div className={styles.headerContents}>
       <div className={styles.brand}>
         <Link to="/">
-          <h1>Header</h1>
+          <p>ukyoda&#39;s Blog</p>
         </Link>
       </div>
-    </Container>
-  </header>
+      <div>test</div>
+    </div>
+  </Container>
 )

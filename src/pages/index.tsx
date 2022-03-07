@@ -4,13 +4,13 @@ import React from 'react'
 import { Container } from '~/components/layout/Container'
 import { Header } from '~/components/layout/Header'
 
+type Props = PageProps<GatsbyTypes.PostsFromTopQuery>
+
 const Top: React.FC = () => {
   return (
     <div>
       <Header />
-      <Container>
-        <div>test</div>
-      </Container>
+      <Container />
     </div>
   )
 }
