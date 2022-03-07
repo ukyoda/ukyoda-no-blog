@@ -1,0 +1,8 @@
+.header {
+  @apply bg-black text-white;
+}
+
+.brand {
+  padding: 10px;
+  font-size: 1.4em;
+}
