@@ -5,6 +5,7 @@ import { Body } from '~/components/layout/Body'
 import { Container } from '~/components/layout/Container'
 import { Header } from '~/components/layout/Header'
 import { Description } from '~/components/pages/Top/Description'
+import { Notice } from '~/components/pages/Top/Notice'
 
 type Props = PageProps<GatsbyTypes.PostsFromTopQuery>
 

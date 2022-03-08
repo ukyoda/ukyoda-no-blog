@@ -1,0 +1,6 @@
+.anchor {
+  @apply text-link;
+}
+.anchor:hover {
+  opacity: 0.8;
+}
