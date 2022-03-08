@@ -1,8 +1,10 @@
 import { graphql, PageProps } from 'gatsby'
 import React from 'react'
 
+import { Body } from '~/components/layout/Body'
 import { Container } from '~/components/layout/Container'
 import { Header } from '~/components/layout/Header'
+import { Description } from '~/components/pages/Top/Description'
 
 type Props = PageProps<GatsbyTypes.PostsFromTopQuery>
 
@@ -10,7 +12,9 @@ const Top: React.FC = () => {
   return (
     <div>
       <Header />
-      <Container />
+      <Body>
+        <Description />
+      </Body>
     </div>
   )
 }

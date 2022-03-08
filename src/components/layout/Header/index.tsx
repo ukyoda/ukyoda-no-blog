@@ -11,7 +11,7 @@ export const Header: React.VFC = () => (
       <div className={styles.headerContents}>
         <div className={styles.brand}>
           <Link to="/">
-            <p>ukyoda&#39;s Blog</p>
+            <h1>ukyoda&#39;s Blog</h1>
           </Link>
         </div>
         <nav>

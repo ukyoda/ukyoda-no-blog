@@ -38,6 +38,7 @@ module.exports = {
     'react/function-component-definition': 'off', // functionalコンポーネントOK（むしろ歓迎）
     'react/jsx-props-no-spreading': 'off', // propsのspreadを許可
     'react/require-default-props': 'off', // default propsを許可
+    'react/prop-types': 'off',
     'jsx-a11y/label-has-associated-control': [
       // a11y関連設定 (https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/master/docs/rules/label-has-associated-control.md)
       'error',
