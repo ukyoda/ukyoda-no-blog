@@ -24,14 +24,15 @@ export default Top
 
 export const query = graphql`
   query PostsFromTop {
-    allContentfulMyPost(sort: { order: DESC }) {
+    allContentfulMyPost {
       nodes {
-        title
         body {
+          body
           childMarkdownRemark {
             html
           }
         }
+        title
       }
     }
   }

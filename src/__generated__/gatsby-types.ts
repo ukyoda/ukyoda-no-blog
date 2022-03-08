@@ -700,10 +700,7 @@ type ContentfulAsset = ContentfulReference & Node & {
   readonly description: Maybe<Scalars['String']>;
   readonly node_locale: Maybe<Scalars['String']>;
   readonly sys: Maybe<ContentfulAssetSys>;
-  readonly fixed: Maybe<ContentfulFixed>;
-  readonly fluid: Maybe<ContentfulFluid>;
   readonly gatsbyImageData: Maybe<Scalars['JSON']>;
-  readonly resize: Maybe<ContentfulResize>;
   readonly parent: Maybe<Node>;
   readonly children: ReadonlyArray<Node>;
   readonly internal: Internal;
@@ -726,38 +723,13 @@ type ContentfulAsset_updatedAtArgs = {
 };
 
 
-type ContentfulAsset_fixedArgs = {
-  width: Maybe<Scalars['Int']>;
-  height: Maybe<Scalars['Int']>;
-  quality?: Maybe<Scalars['Int']>;
-  toFormat?: Maybe<ContentfulImageFormat>;
-  resizingBehavior: Maybe<ImageResizingBehavior>;
-  cropFocus?: Maybe<ContentfulImageCropFocus>;
-  cornerRadius?: Maybe<Scalars['Int']>;
-  background?: Maybe<Scalars['String']>;
-};
-
-
-type ContentfulAsset_fluidArgs = {
-  maxWidth: Maybe<Scalars['Int']>;
-  maxHeight: Maybe<Scalars['Int']>;
-  quality?: Maybe<Scalars['Int']>;
-  toFormat?: Maybe<ContentfulImageFormat>;
-  resizingBehavior: Maybe<ImageResizingBehavior>;
-  cropFocus?: Maybe<ContentfulImageCropFocus>;
-  cornerRadius?: Maybe<Scalars['Int']>;
-  background?: Maybe<Scalars['String']>;
-  sizes: Maybe<Scalars['String']>;
-};
-
-
 type ContentfulAsset_gatsbyImageDataArgs = {
-  layout?: Maybe<ContentfulImageLayout>;
+  layout: Maybe<GatsbyImageLayout>;
   width: Maybe<Scalars['Int']>;
   height: Maybe<Scalars['Int']>;
   aspectRatio: Maybe<Scalars['Float']>;
-  placeholder?: Maybe<ContentfulImagePlaceholder>;
-  formats?: Maybe<ReadonlyArray<Maybe<ContentfulImageFormat>>>;
+  placeholder: Maybe<GatsbyImagePlaceholder>;
+  formats?: Maybe<ReadonlyArray<Maybe<GatsbyImageFormat>>>;
   outputPixelDensities: Maybe<ReadonlyArray<Maybe<Scalars['Float']>>>;
   breakpoints: Maybe<ReadonlyArray<Maybe<Scalars['Int']>>>;
   sizes: Maybe<Scalars['String']>;
@@ -767,19 +739,6 @@ type ContentfulAsset_gatsbyImageDataArgs = {
   cropFocus: Maybe<ContentfulImageCropFocus>;
   cornerRadius?: Maybe<Scalars['Int']>;
   quality?: Maybe<Scalars['Int']>;
-};
-
-
-type ContentfulAsset_resizeArgs = {
-  width: Maybe<Scalars['Int']>;
-  height: Maybe<Scalars['Int']>;
-  quality?: Maybe<Scalars['Int']>;
-  jpegProgressive?: Maybe<Scalars['Boolean']>;
-  resizingBehavior: Maybe<ImageResizingBehavior>;
-  toFormat?: Maybe<ContentfulImageFormat>;
-  cropFocus?: Maybe<ContentfulImageCropFocus>;
-  background?: Maybe<Scalars['String']>;
-  cornerRadius?: Maybe<Scalars['Int']>;
 };
 
 type ContentfulAssetFile = {
@@ -803,25 +762,6 @@ type ContentfulAssetSys = {
   readonly type: Maybe<Scalars['String']>;
   readonly revision: Maybe<Scalars['Int']>;
 };
-
-type ContentfulFixed = {
-  readonly base64: Maybe<Scalars['String']>;
-  readonly tracedSVG: Maybe<Scalars['String']>;
-  readonly aspectRatio: Maybe<Scalars['Float']>;
-  readonly width: Scalars['Float'];
-  readonly height: Scalars['Float'];
-  readonly src: Scalars['String'];
-  readonly srcSet: Scalars['String'];
-  readonly srcWebp: Maybe<Scalars['String']>;
-  readonly srcSetWebp: Maybe<Scalars['String']>;
-};
-
-type ContentfulImageFormat =
-  | 'NO_CHANGE'
-  | 'AUTO'
-  | 'jpg'
-  | 'png'
-  | 'webp';
 
 type ImageResizingBehavior =
   | 'NO_CHANGE'
@@ -848,37 +788,6 @@ type ContentfulImageCropFocus =
   | 'face'
   | 'faces'
   | 'center';
-
-type ContentfulFluid = {
-  readonly base64: Maybe<Scalars['String']>;
-  readonly tracedSVG: Maybe<Scalars['String']>;
-  readonly aspectRatio: Scalars['Float'];
-  readonly src: Scalars['String'];
-  readonly srcSet: Scalars['String'];
-  readonly srcWebp: Maybe<Scalars['String']>;
-  readonly srcSetWebp: Maybe<Scalars['String']>;
-  readonly sizes: Scalars['String'];
-};
-
-type ContentfulImageLayout =
-  | 'fixed'
-  | 'fullWidth'
-  | 'constrained';
-
-type ContentfulImagePlaceholder =
-  | 'dominantColor'
-  | 'tracedSVG'
-  | 'blurred'
-  | 'none';
-
-type ContentfulResize = {
-  readonly base64: Maybe<Scalars['String']>;
-  readonly tracedSVG: Maybe<Scalars['String']>;
-  readonly src: Maybe<Scalars['String']>;
-  readonly width: Maybe<Scalars['Int']>;
-  readonly height: Maybe<Scalars['Int']>;
-  readonly aspectRatio: Maybe<Scalars['Float']>;
-};
 
 type ContentfulPerson = ContentfulReference & ContentfulEntry & Node & {
   readonly contentful_id: Scalars['String'];
@@ -1066,6 +975,7 @@ type ContentfulMyPost = ContentfulReference & ContentfulEntry & Node & {
   readonly id: Scalars['ID'];
   readonly node_locale: Scalars['String'];
   readonly title: Maybe<Scalars['String']>;
+  readonly slug: Maybe<Scalars['String']>;
   readonly publishDate: Maybe<Scalars['Date']>;
   readonly body: Maybe<contentfulMyPostBodyTextNode>;
   readonly spaceId: Maybe<Scalars['String']>;
@@ -1549,10 +1459,7 @@ type Query_contentfulAssetArgs = {
   description: Maybe<StringQueryOperatorInput>;
   node_locale: Maybe<StringQueryOperatorInput>;
   sys: Maybe<ContentfulAssetSysFilterInput>;
-  fixed: Maybe<ContentfulFixedFilterInput>;
-  fluid: Maybe<ContentfulFluidFilterInput>;
   gatsbyImageData: Maybe<JSONQueryOperatorInput>;
-  resize: Maybe<ContentfulResizeFilterInput>;
   parent: Maybe<NodeFilterInput>;
   children: Maybe<NodeFilterListInput>;
   internal: Maybe<InternalFilterInput>;
@@ -1668,6 +1575,7 @@ type Query_contentfulMyPostArgs = {
   id: Maybe<StringQueryOperatorInput>;
   node_locale: Maybe<StringQueryOperatorInput>;
   title: Maybe<StringQueryOperatorInput>;
+  slug: Maybe<StringQueryOperatorInput>;
   publishDate: Maybe<DateQueryOperatorInput>;
   body: Maybe<contentfulMyPostBodyTextNodeFilterInput>;
   spaceId: Maybe<StringQueryOperatorInput>;
@@ -4297,38 +4205,6 @@ type ContentfulAssetSysFilterInput = {
   readonly revision: Maybe<IntQueryOperatorInput>;
 };
 
-type ContentfulFixedFilterInput = {
-  readonly base64: Maybe<StringQueryOperatorInput>;
-  readonly tracedSVG: Maybe<StringQueryOperatorInput>;
-  readonly aspectRatio: Maybe<FloatQueryOperatorInput>;
-  readonly width: Maybe<FloatQueryOperatorInput>;
-  readonly height: Maybe<FloatQueryOperatorInput>;
-  readonly src: Maybe<StringQueryOperatorInput>;
-  readonly srcSet: Maybe<StringQueryOperatorInput>;
-  readonly srcWebp: Maybe<StringQueryOperatorInput>;
-  readonly srcSetWebp: Maybe<StringQueryOperatorInput>;
-};
-
-type ContentfulFluidFilterInput = {
-  readonly base64: Maybe<StringQueryOperatorInput>;
-  readonly tracedSVG: Maybe<StringQueryOperatorInput>;
-  readonly aspectRatio: Maybe<FloatQueryOperatorInput>;
-  readonly src: Maybe<StringQueryOperatorInput>;
-  readonly srcSet: Maybe<StringQueryOperatorInput>;
-  readonly srcWebp: Maybe<StringQueryOperatorInput>;
-  readonly srcSetWebp: Maybe<StringQueryOperatorInput>;
-  readonly sizes: Maybe<StringQueryOperatorInput>;
-};
-
-type ContentfulResizeFilterInput = {
-  readonly base64: Maybe<StringQueryOperatorInput>;
-  readonly tracedSVG: Maybe<StringQueryOperatorInput>;
-  readonly src: Maybe<StringQueryOperatorInput>;
-  readonly width: Maybe<IntQueryOperatorInput>;
-  readonly height: Maybe<IntQueryOperatorInput>;
-  readonly aspectRatio: Maybe<FloatQueryOperatorInput>;
-};
-
 type ContentfulAssetConnection = {
   readonly totalCount: Scalars['Int'];
   readonly edges: ReadonlyArray<ContentfulAssetEdge>;
@@ -4391,30 +4267,7 @@ type ContentfulAssetFieldsEnum =
   | 'node_locale'
   | 'sys.type'
   | 'sys.revision'
-  | 'fixed.base64'
-  | 'fixed.tracedSVG'
-  | 'fixed.aspectRatio'
-  | 'fixed.width'
-  | 'fixed.height'
-  | 'fixed.src'
-  | 'fixed.srcSet'
-  | 'fixed.srcWebp'
-  | 'fixed.srcSetWebp'
-  | 'fluid.base64'
-  | 'fluid.tracedSVG'
-  | 'fluid.aspectRatio'
-  | 'fluid.src'
-  | 'fluid.srcSet'
-  | 'fluid.srcWebp'
-  | 'fluid.srcSetWebp'
-  | 'fluid.sizes'
   | 'gatsbyImageData'
-  | 'resize.base64'
-  | 'resize.tracedSVG'
-  | 'resize.src'
-  | 'resize.width'
-  | 'resize.height'
-  | 'resize.aspectRatio'
   | 'parent.id'
   | 'parent.parent.id'
   | 'parent.parent.parent.id'
@@ -4553,10 +4406,7 @@ type ContentfulAssetFilterInput = {
   readonly description: Maybe<StringQueryOperatorInput>;
   readonly node_locale: Maybe<StringQueryOperatorInput>;
   readonly sys: Maybe<ContentfulAssetSysFilterInput>;
-  readonly fixed: Maybe<ContentfulFixedFilterInput>;
-  readonly fluid: Maybe<ContentfulFluidFilterInput>;
   readonly gatsbyImageData: Maybe<JSONQueryOperatorInput>;
-  readonly resize: Maybe<ContentfulResizeFilterInput>;
   readonly parent: Maybe<NodeFilterInput>;
   readonly children: Maybe<NodeFilterListInput>;
   readonly internal: Maybe<InternalFilterInput>;
@@ -4786,30 +4636,7 @@ type ContentfulPersonFieldsEnum =
   | 'image.node_locale'
   | 'image.sys.type'
   | 'image.sys.revision'
-  | 'image.fixed.base64'
-  | 'image.fixed.tracedSVG'
-  | 'image.fixed.aspectRatio'
-  | 'image.fixed.width'
-  | 'image.fixed.height'
-  | 'image.fixed.src'
-  | 'image.fixed.srcSet'
-  | 'image.fixed.srcWebp'
-  | 'image.fixed.srcSetWebp'
-  | 'image.fluid.base64'
-  | 'image.fluid.tracedSVG'
-  | 'image.fluid.aspectRatio'
-  | 'image.fluid.src'
-  | 'image.fluid.srcSet'
-  | 'image.fluid.srcWebp'
-  | 'image.fluid.srcSetWebp'
-  | 'image.fluid.sizes'
   | 'image.gatsbyImageData'
-  | 'image.resize.base64'
-  | 'image.resize.tracedSVG'
-  | 'image.resize.src'
-  | 'image.resize.width'
-  | 'image.resize.height'
-  | 'image.resize.aspectRatio'
   | 'image.parent.id'
   | 'image.parent.parent.id'
   | 'image.parent.parent.children'
@@ -4868,30 +4695,7 @@ type ContentfulPersonFieldsEnum =
   | 'blog_post.heroImage.node_locale'
   | 'blog_post.heroImage.sys.type'
   | 'blog_post.heroImage.sys.revision'
-  | 'blog_post.heroImage.fixed.base64'
-  | 'blog_post.heroImage.fixed.tracedSVG'
-  | 'blog_post.heroImage.fixed.aspectRatio'
-  | 'blog_post.heroImage.fixed.width'
-  | 'blog_post.heroImage.fixed.height'
-  | 'blog_post.heroImage.fixed.src'
-  | 'blog_post.heroImage.fixed.srcSet'
-  | 'blog_post.heroImage.fixed.srcWebp'
-  | 'blog_post.heroImage.fixed.srcSetWebp'
-  | 'blog_post.heroImage.fluid.base64'
-  | 'blog_post.heroImage.fluid.tracedSVG'
-  | 'blog_post.heroImage.fluid.aspectRatio'
-  | 'blog_post.heroImage.fluid.src'
-  | 'blog_post.heroImage.fluid.srcSet'
-  | 'blog_post.heroImage.fluid.srcWebp'
-  | 'blog_post.heroImage.fluid.srcSetWebp'
-  | 'blog_post.heroImage.fluid.sizes'
   | 'blog_post.heroImage.gatsbyImageData'
-  | 'blog_post.heroImage.resize.base64'
-  | 'blog_post.heroImage.resize.tracedSVG'
-  | 'blog_post.heroImage.resize.src'
-  | 'blog_post.heroImage.resize.width'
-  | 'blog_post.heroImage.resize.height'
-  | 'blog_post.heroImage.resize.aspectRatio'
   | 'blog_post.heroImage.parent.id'
   | 'blog_post.heroImage.parent.children'
   | 'blog_post.heroImage.children'
@@ -5742,30 +5546,7 @@ type ContentfulBlogPostFieldsEnum =
   | 'heroImage.node_locale'
   | 'heroImage.sys.type'
   | 'heroImage.sys.revision'
-  | 'heroImage.fixed.base64'
-  | 'heroImage.fixed.tracedSVG'
-  | 'heroImage.fixed.aspectRatio'
-  | 'heroImage.fixed.width'
-  | 'heroImage.fixed.height'
-  | 'heroImage.fixed.src'
-  | 'heroImage.fixed.srcSet'
-  | 'heroImage.fixed.srcWebp'
-  | 'heroImage.fixed.srcSetWebp'
-  | 'heroImage.fluid.base64'
-  | 'heroImage.fluid.tracedSVG'
-  | 'heroImage.fluid.aspectRatio'
-  | 'heroImage.fluid.src'
-  | 'heroImage.fluid.srcSet'
-  | 'heroImage.fluid.srcWebp'
-  | 'heroImage.fluid.srcSetWebp'
-  | 'heroImage.fluid.sizes'
   | 'heroImage.gatsbyImageData'
-  | 'heroImage.resize.base64'
-  | 'heroImage.resize.tracedSVG'
-  | 'heroImage.resize.src'
-  | 'heroImage.resize.width'
-  | 'heroImage.resize.height'
-  | 'heroImage.resize.aspectRatio'
   | 'heroImage.parent.id'
   | 'heroImage.parent.parent.id'
   | 'heroImage.parent.parent.children'
@@ -5827,30 +5608,7 @@ type ContentfulBlogPostFieldsEnum =
   | 'author.image.node_locale'
   | 'author.image.sys.type'
   | 'author.image.sys.revision'
-  | 'author.image.fixed.base64'
-  | 'author.image.fixed.tracedSVG'
-  | 'author.image.fixed.aspectRatio'
-  | 'author.image.fixed.width'
-  | 'author.image.fixed.height'
-  | 'author.image.fixed.src'
-  | 'author.image.fixed.srcSet'
-  | 'author.image.fixed.srcWebp'
-  | 'author.image.fixed.srcSetWebp'
-  | 'author.image.fluid.base64'
-  | 'author.image.fluid.tracedSVG'
-  | 'author.image.fluid.aspectRatio'
-  | 'author.image.fluid.src'
-  | 'author.image.fluid.srcSet'
-  | 'author.image.fluid.srcWebp'
-  | 'author.image.fluid.srcSetWebp'
-  | 'author.image.fluid.sizes'
   | 'author.image.gatsbyImageData'
-  | 'author.image.resize.base64'
-  | 'author.image.resize.tracedSVG'
-  | 'author.image.resize.src'
-  | 'author.image.resize.width'
-  | 'author.image.resize.height'
-  | 'author.image.resize.aspectRatio'
   | 'author.image.parent.id'
   | 'author.image.parent.children'
   | 'author.image.children'
@@ -6932,30 +6690,7 @@ type ContentfulAuthorFieldsEnum =
   | 'avatarImage.node_locale'
   | 'avatarImage.sys.type'
   | 'avatarImage.sys.revision'
-  | 'avatarImage.fixed.base64'
-  | 'avatarImage.fixed.tracedSVG'
-  | 'avatarImage.fixed.aspectRatio'
-  | 'avatarImage.fixed.width'
-  | 'avatarImage.fixed.height'
-  | 'avatarImage.fixed.src'
-  | 'avatarImage.fixed.srcSet'
-  | 'avatarImage.fixed.srcWebp'
-  | 'avatarImage.fixed.srcSetWebp'
-  | 'avatarImage.fluid.base64'
-  | 'avatarImage.fluid.tracedSVG'
-  | 'avatarImage.fluid.aspectRatio'
-  | 'avatarImage.fluid.src'
-  | 'avatarImage.fluid.srcSet'
-  | 'avatarImage.fluid.srcWebp'
-  | 'avatarImage.fluid.srcSetWebp'
-  | 'avatarImage.fluid.sizes'
   | 'avatarImage.gatsbyImageData'
-  | 'avatarImage.resize.base64'
-  | 'avatarImage.resize.tracedSVG'
-  | 'avatarImage.resize.src'
-  | 'avatarImage.resize.width'
-  | 'avatarImage.resize.height'
-  | 'avatarImage.resize.aspectRatio'
   | 'avatarImage.parent.id'
   | 'avatarImage.parent.parent.id'
   | 'avatarImage.parent.parent.children'
@@ -7534,6 +7269,7 @@ type ContentfulMyPostFieldsEnum =
   | 'id'
   | 'node_locale'
   | 'title'
+  | 'slug'
   | 'publishDate'
   | 'body.id'
   | 'body.parent.id'
@@ -7973,6 +7709,7 @@ type ContentfulMyPostFilterInput = {
   readonly id: Maybe<StringQueryOperatorInput>;
   readonly node_locale: Maybe<StringQueryOperatorInput>;
   readonly title: Maybe<StringQueryOperatorInput>;
+  readonly slug: Maybe<StringQueryOperatorInput>;
   readonly publishDate: Maybe<DateQueryOperatorInput>;
   readonly body: Maybe<contentfulMyPostBodyTextNodeFilterInput>;
   readonly spaceId: Maybe<StringQueryOperatorInput>;
@@ -9639,10 +9376,7 @@ type BlogPostBySlugQueryVariables = Exact<{
 type BlogPostBySlugQuery = { readonly contentfulBlogPost: Maybe<(
     Pick<ContentfulBlogPost, 'slug' | 'title' | 'publishDate' | 'tags'>
     & { rawDate: ContentfulBlogPost['publishDate'] }
-    & { readonly author: Maybe<Pick<ContentfulPerson, 'name'>>, readonly heroImage: Maybe<(
-      Pick<ContentfulAsset, 'gatsbyImageData'>
-      & { readonly resize: Maybe<Pick<ContentfulResize, 'src'>> }
-    )>, readonly body: Maybe<{ readonly childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'html' | 'timeToRead'>> }>, readonly description: Maybe<{ readonly childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'excerpt'>> }> }
+    & { readonly author: Maybe<Pick<ContentfulPerson, 'name'>>, readonly heroImage: Maybe<Pick<ContentfulAsset, 'gatsbyImageData'>>, readonly body: Maybe<{ readonly childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'html' | 'timeToRead'>> }>, readonly description: Maybe<{ readonly childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'excerpt'>> }> }
   )>, readonly previous: Maybe<Pick<ContentfulBlogPost, 'slug' | 'title'>>, readonly next: Maybe<Pick<ContentfulBlogPost, 'slug' | 'title'>> };
 
 type PagesQueryQueryVariables = Exact<{ [key: string]: never; }>;
@@ -9655,7 +9389,10 @@ type PostsFromTopQueryVariables = Exact<{ [key: string]: never; }>;
 
 type PostsFromTopQuery = { readonly allContentfulMyPost: { readonly nodes: ReadonlyArray<(
       Pick<ContentfulMyPost, 'title'>
-      & { readonly body: Maybe<{ readonly childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'html'>> }> }
+      & { readonly body: Maybe<(
+        Pick<contentfulMyPostBodyTextNode, 'body'>
+        & { readonly childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'html'>> }
+      )> }
     )> } };
 
 type AuthorFromMeQueryVariables = Exact<{ [key: string]: never; }>;
@@ -9691,25 +9428,5 @@ type GatsbyImageSharpFluid_withWebp_tracedSVGFragment = Pick<ImageSharpFluid, 't
 type GatsbyImageSharpFluid_noBase64Fragment = Pick<ImageSharpFluid, 'aspectRatio' | 'src' | 'srcSet' | 'sizes'>;
 
 type GatsbyImageSharpFluid_withWebp_noBase64Fragment = Pick<ImageSharpFluid, 'aspectRatio' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp' | 'sizes'>;
-
-type GatsbyContentfulFixedFragment = Pick<ContentfulFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;
-
-type GatsbyContentfulFixed_tracedSVGFragment = Pick<ContentfulFixed, 'tracedSVG' | 'width' | 'height' | 'src' | 'srcSet'>;
-
-type GatsbyContentfulFixed_noBase64Fragment = Pick<ContentfulFixed, 'width' | 'height' | 'src' | 'srcSet'>;
-
-type GatsbyContentfulFixed_withWebpFragment = Pick<ContentfulFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp'>;
-
-type GatsbyContentfulFixed_withWebp_noBase64Fragment = Pick<ContentfulFixed, 'width' | 'height' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp'>;
-
-type GatsbyContentfulFluidFragment = Pick<ContentfulFluid, 'base64' | 'aspectRatio' | 'src' | 'srcSet' | 'sizes'>;
-
-type GatsbyContentfulFluid_tracedSVGFragment = Pick<ContentfulFluid, 'tracedSVG' | 'aspectRatio' | 'src' | 'srcSet' | 'sizes'>;
-
-type GatsbyContentfulFluid_noBase64Fragment = Pick<ContentfulFluid, 'aspectRatio' | 'src' | 'srcSet' | 'sizes'>;
-
-type GatsbyContentfulFluid_withWebpFragment = Pick<ContentfulFluid, 'base64' | 'aspectRatio' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp' | 'sizes'>;
-
-type GatsbyContentfulFluid_withWebp_noBase64Fragment = Pick<ContentfulFluid, 'aspectRatio' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp' | 'sizes'>;
 
 }
