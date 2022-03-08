@@ -1066,7 +1066,7 @@ type ContentfulMyPost = ContentfulReference & ContentfulEntry & Node & {
   readonly id: Scalars['ID'];
   readonly node_locale: Scalars['String'];
   readonly title: Maybe<Scalars['String']>;
-  readonly medias: Maybe<ReadonlyArray<Maybe<ContentfulAsset>>>;
+  readonly publishDate: Maybe<Scalars['Date']>;
   readonly body: Maybe<contentfulMyPostBodyTextNode>;
   readonly spaceId: Maybe<Scalars['String']>;
   readonly createdAt: Maybe<Scalars['Date']>;
@@ -1079,6 +1079,14 @@ type ContentfulMyPost = ContentfulReference & ContentfulEntry & Node & {
   readonly parent: Maybe<Node>;
   readonly children: ReadonlyArray<Node>;
   readonly internal: Internal;
+};
+
+
+type ContentfulMyPost_publishDateArgs = {
+  formatString: Maybe<Scalars['String']>;
+  fromNow: Maybe<Scalars['Boolean']>;
+  difference: Maybe<Scalars['String']>;
+  locale: Maybe<Scalars['String']>;
 };
 
 
@@ -1660,7 +1668,7 @@ type Query_contentfulMyPostArgs = {
   id: Maybe<StringQueryOperatorInput>;
   node_locale: Maybe<StringQueryOperatorInput>;
   title: Maybe<StringQueryOperatorInput>;
-  medias: Maybe<ContentfulAssetFilterListInput>;
+  publishDate: Maybe<DateQueryOperatorInput>;
   body: Maybe<contentfulMyPostBodyTextNodeFilterInput>;
   spaceId: Maybe<StringQueryOperatorInput>;
   createdAt: Maybe<DateQueryOperatorInput>;
@@ -7441,10 +7449,6 @@ type ContentfulAuthorSortInput = {
   readonly order: Maybe<ReadonlyArray<Maybe<SortOrderEnum>>>;
 };
 
-type ContentfulAssetFilterListInput = {
-  readonly elemMatch: Maybe<ContentfulAssetFilterInput>;
-};
-
 type contentfulMyPostBodyTextNodeFilterInput = {
   readonly id: Maybe<StringQueryOperatorInput>;
   readonly parent: Maybe<NodeFilterInput>;
@@ -7530,82 +7534,7 @@ type ContentfulMyPostFieldsEnum =
   | 'id'
   | 'node_locale'
   | 'title'
-  | 'medias'
-  | 'medias.contentful_id'
-  | 'medias.id'
-  | 'medias.spaceId'
-  | 'medias.createdAt'
-  | 'medias.updatedAt'
-  | 'medias.file.url'
-  | 'medias.file.details.size'
-  | 'medias.file.fileName'
-  | 'medias.file.contentType'
-  | 'medias.title'
-  | 'medias.description'
-  | 'medias.node_locale'
-  | 'medias.sys.type'
-  | 'medias.sys.revision'
-  | 'medias.fixed.base64'
-  | 'medias.fixed.tracedSVG'
-  | 'medias.fixed.aspectRatio'
-  | 'medias.fixed.width'
-  | 'medias.fixed.height'
-  | 'medias.fixed.src'
-  | 'medias.fixed.srcSet'
-  | 'medias.fixed.srcWebp'
-  | 'medias.fixed.srcSetWebp'
-  | 'medias.fluid.base64'
-  | 'medias.fluid.tracedSVG'
-  | 'medias.fluid.aspectRatio'
-  | 'medias.fluid.src'
-  | 'medias.fluid.srcSet'
-  | 'medias.fluid.srcWebp'
-  | 'medias.fluid.srcSetWebp'
-  | 'medias.fluid.sizes'
-  | 'medias.gatsbyImageData'
-  | 'medias.resize.base64'
-  | 'medias.resize.tracedSVG'
-  | 'medias.resize.src'
-  | 'medias.resize.width'
-  | 'medias.resize.height'
-  | 'medias.resize.aspectRatio'
-  | 'medias.parent.id'
-  | 'medias.parent.parent.id'
-  | 'medias.parent.parent.children'
-  | 'medias.parent.children'
-  | 'medias.parent.children.id'
-  | 'medias.parent.children.children'
-  | 'medias.parent.internal.content'
-  | 'medias.parent.internal.contentDigest'
-  | 'medias.parent.internal.description'
-  | 'medias.parent.internal.fieldOwners'
-  | 'medias.parent.internal.ignoreType'
-  | 'medias.parent.internal.mediaType'
-  | 'medias.parent.internal.owner'
-  | 'medias.parent.internal.type'
-  | 'medias.children'
-  | 'medias.children.id'
-  | 'medias.children.parent.id'
-  | 'medias.children.parent.children'
-  | 'medias.children.children'
-  | 'medias.children.children.id'
-  | 'medias.children.children.children'
-  | 'medias.children.internal.content'
-  | 'medias.children.internal.contentDigest'
-  | 'medias.children.internal.description'
-  | 'medias.children.internal.fieldOwners'
-  | 'medias.children.internal.ignoreType'
-  | 'medias.children.internal.mediaType'
-  | 'medias.children.internal.owner'
-  | 'medias.children.internal.type'
-  | 'medias.internal.content'
-  | 'medias.internal.contentDigest'
-  | 'medias.internal.description'
-  | 'medias.internal.fieldOwners'
-  | 'medias.internal.ignoreType'
-  | 'medias.internal.mediaType'
-  | 'medias.internal.owner'
-  | 'medias.internal.type'
+  | 'publishDate'
   | 'body.id'
   | 'body.parent.id'
   | 'body.parent.parent.id'
@@ -8044,7 +7973,7 @@ type ContentfulMyPostFilterInput = {
   readonly id: Maybe<StringQueryOperatorInput>;
   readonly node_locale: Maybe<StringQueryOperatorInput>;
   readonly title: Maybe<StringQueryOperatorInput>;
-  readonly medias: Maybe<ContentfulAssetFilterListInput>;
+  readonly publishDate: Maybe<DateQueryOperatorInput>;
   readonly body: Maybe<contentfulMyPostBodyTextNodeFilterInput>;
   readonly spaceId: Maybe<StringQueryOperatorInput>;
   readonly createdAt: Maybe<DateQueryOperatorInput>;
@@ -9721,31 +9650,12 @@ type PagesQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 type PagesQueryQuery = { readonly allSiteFunction: { readonly nodes: ReadonlyArray<Pick<SiteFunction, 'functionRoute'>> }, readonly allSitePage: { readonly nodes: ReadonlyArray<Pick<SitePage, 'path'>> } };
 
-type BlogIndexQueryQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type BlogIndexQueryQuery = { readonly allContentfulBlogPost: { readonly nodes: ReadonlyArray<(
-      Pick<ContentfulBlogPost, 'title' | 'slug' | 'publishDate' | 'tags'>
-      & { readonly heroImage: Maybe<Pick<ContentfulAsset, 'gatsbyImageData'>>, readonly description: Maybe<{ readonly childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'html'>> }> }
-    )> } };
-
 type PostsFromTopQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 type PostsFromTopQuery = { readonly allContentfulMyPost: { readonly nodes: ReadonlyArray<(
       Pick<ContentfulMyPost, 'title'>
       & { readonly body: Maybe<{ readonly childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'html'>> }> }
-    )> } };
-
-type HomeQueryQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type HomeQueryQuery = { readonly allContentfulBlogPost: { readonly nodes: ReadonlyArray<(
-      Pick<ContentfulBlogPost, 'title' | 'slug' | 'publishDate' | 'tags'>
-      & { readonly heroImage: Maybe<Pick<ContentfulAsset, 'gatsbyImageData'>>, readonly description: Maybe<{ readonly childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'html'>> }> }
-    )> }, readonly allContentfulPerson: { readonly nodes: ReadonlyArray<(
-      Pick<ContentfulPerson, 'name' | 'title'>
-      & { readonly shortBio: Maybe<Pick<contentfulPersonShortBioTextNode, 'shortBio'>>, readonly heroImage: Maybe<Pick<ContentfulAsset, 'gatsbyImageData'>> }
     )> } };
 
 type AuthorFromMeQueryVariables = Exact<{ [key: string]: never; }>;
@@ -9755,11 +9665,6 @@ type AuthorFromMeQuery = { readonly contentfulAuthor: Maybe<(
     Pick<ContentfulAuthor, 'nickName'>
     & { readonly avatarImage: Maybe<Pick<ContentfulAsset, 'gatsbyImageData'>>, readonly description: Maybe<{ readonly childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'html'>> }> }
   )> };
-
-type Unnamed_1_QueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type Unnamed_1_Query = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'description'>> }> };
 
 type GatsbyImageSharpFixedFragment = Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;
 
