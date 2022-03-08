@@ -50,6 +50,8 @@ module.exports = {
       resolve: 'gatsby-source-contentful',
       options: contentfulConfig,
     },
+    'gatsby-plugin-typescript',
+    'gatsby-plugin-linaria',
     'gatsby-plugin-typegen',
     'gatsby-plugin-postcss',
     'gatsby-plugin-dts-css-modules',
