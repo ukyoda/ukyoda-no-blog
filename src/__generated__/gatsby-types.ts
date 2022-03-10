@@ -923,6 +923,9 @@ type ContentfulAuthor = ContentfulReference & ContentfulEntry & Node & {
   readonly id: Scalars['ID'];
   readonly node_locale: Scalars['String'];
   readonly nickName: Maybe<Scalars['String']>;
+  readonly qiita: Maybe<Scalars['String']>;
+  readonly twitter: Maybe<Scalars['String']>;
+  readonly github: Maybe<Scalars['String']>;
   readonly avatarImage: Maybe<ContentfulAsset>;
   readonly description: Maybe<contentfulAuthorDescriptionTextNode>;
   readonly spaceId: Maybe<Scalars['String']>;
@@ -982,6 +985,7 @@ type ContentfulMyPost = ContentfulReference & ContentfulEntry & Node & {
   readonly createdAt: Maybe<Scalars['Date']>;
   readonly updatedAt: Maybe<Scalars['Date']>;
   readonly sys: Maybe<ContentfulMyPostSys>;
+  readonly description: Maybe<Scalars['String']>;
   /** Returns all children nodes filtered by type contentfulMyPostBodyTextNode */
   readonly childrenContentfulMyPostBodyTextNode: Maybe<ReadonlyArray<Maybe<contentfulMyPostBodyTextNode>>>;
   /** Returns the first child node of type contentfulMyPostBodyTextNode or null if there are no children of given type on this node */
@@ -1031,6 +1035,59 @@ type ContentfulMyPostSysContentTypeSys = {
   readonly id: Maybe<Scalars['String']>;
 };
 
+type ContentfulMyWork = ContentfulReference & ContentfulEntry & Node & {
+  readonly contentful_id: Scalars['String'];
+  readonly id: Scalars['ID'];
+  readonly node_locale: Scalars['String'];
+  readonly title: Maybe<Scalars['String']>;
+  readonly url: Maybe<Scalars['String']>;
+  readonly repositoryUrl: Maybe<Scalars['String']>;
+  readonly description: Maybe<contentfulMyWorkDescriptionTextNode>;
+  readonly spaceId: Maybe<Scalars['String']>;
+  readonly createdAt: Maybe<Scalars['Date']>;
+  readonly updatedAt: Maybe<Scalars['Date']>;
+  readonly sys: Maybe<ContentfulMyWorkSys>;
+  /** Returns all children nodes filtered by type contentfulMyWorkDescriptionTextNode */
+  readonly childrenContentfulMyWorkDescriptionTextNode: Maybe<ReadonlyArray<Maybe<contentfulMyWorkDescriptionTextNode>>>;
+  /** Returns the first child node of type contentfulMyWorkDescriptionTextNode or null if there are no children of given type on this node */
+  readonly childContentfulMyWorkDescriptionTextNode: Maybe<contentfulMyWorkDescriptionTextNode>;
+  readonly parent: Maybe<Node>;
+  readonly children: ReadonlyArray<Node>;
+  readonly internal: Internal;
+};
+
+
+type ContentfulMyWork_createdAtArgs = {
+  formatString: Maybe<Scalars['String']>;
+  fromNow: Maybe<Scalars['Boolean']>;
+  difference: Maybe<Scalars['String']>;
+  locale: Maybe<Scalars['String']>;
+};
+
+
+type ContentfulMyWork_updatedAtArgs = {
+  formatString: Maybe<Scalars['String']>;
+  fromNow: Maybe<Scalars['Boolean']>;
+  difference: Maybe<Scalars['String']>;
+  locale: Maybe<Scalars['String']>;
+};
+
+type ContentfulMyWorkSys = {
+  readonly type: Maybe<Scalars['String']>;
+  readonly revision: Maybe<Scalars['Int']>;
+  readonly contentType: Maybe<ContentfulMyWorkSysContentType>;
+};
+
+type ContentfulMyWorkSysContentType = {
+  readonly sys: Maybe<ContentfulMyWorkSysContentTypeSys>;
+};
+
+type ContentfulMyWorkSysContentTypeSys = {
+  readonly type: Maybe<Scalars['String']>;
+  readonly linkType: Maybe<Scalars['String']>;
+  readonly id: Maybe<Scalars['String']>;
+};
+
 type contentfulPersonShortBioTextNode = Node & {
   readonly id: Scalars['ID'];
   readonly parent: Maybe<Node>;
@@ -1045,6 +1102,23 @@ type contentfulPersonShortBioTextNode = Node & {
 };
 
 type contentfulPersonShortBioTextNodeSys = {
+  readonly type: Maybe<Scalars['String']>;
+};
+
+type contentfulMyWorkDescriptionTextNode = Node & {
+  readonly id: Scalars['ID'];
+  readonly parent: Maybe<Node>;
+  readonly children: ReadonlyArray<Node>;
+  readonly internal: Internal;
+  readonly description: Maybe<Scalars['String']>;
+  readonly sys: Maybe<contentfulMyWorkDescriptionTextNodeSys>;
+  /** Returns all children nodes filtered by type MarkdownRemark */
+  readonly childrenMarkdownRemark: Maybe<ReadonlyArray<Maybe<MarkdownRemark>>>;
+  /** Returns the first child node of type MarkdownRemark or null if there are no children of given type on this node */
+  readonly childMarkdownRemark: Maybe<MarkdownRemark>;
+};
+
+type contentfulMyWorkDescriptionTextNodeSys = {
   readonly type: Maybe<Scalars['String']>;
 };
 
@@ -1162,8 +1236,12 @@ type Query = {
   readonly allContentfulAuthor: ContentfulAuthorConnection;
   readonly contentfulMyPost: Maybe<ContentfulMyPost>;
   readonly allContentfulMyPost: ContentfulMyPostConnection;
+  readonly contentfulMyWork: Maybe<ContentfulMyWork>;
+  readonly allContentfulMyWork: ContentfulMyWorkConnection;
   readonly contentfulPersonShortBioTextNode: Maybe<contentfulPersonShortBioTextNode>;
   readonly allContentfulPersonShortBioTextNode: contentfulPersonShortBioTextNodeConnection;
+  readonly contentfulMyWorkDescriptionTextNode: Maybe<contentfulMyWorkDescriptionTextNode>;
+  readonly allContentfulMyWorkDescriptionTextNode: contentfulMyWorkDescriptionTextNodeConnection;
   readonly contentfulMyPostBodyTextNode: Maybe<contentfulMyPostBodyTextNode>;
   readonly allContentfulMyPostBodyTextNode: contentfulMyPostBodyTextNodeConnection;
   readonly contentfulBlogPostDescriptionTextNode: Maybe<contentfulBlogPostDescriptionTextNode>;
@@ -1548,6 +1626,9 @@ type Query_contentfulAuthorArgs = {
   id: Maybe<StringQueryOperatorInput>;
   node_locale: Maybe<StringQueryOperatorInput>;
   nickName: Maybe<StringQueryOperatorInput>;
+  qiita: Maybe<StringQueryOperatorInput>;
+  twitter: Maybe<StringQueryOperatorInput>;
+  github: Maybe<StringQueryOperatorInput>;
   avatarImage: Maybe<ContentfulAssetFilterInput>;
   description: Maybe<contentfulAuthorDescriptionTextNodeFilterInput>;
   spaceId: Maybe<StringQueryOperatorInput>;
@@ -1582,6 +1663,7 @@ type Query_contentfulMyPostArgs = {
   createdAt: Maybe<DateQueryOperatorInput>;
   updatedAt: Maybe<DateQueryOperatorInput>;
   sys: Maybe<ContentfulMyPostSysFilterInput>;
+  description: Maybe<StringQueryOperatorInput>;
   childrenContentfulMyPostBodyTextNode: Maybe<contentfulMyPostBodyTextNodeFilterListInput>;
   childContentfulMyPostBodyTextNode: Maybe<contentfulMyPostBodyTextNodeFilterInput>;
   parent: Maybe<NodeFilterInput>;
@@ -1593,6 +1675,34 @@ type Query_contentfulMyPostArgs = {
 type Query_allContentfulMyPostArgs = {
   filter: Maybe<ContentfulMyPostFilterInput>;
   sort: Maybe<ContentfulMyPostSortInput>;
+  skip: Maybe<Scalars['Int']>;
+  limit: Maybe<Scalars['Int']>;
+};
+
+
+type Query_contentfulMyWorkArgs = {
+  contentful_id: Maybe<StringQueryOperatorInput>;
+  id: Maybe<StringQueryOperatorInput>;
+  node_locale: Maybe<StringQueryOperatorInput>;
+  title: Maybe<StringQueryOperatorInput>;
+  url: Maybe<StringQueryOperatorInput>;
+  repositoryUrl: Maybe<StringQueryOperatorInput>;
+  description: Maybe<contentfulMyWorkDescriptionTextNodeFilterInput>;
+  spaceId: Maybe<StringQueryOperatorInput>;
+  createdAt: Maybe<DateQueryOperatorInput>;
+  updatedAt: Maybe<DateQueryOperatorInput>;
+  sys: Maybe<ContentfulMyWorkSysFilterInput>;
+  childrenContentfulMyWorkDescriptionTextNode: Maybe<contentfulMyWorkDescriptionTextNodeFilterListInput>;
+  childContentfulMyWorkDescriptionTextNode: Maybe<contentfulMyWorkDescriptionTextNodeFilterInput>;
+  parent: Maybe<NodeFilterInput>;
+  children: Maybe<NodeFilterListInput>;
+  internal: Maybe<InternalFilterInput>;
+};
+
+
+type Query_allContentfulMyWorkArgs = {
+  filter: Maybe<ContentfulMyWorkFilterInput>;
+  sort: Maybe<ContentfulMyWorkSortInput>;
   skip: Maybe<Scalars['Int']>;
   limit: Maybe<Scalars['Int']>;
 };
@@ -1613,6 +1723,26 @@ type Query_contentfulPersonShortBioTextNodeArgs = {
 type Query_allContentfulPersonShortBioTextNodeArgs = {
   filter: Maybe<contentfulPersonShortBioTextNodeFilterInput>;
   sort: Maybe<contentfulPersonShortBioTextNodeSortInput>;
+  skip: Maybe<Scalars['Int']>;
+  limit: Maybe<Scalars['Int']>;
+};
+
+
+type Query_contentfulMyWorkDescriptionTextNodeArgs = {
+  id: Maybe<StringQueryOperatorInput>;
+  parent: Maybe<NodeFilterInput>;
+  children: Maybe<NodeFilterListInput>;
+  internal: Maybe<InternalFilterInput>;
+  description: Maybe<StringQueryOperatorInput>;
+  sys: Maybe<contentfulMyWorkDescriptionTextNodeSysFilterInput>;
+  childrenMarkdownRemark: Maybe<MarkdownRemarkFilterListInput>;
+  childMarkdownRemark: Maybe<MarkdownRemarkFilterInput>;
+};
+
+
+type Query_allContentfulMyWorkDescriptionTextNodeArgs = {
+  filter: Maybe<contentfulMyWorkDescriptionTextNodeFilterInput>;
+  sort: Maybe<contentfulMyWorkDescriptionTextNodeSortInput>;
   skip: Maybe<Scalars['Int']>;
   limit: Maybe<Scalars['Int']>;
 };
@@ -6676,6 +6806,9 @@ type ContentfulAuthorFieldsEnum =
   | 'id'
   | 'node_locale'
   | 'nickName'
+  | 'qiita'
+  | 'twitter'
+  | 'github'
   | 'avatarImage.contentful_id'
   | 'avatarImage.id'
   | 'avatarImage.spaceId'
@@ -7166,6 +7299,9 @@ type ContentfulAuthorFilterInput = {
   readonly id: Maybe<StringQueryOperatorInput>;
   readonly node_locale: Maybe<StringQueryOperatorInput>;
   readonly nickName: Maybe<StringQueryOperatorInput>;
+  readonly qiita: Maybe<StringQueryOperatorInput>;
+  readonly twitter: Maybe<StringQueryOperatorInput>;
+  readonly github: Maybe<StringQueryOperatorInput>;
   readonly avatarImage: Maybe<ContentfulAssetFilterInput>;
   readonly description: Maybe<contentfulAuthorDescriptionTextNodeFilterInput>;
   readonly spaceId: Maybe<StringQueryOperatorInput>;
@@ -7378,6 +7514,7 @@ type ContentfulMyPostFieldsEnum =
   | 'sys.contentType.sys.type'
   | 'sys.contentType.sys.linkType'
   | 'sys.contentType.sys.id'
+  | 'description'
   | 'childrenContentfulMyPostBodyTextNode'
   | 'childrenContentfulMyPostBodyTextNode.id'
   | 'childrenContentfulMyPostBodyTextNode.parent.id'
@@ -7716,6 +7853,7 @@ type ContentfulMyPostFilterInput = {
   readonly createdAt: Maybe<DateQueryOperatorInput>;
   readonly updatedAt: Maybe<DateQueryOperatorInput>;
   readonly sys: Maybe<ContentfulMyPostSysFilterInput>;
+  readonly description: Maybe<StringQueryOperatorInput>;
   readonly childrenContentfulMyPostBodyTextNode: Maybe<contentfulMyPostBodyTextNodeFilterListInput>;
   readonly childContentfulMyPostBodyTextNode: Maybe<contentfulMyPostBodyTextNodeFilterInput>;
   readonly parent: Maybe<NodeFilterInput>;
@@ -7725,6 +7863,550 @@ type ContentfulMyPostFilterInput = {
 
 type ContentfulMyPostSortInput = {
   readonly fields: Maybe<ReadonlyArray<Maybe<ContentfulMyPostFieldsEnum>>>;
+  readonly order: Maybe<ReadonlyArray<Maybe<SortOrderEnum>>>;
+};
+
+type contentfulMyWorkDescriptionTextNodeFilterInput = {
+  readonly id: Maybe<StringQueryOperatorInput>;
+  readonly parent: Maybe<NodeFilterInput>;
+  readonly children: Maybe<NodeFilterListInput>;
+  readonly internal: Maybe<InternalFilterInput>;
+  readonly description: Maybe<StringQueryOperatorInput>;
+  readonly sys: Maybe<contentfulMyWorkDescriptionTextNodeSysFilterInput>;
+  readonly childrenMarkdownRemark: Maybe<MarkdownRemarkFilterListInput>;
+  readonly childMarkdownRemark: Maybe<MarkdownRemarkFilterInput>;
+};
+
+type contentfulMyWorkDescriptionTextNodeSysFilterInput = {
+  readonly type: Maybe<StringQueryOperatorInput>;
+};
+
+type ContentfulMyWorkSysFilterInput = {
+  readonly type: Maybe<StringQueryOperatorInput>;
+  readonly revision: Maybe<IntQueryOperatorInput>;
+  readonly contentType: Maybe<ContentfulMyWorkSysContentTypeFilterInput>;
+};
+
+type ContentfulMyWorkSysContentTypeFilterInput = {
+  readonly sys: Maybe<ContentfulMyWorkSysContentTypeSysFilterInput>;
+};
+
+type ContentfulMyWorkSysContentTypeSysFilterInput = {
+  readonly type: Maybe<StringQueryOperatorInput>;
+  readonly linkType: Maybe<StringQueryOperatorInput>;
+  readonly id: Maybe<StringQueryOperatorInput>;
+};
+
+type contentfulMyWorkDescriptionTextNodeFilterListInput = {
+  readonly elemMatch: Maybe<contentfulMyWorkDescriptionTextNodeFilterInput>;
+};
+
+type ContentfulMyWorkConnection = {
+  readonly totalCount: Scalars['Int'];
+  readonly edges: ReadonlyArray<ContentfulMyWorkEdge>;
+  readonly nodes: ReadonlyArray<ContentfulMyWork>;
+  readonly pageInfo: PageInfo;
+  readonly distinct: ReadonlyArray<Scalars['String']>;
+  readonly max: Maybe<Scalars['Float']>;
+  readonly min: Maybe<Scalars['Float']>;
+  readonly sum: Maybe<Scalars['Float']>;
+  readonly group: ReadonlyArray<ContentfulMyWorkGroupConnection>;
+};
+
+
+type ContentfulMyWorkConnection_distinctArgs = {
+  field: ContentfulMyWorkFieldsEnum;
+};
+
+
+type ContentfulMyWorkConnection_maxArgs = {
+  field: ContentfulMyWorkFieldsEnum;
+};
+
+
+type ContentfulMyWorkConnection_minArgs = {
+  field: ContentfulMyWorkFieldsEnum;
+};
+
+
+type ContentfulMyWorkConnection_sumArgs = {
+  field: ContentfulMyWorkFieldsEnum;
+};
+
+
+type ContentfulMyWorkConnection_groupArgs = {
+  skip: Maybe<Scalars['Int']>;
+  limit: Maybe<Scalars['Int']>;
+  field: ContentfulMyWorkFieldsEnum;
+};
+
+type ContentfulMyWorkEdge = {
+  readonly next: Maybe<ContentfulMyWork>;
+  readonly node: ContentfulMyWork;
+  readonly previous: Maybe<ContentfulMyWork>;
+};
+
+type ContentfulMyWorkFieldsEnum =
+  | 'contentful_id'
+  | 'id'
+  | 'node_locale'
+  | 'title'
+  | 'url'
+  | 'repositoryUrl'
+  | 'description.id'
+  | 'description.parent.id'
+  | 'description.parent.parent.id'
+  | 'description.parent.parent.children'
+  | 'description.parent.children'
+  | 'description.parent.children.id'
+  | 'description.parent.children.children'
+  | 'description.parent.internal.content'
+  | 'description.parent.internal.contentDigest'
+  | 'description.parent.internal.description'
+  | 'description.parent.internal.fieldOwners'
+  | 'description.parent.internal.ignoreType'
+  | 'description.parent.internal.mediaType'
+  | 'description.parent.internal.owner'
+  | 'description.parent.internal.type'
+  | 'description.children'
+  | 'description.children.id'
+  | 'description.children.parent.id'
+  | 'description.children.parent.children'
+  | 'description.children.children'
+  | 'description.children.children.id'
+  | 'description.children.children.children'
+  | 'description.children.internal.content'
+  | 'description.children.internal.contentDigest'
+  | 'description.children.internal.description'
+  | 'description.children.internal.fieldOwners'
+  | 'description.children.internal.ignoreType'
+  | 'description.children.internal.mediaType'
+  | 'description.children.internal.owner'
+  | 'description.children.internal.type'
+  | 'description.internal.content'
+  | 'description.internal.contentDigest'
+  | 'description.internal.description'
+  | 'description.internal.fieldOwners'
+  | 'description.internal.ignoreType'
+  | 'description.internal.mediaType'
+  | 'description.internal.owner'
+  | 'description.internal.type'
+  | 'description.description'
+  | 'description.sys.type'
+  | 'description.childrenMarkdownRemark'
+  | 'description.childrenMarkdownRemark.id'
+  | 'description.childrenMarkdownRemark.frontmatter.title'
+  | 'description.childrenMarkdownRemark.excerpt'
+  | 'description.childrenMarkdownRemark.rawMarkdownBody'
+  | 'description.childrenMarkdownRemark.html'
+  | 'description.childrenMarkdownRemark.htmlAst'
+  | 'description.childrenMarkdownRemark.excerptAst'
+  | 'description.childrenMarkdownRemark.headings'
+  | 'description.childrenMarkdownRemark.headings.id'
+  | 'description.childrenMarkdownRemark.headings.value'
+  | 'description.childrenMarkdownRemark.headings.depth'
+  | 'description.childrenMarkdownRemark.timeToRead'
+  | 'description.childrenMarkdownRemark.tableOfContents'
+  | 'description.childrenMarkdownRemark.wordCount.paragraphs'
+  | 'description.childrenMarkdownRemark.wordCount.sentences'
+  | 'description.childrenMarkdownRemark.wordCount.words'
+  | 'description.childrenMarkdownRemark.parent.id'
+  | 'description.childrenMarkdownRemark.parent.children'
+  | 'description.childrenMarkdownRemark.children'
+  | 'description.childrenMarkdownRemark.children.id'
+  | 'description.childrenMarkdownRemark.children.children'
+  | 'description.childrenMarkdownRemark.internal.content'
+  | 'description.childrenMarkdownRemark.internal.contentDigest'
+  | 'description.childrenMarkdownRemark.internal.description'
+  | 'description.childrenMarkdownRemark.internal.fieldOwners'
+  | 'description.childrenMarkdownRemark.internal.ignoreType'
+  | 'description.childrenMarkdownRemark.internal.mediaType'
+  | 'description.childrenMarkdownRemark.internal.owner'
+  | 'description.childrenMarkdownRemark.internal.type'
+  | 'description.childMarkdownRemark.id'
+  | 'description.childMarkdownRemark.frontmatter.title'
+  | 'description.childMarkdownRemark.excerpt'
+  | 'description.childMarkdownRemark.rawMarkdownBody'
+  | 'description.childMarkdownRemark.html'
+  | 'description.childMarkdownRemark.htmlAst'
+  | 'description.childMarkdownRemark.excerptAst'
+  | 'description.childMarkdownRemark.headings'
+  | 'description.childMarkdownRemark.headings.id'
+  | 'description.childMarkdownRemark.headings.value'
+  | 'description.childMarkdownRemark.headings.depth'
+  | 'description.childMarkdownRemark.timeToRead'
+  | 'description.childMarkdownRemark.tableOfContents'
+  | 'description.childMarkdownRemark.wordCount.paragraphs'
+  | 'description.childMarkdownRemark.wordCount.sentences'
+  | 'description.childMarkdownRemark.wordCount.words'
+  | 'description.childMarkdownRemark.parent.id'
+  | 'description.childMarkdownRemark.parent.children'
+  | 'description.childMarkdownRemark.children'
+  | 'description.childMarkdownRemark.children.id'
+  | 'description.childMarkdownRemark.children.children'
+  | 'description.childMarkdownRemark.internal.content'
+  | 'description.childMarkdownRemark.internal.contentDigest'
+  | 'description.childMarkdownRemark.internal.description'
+  | 'description.childMarkdownRemark.internal.fieldOwners'
+  | 'description.childMarkdownRemark.internal.ignoreType'
+  | 'description.childMarkdownRemark.internal.mediaType'
+  | 'description.childMarkdownRemark.internal.owner'
+  | 'description.childMarkdownRemark.internal.type'
+  | 'spaceId'
+  | 'createdAt'
+  | 'updatedAt'
+  | 'sys.type'
+  | 'sys.revision'
+  | 'sys.contentType.sys.type'
+  | 'sys.contentType.sys.linkType'
+  | 'sys.contentType.sys.id'
+  | 'childrenContentfulMyWorkDescriptionTextNode'
+  | 'childrenContentfulMyWorkDescriptionTextNode.id'
+  | 'childrenContentfulMyWorkDescriptionTextNode.parent.id'
+  | 'childrenContentfulMyWorkDescriptionTextNode.parent.parent.id'
+  | 'childrenContentfulMyWorkDescriptionTextNode.parent.parent.children'
+  | 'childrenContentfulMyWorkDescriptionTextNode.parent.children'
+  | 'childrenContentfulMyWorkDescriptionTextNode.parent.children.id'
+  | 'childrenContentfulMyWorkDescriptionTextNode.parent.children.children'
+  | 'childrenContentfulMyWorkDescriptionTextNode.parent.internal.content'
+  | 'childrenContentfulMyWorkDescriptionTextNode.parent.internal.contentDigest'
+  | 'childrenContentfulMyWorkDescriptionTextNode.parent.internal.description'
+  | 'childrenContentfulMyWorkDescriptionTextNode.parent.internal.fieldOwners'
+  | 'childrenContentfulMyWorkDescriptionTextNode.parent.internal.ignoreType'
+  | 'childrenContentfulMyWorkDescriptionTextNode.parent.internal.mediaType'
+  | 'childrenContentfulMyWorkDescriptionTextNode.parent.internal.owner'
+  | 'childrenContentfulMyWorkDescriptionTextNode.parent.internal.type'
+  | 'childrenContentfulMyWorkDescriptionTextNode.children'
+  | 'childrenContentfulMyWorkDescriptionTextNode.children.id'
+  | 'childrenContentfulMyWorkDescriptionTextNode.children.parent.id'
+  | 'childrenContentfulMyWorkDescriptionTextNode.children.parent.children'
+  | 'childrenContentfulMyWorkDescriptionTextNode.children.children'
+  | 'childrenContentfulMyWorkDescriptionTextNode.children.children.id'
+  | 'childrenContentfulMyWorkDescriptionTextNode.children.children.children'
+  | 'childrenContentfulMyWorkDescriptionTextNode.children.internal.content'
+  | 'childrenContentfulMyWorkDescriptionTextNode.children.internal.contentDigest'
+  | 'childrenContentfulMyWorkDescriptionTextNode.children.internal.description'
+  | 'childrenContentfulMyWorkDescriptionTextNode.children.internal.fieldOwners'
+  | 'childrenContentfulMyWorkDescriptionTextNode.children.internal.ignoreType'
+  | 'childrenContentfulMyWorkDescriptionTextNode.children.internal.mediaType'
+  | 'childrenContentfulMyWorkDescriptionTextNode.children.internal.owner'
+  | 'childrenContentfulMyWorkDescriptionTextNode.children.internal.type'
+  | 'childrenContentfulMyWorkDescriptionTextNode.internal.content'
+  | 'childrenContentfulMyWorkDescriptionTextNode.internal.contentDigest'
+  | 'childrenContentfulMyWorkDescriptionTextNode.internal.description'
+  | 'childrenContentfulMyWorkDescriptionTextNode.internal.fieldOwners'
+  | 'childrenContentfulMyWorkDescriptionTextNode.internal.ignoreType'
+  | 'childrenContentfulMyWorkDescriptionTextNode.internal.mediaType'
+  | 'childrenContentfulMyWorkDescriptionTextNode.internal.owner'
+  | 'childrenContentfulMyWorkDescriptionTextNode.internal.type'
+  | 'childrenContentfulMyWorkDescriptionTextNode.description'
+  | 'childrenContentfulMyWorkDescriptionTextNode.sys.type'
+  | 'childrenContentfulMyWorkDescriptionTextNode.childrenMarkdownRemark'
+  | 'childrenContentfulMyWorkDescriptionTextNode.childrenMarkdownRemark.id'
+  | 'childrenContentfulMyWorkDescriptionTextNode.childrenMarkdownRemark.frontmatter.title'
+  | 'childrenContentfulMyWorkDescriptionTextNode.childrenMarkdownRemark.excerpt'
+  | 'childrenContentfulMyWorkDescriptionTextNode.childrenMarkdownRemark.rawMarkdownBody'
+  | 'childrenContentfulMyWorkDescriptionTextNode.childrenMarkdownRemark.html'
+  | 'childrenContentfulMyWorkDescriptionTextNode.childrenMarkdownRemark.htmlAst'
+  | 'childrenContentfulMyWorkDescriptionTextNode.childrenMarkdownRemark.excerptAst'
+  | 'childrenContentfulMyWorkDescriptionTextNode.childrenMarkdownRemark.headings'
+  | 'childrenContentfulMyWorkDescriptionTextNode.childrenMarkdownRemark.headings.id'
+  | 'childrenContentfulMyWorkDescriptionTextNode.childrenMarkdownRemark.headings.value'
+  | 'childrenContentfulMyWorkDescriptionTextNode.childrenMarkdownRemark.headings.depth'
+  | 'childrenContentfulMyWorkDescriptionTextNode.childrenMarkdownRemark.timeToRead'
+  | 'childrenContentfulMyWorkDescriptionTextNode.childrenMarkdownRemark.tableOfContents'
+  | 'childrenContentfulMyWorkDescriptionTextNode.childrenMarkdownRemark.wordCount.paragraphs'
+  | 'childrenContentfulMyWorkDescriptionTextNode.childrenMarkdownRemark.wordCount.sentences'
+  | 'childrenContentfulMyWorkDescriptionTextNode.childrenMarkdownRemark.wordCount.words'
+  | 'childrenContentfulMyWorkDescriptionTextNode.childrenMarkdownRemark.parent.id'
+  | 'childrenContentfulMyWorkDescriptionTextNode.childrenMarkdownRemark.parent.children'
+  | 'childrenContentfulMyWorkDescriptionTextNode.childrenMarkdownRemark.children'
+  | 'childrenContentfulMyWorkDescriptionTextNode.childrenMarkdownRemark.children.id'
+  | 'childrenContentfulMyWorkDescriptionTextNode.childrenMarkdownRemark.children.children'
+  | 'childrenContentfulMyWorkDescriptionTextNode.childrenMarkdownRemark.internal.content'
+  | 'childrenContentfulMyWorkDescriptionTextNode.childrenMarkdownRemark.internal.contentDigest'
+  | 'childrenContentfulMyWorkDescriptionTextNode.childrenMarkdownRemark.internal.description'
+  | 'childrenContentfulMyWorkDescriptionTextNode.childrenMarkdownRemark.internal.fieldOwners'
+  | 'childrenContentfulMyWorkDescriptionTextNode.childrenMarkdownRemark.internal.ignoreType'
+  | 'childrenContentfulMyWorkDescriptionTextNode.childrenMarkdownRemark.internal.mediaType'
+  | 'childrenContentfulMyWorkDescriptionTextNode.childrenMarkdownRemark.internal.owner'
+  | 'childrenContentfulMyWorkDescriptionTextNode.childrenMarkdownRemark.internal.type'
+  | 'childrenContentfulMyWorkDescriptionTextNode.childMarkdownRemark.id'
+  | 'childrenContentfulMyWorkDescriptionTextNode.childMarkdownRemark.frontmatter.title'
+  | 'childrenContentfulMyWorkDescriptionTextNode.childMarkdownRemark.excerpt'
+  | 'childrenContentfulMyWorkDescriptionTextNode.childMarkdownRemark.rawMarkdownBody'
+  | 'childrenContentfulMyWorkDescriptionTextNode.childMarkdownRemark.html'
+  | 'childrenContentfulMyWorkDescriptionTextNode.childMarkdownRemark.htmlAst'
+  | 'childrenContentfulMyWorkDescriptionTextNode.childMarkdownRemark.excerptAst'
+  | 'childrenContentfulMyWorkDescriptionTextNode.childMarkdownRemark.headings'
+  | 'childrenContentfulMyWorkDescriptionTextNode.childMarkdownRemark.headings.id'
+  | 'childrenContentfulMyWorkDescriptionTextNode.childMarkdownRemark.headings.value'
+  | 'childrenContentfulMyWorkDescriptionTextNode.childMarkdownRemark.headings.depth'
+  | 'childrenContentfulMyWorkDescriptionTextNode.childMarkdownRemark.timeToRead'
+  | 'childrenContentfulMyWorkDescriptionTextNode.childMarkdownRemark.tableOfContents'
+  | 'childrenContentfulMyWorkDescriptionTextNode.childMarkdownRemark.wordCount.paragraphs'
+  | 'childrenContentfulMyWorkDescriptionTextNode.childMarkdownRemark.wordCount.sentences'
+  | 'childrenContentfulMyWorkDescriptionTextNode.childMarkdownRemark.wordCount.words'
+  | 'childrenContentfulMyWorkDescriptionTextNode.childMarkdownRemark.parent.id'
+  | 'childrenContentfulMyWorkDescriptionTextNode.childMarkdownRemark.parent.children'
+  | 'childrenContentfulMyWorkDescriptionTextNode.childMarkdownRemark.children'
+  | 'childrenContentfulMyWorkDescriptionTextNode.childMarkdownRemark.children.id'
+  | 'childrenContentfulMyWorkDescriptionTextNode.childMarkdownRemark.children.children'
+  | 'childrenContentfulMyWorkDescriptionTextNode.childMarkdownRemark.internal.content'
+  | 'childrenContentfulMyWorkDescriptionTextNode.childMarkdownRemark.internal.contentDigest'
+  | 'childrenContentfulMyWorkDescriptionTextNode.childMarkdownRemark.internal.description'
+  | 'childrenContentfulMyWorkDescriptionTextNode.childMarkdownRemark.internal.fieldOwners'
+  | 'childrenContentfulMyWorkDescriptionTextNode.childMarkdownRemark.internal.ignoreType'
+  | 'childrenContentfulMyWorkDescriptionTextNode.childMarkdownRemark.internal.mediaType'
+  | 'childrenContentfulMyWorkDescriptionTextNode.childMarkdownRemark.internal.owner'
+  | 'childrenContentfulMyWorkDescriptionTextNode.childMarkdownRemark.internal.type'
+  | 'childContentfulMyWorkDescriptionTextNode.id'
+  | 'childContentfulMyWorkDescriptionTextNode.parent.id'
+  | 'childContentfulMyWorkDescriptionTextNode.parent.parent.id'
+  | 'childContentfulMyWorkDescriptionTextNode.parent.parent.children'
+  | 'childContentfulMyWorkDescriptionTextNode.parent.children'
+  | 'childContentfulMyWorkDescriptionTextNode.parent.children.id'
+  | 'childContentfulMyWorkDescriptionTextNode.parent.children.children'
+  | 'childContentfulMyWorkDescriptionTextNode.parent.internal.content'
+  | 'childContentfulMyWorkDescriptionTextNode.parent.internal.contentDigest'
+  | 'childContentfulMyWorkDescriptionTextNode.parent.internal.description'
+  | 'childContentfulMyWorkDescriptionTextNode.parent.internal.fieldOwners'
+  | 'childContentfulMyWorkDescriptionTextNode.parent.internal.ignoreType'
+  | 'childContentfulMyWorkDescriptionTextNode.parent.internal.mediaType'
+  | 'childContentfulMyWorkDescriptionTextNode.parent.internal.owner'
+  | 'childContentfulMyWorkDescriptionTextNode.parent.internal.type'
+  | 'childContentfulMyWorkDescriptionTextNode.children'
+  | 'childContentfulMyWorkDescriptionTextNode.children.id'
+  | 'childContentfulMyWorkDescriptionTextNode.children.parent.id'
+  | 'childContentfulMyWorkDescriptionTextNode.children.parent.children'
+  | 'childContentfulMyWorkDescriptionTextNode.children.children'
+  | 'childContentfulMyWorkDescriptionTextNode.children.children.id'
+  | 'childContentfulMyWorkDescriptionTextNode.children.children.children'
+  | 'childContentfulMyWorkDescriptionTextNode.children.internal.content'
+  | 'childContentfulMyWorkDescriptionTextNode.children.internal.contentDigest'
+  | 'childContentfulMyWorkDescriptionTextNode.children.internal.description'
+  | 'childContentfulMyWorkDescriptionTextNode.children.internal.fieldOwners'
+  | 'childContentfulMyWorkDescriptionTextNode.children.internal.ignoreType'
+  | 'childContentfulMyWorkDescriptionTextNode.children.internal.mediaType'
+  | 'childContentfulMyWorkDescriptionTextNode.children.internal.owner'
+  | 'childContentfulMyWorkDescriptionTextNode.children.internal.type'
+  | 'childContentfulMyWorkDescriptionTextNode.internal.content'
+  | 'childContentfulMyWorkDescriptionTextNode.internal.contentDigest'
+  | 'childContentfulMyWorkDescriptionTextNode.internal.description'
+  | 'childContentfulMyWorkDescriptionTextNode.internal.fieldOwners'
+  | 'childContentfulMyWorkDescriptionTextNode.internal.ignoreType'
+  | 'childContentfulMyWorkDescriptionTextNode.internal.mediaType'
+  | 'childContentfulMyWorkDescriptionTextNode.internal.owner'
+  | 'childContentfulMyWorkDescriptionTextNode.internal.type'
+  | 'childContentfulMyWorkDescriptionTextNode.description'
+  | 'childContentfulMyWorkDescriptionTextNode.sys.type'
+  | 'childContentfulMyWorkDescriptionTextNode.childrenMarkdownRemark'
+  | 'childContentfulMyWorkDescriptionTextNode.childrenMarkdownRemark.id'
+  | 'childContentfulMyWorkDescriptionTextNode.childrenMarkdownRemark.frontmatter.title'
+  | 'childContentfulMyWorkDescriptionTextNode.childrenMarkdownRemark.excerpt'
+  | 'childContentfulMyWorkDescriptionTextNode.childrenMarkdownRemark.rawMarkdownBody'
+  | 'childContentfulMyWorkDescriptionTextNode.childrenMarkdownRemark.html'
+  | 'childContentfulMyWorkDescriptionTextNode.childrenMarkdownRemark.htmlAst'
+  | 'childContentfulMyWorkDescriptionTextNode.childrenMarkdownRemark.excerptAst'
+  | 'childContentfulMyWorkDescriptionTextNode.childrenMarkdownRemark.headings'
+  | 'childContentfulMyWorkDescriptionTextNode.childrenMarkdownRemark.headings.id'
+  | 'childContentfulMyWorkDescriptionTextNode.childrenMarkdownRemark.headings.value'
+  | 'childContentfulMyWorkDescriptionTextNode.childrenMarkdownRemark.headings.depth'
+  | 'childContentfulMyWorkDescriptionTextNode.childrenMarkdownRemark.timeToRead'
+  | 'childContentfulMyWorkDescriptionTextNode.childrenMarkdownRemark.tableOfContents'
+  | 'childContentfulMyWorkDescriptionTextNode.childrenMarkdownRemark.wordCount.paragraphs'
+  | 'childContentfulMyWorkDescriptionTextNode.childrenMarkdownRemark.wordCount.sentences'
+  | 'childContentfulMyWorkDescriptionTextNode.childrenMarkdownRemark.wordCount.words'
+  | 'childContentfulMyWorkDescriptionTextNode.childrenMarkdownRemark.parent.id'
+  | 'childContentfulMyWorkDescriptionTextNode.childrenMarkdownRemark.parent.children'
+  | 'childContentfulMyWorkDescriptionTextNode.childrenMarkdownRemark.children'
+  | 'childContentfulMyWorkDescriptionTextNode.childrenMarkdownRemark.children.id'
+  | 'childContentfulMyWorkDescriptionTextNode.childrenMarkdownRemark.children.children'
+  | 'childContentfulMyWorkDescriptionTextNode.childrenMarkdownRemark.internal.content'
+  | 'childContentfulMyWorkDescriptionTextNode.childrenMarkdownRemark.internal.contentDigest'
+  | 'childContentfulMyWorkDescriptionTextNode.childrenMarkdownRemark.internal.description'
+  | 'childContentfulMyWorkDescriptionTextNode.childrenMarkdownRemark.internal.fieldOwners'
+  | 'childContentfulMyWorkDescriptionTextNode.childrenMarkdownRemark.internal.ignoreType'
+  | 'childContentfulMyWorkDescriptionTextNode.childrenMarkdownRemark.internal.mediaType'
+  | 'childContentfulMyWorkDescriptionTextNode.childrenMarkdownRemark.internal.owner'
+  | 'childContentfulMyWorkDescriptionTextNode.childrenMarkdownRemark.internal.type'
+  | 'childContentfulMyWorkDescriptionTextNode.childMarkdownRemark.id'
+  | 'childContentfulMyWorkDescriptionTextNode.childMarkdownRemark.frontmatter.title'
+  | 'childContentfulMyWorkDescriptionTextNode.childMarkdownRemark.excerpt'
+  | 'childContentfulMyWorkDescriptionTextNode.childMarkdownRemark.rawMarkdownBody'
+  | 'childContentfulMyWorkDescriptionTextNode.childMarkdownRemark.html'
+  | 'childContentfulMyWorkDescriptionTextNode.childMarkdownRemark.htmlAst'
+  | 'childContentfulMyWorkDescriptionTextNode.childMarkdownRemark.excerptAst'
+  | 'childContentfulMyWorkDescriptionTextNode.childMarkdownRemark.headings'
+  | 'childContentfulMyWorkDescriptionTextNode.childMarkdownRemark.headings.id'
+  | 'childContentfulMyWorkDescriptionTextNode.childMarkdownRemark.headings.value'
+  | 'childContentfulMyWorkDescriptionTextNode.childMarkdownRemark.headings.depth'
+  | 'childContentfulMyWorkDescriptionTextNode.childMarkdownRemark.timeToRead'
+  | 'childContentfulMyWorkDescriptionTextNode.childMarkdownRemark.tableOfContents'
+  | 'childContentfulMyWorkDescriptionTextNode.childMarkdownRemark.wordCount.paragraphs'
+  | 'childContentfulMyWorkDescriptionTextNode.childMarkdownRemark.wordCount.sentences'
+  | 'childContentfulMyWorkDescriptionTextNode.childMarkdownRemark.wordCount.words'
+  | 'childContentfulMyWorkDescriptionTextNode.childMarkdownRemark.parent.id'
+  | 'childContentfulMyWorkDescriptionTextNode.childMarkdownRemark.parent.children'
+  | 'childContentfulMyWorkDescriptionTextNode.childMarkdownRemark.children'
+  | 'childContentfulMyWorkDescriptionTextNode.childMarkdownRemark.children.id'
+  | 'childContentfulMyWorkDescriptionTextNode.childMarkdownRemark.children.children'
+  | 'childContentfulMyWorkDescriptionTextNode.childMarkdownRemark.internal.content'
+  | 'childContentfulMyWorkDescriptionTextNode.childMarkdownRemark.internal.contentDigest'
+  | 'childContentfulMyWorkDescriptionTextNode.childMarkdownRemark.internal.description'
+  | 'childContentfulMyWorkDescriptionTextNode.childMarkdownRemark.internal.fieldOwners'
+  | 'childContentfulMyWorkDescriptionTextNode.childMarkdownRemark.internal.ignoreType'
+  | 'childContentfulMyWorkDescriptionTextNode.childMarkdownRemark.internal.mediaType'
+  | 'childContentfulMyWorkDescriptionTextNode.childMarkdownRemark.internal.owner'
+  | 'childContentfulMyWorkDescriptionTextNode.childMarkdownRemark.internal.type'
+  | 'parent.id'
+  | 'parent.parent.id'
+  | 'parent.parent.parent.id'
+  | 'parent.parent.parent.children'
+  | 'parent.parent.children'
+  | 'parent.parent.children.id'
+  | 'parent.parent.children.children'
+  | 'parent.parent.internal.content'
+  | 'parent.parent.internal.contentDigest'
+  | 'parent.parent.internal.description'
+  | 'parent.parent.internal.fieldOwners'
+  | 'parent.parent.internal.ignoreType'
+  | 'parent.parent.internal.mediaType'
+  | 'parent.parent.internal.owner'
+  | 'parent.parent.internal.type'
+  | 'parent.children'
+  | 'parent.children.id'
+  | 'parent.children.parent.id'
+  | 'parent.children.parent.children'
+  | 'parent.children.children'
+  | 'parent.children.children.id'
+  | 'parent.children.children.children'
+  | 'parent.children.internal.content'
+  | 'parent.children.internal.contentDigest'
+  | 'parent.children.internal.description'
+  | 'parent.children.internal.fieldOwners'
+  | 'parent.children.internal.ignoreType'
+  | 'parent.children.internal.mediaType'
+  | 'parent.children.internal.owner'
+  | 'parent.children.internal.type'
+  | 'parent.internal.content'
+  | 'parent.internal.contentDigest'
+  | 'parent.internal.description'
+  | 'parent.internal.fieldOwners'
+  | 'parent.internal.ignoreType'
+  | 'parent.internal.mediaType'
+  | 'parent.internal.owner'
+  | 'parent.internal.type'
+  | 'children'
+  | 'children.id'
+  | 'children.parent.id'
+  | 'children.parent.parent.id'
+  | 'children.parent.parent.children'
+  | 'children.parent.children'
+  | 'children.parent.children.id'
+  | 'children.parent.children.children'
+  | 'children.parent.internal.content'
+  | 'children.parent.internal.contentDigest'
+  | 'children.parent.internal.description'
+  | 'children.parent.internal.fieldOwners'
+  | 'children.parent.internal.ignoreType'
+  | 'children.parent.internal.mediaType'
+  | 'children.parent.internal.owner'
+  | 'children.parent.internal.type'
+  | 'children.children'
+  | 'children.children.id'
+  | 'children.children.parent.id'
+  | 'children.children.parent.children'
+  | 'children.children.children'
+  | 'children.children.children.id'
+  | 'children.children.children.children'
+  | 'children.children.internal.content'
+  | 'children.children.internal.contentDigest'
+  | 'children.children.internal.description'
+  | 'children.children.internal.fieldOwners'
+  | 'children.children.internal.ignoreType'
+  | 'children.children.internal.mediaType'
+  | 'children.children.internal.owner'
+  | 'children.children.internal.type'
+  | 'children.internal.content'
+  | 'children.internal.contentDigest'
+  | 'children.internal.description'
+  | 'children.internal.fieldOwners'
+  | 'children.internal.ignoreType'
+  | 'children.internal.mediaType'
+  | 'children.internal.owner'
+  | 'children.internal.type'
+  | 'internal.content'
+  | 'internal.contentDigest'
+  | 'internal.description'
+  | 'internal.fieldOwners'
+  | 'internal.ignoreType'
+  | 'internal.mediaType'
+  | 'internal.owner'
+  | 'internal.type';
+
+type ContentfulMyWorkGroupConnection = {
+  readonly totalCount: Scalars['Int'];
+  readonly edges: ReadonlyArray<ContentfulMyWorkEdge>;
+  readonly nodes: ReadonlyArray<ContentfulMyWork>;
+  readonly pageInfo: PageInfo;
+  readonly distinct: ReadonlyArray<Scalars['String']>;
+  readonly max: Maybe<Scalars['Float']>;
+  readonly min: Maybe<Scalars['Float']>;
+  readonly sum: Maybe<Scalars['Float']>;
+  readonly group: ReadonlyArray<ContentfulMyWorkGroupConnection>;
+  readonly field: Scalars['String'];
+  readonly fieldValue: Maybe<Scalars['String']>;
+};
+
+
+type ContentfulMyWorkGroupConnection_distinctArgs = {
+  field: ContentfulMyWorkFieldsEnum;
+};
+
+
+type ContentfulMyWorkGroupConnection_maxArgs = {
+  field: ContentfulMyWorkFieldsEnum;
+};
+
+
+type ContentfulMyWorkGroupConnection_minArgs = {
+  field: ContentfulMyWorkFieldsEnum;
+};
+
+
+type ContentfulMyWorkGroupConnection_sumArgs = {
+  field: ContentfulMyWorkFieldsEnum;
+};
+
+
+type ContentfulMyWorkGroupConnection_groupArgs = {
+  skip: Maybe<Scalars['Int']>;
+  limit: Maybe<Scalars['Int']>;
+  field: ContentfulMyWorkFieldsEnum;
+};
+
+type ContentfulMyWorkFilterInput = {
+  readonly contentful_id: Maybe<StringQueryOperatorInput>;
+  readonly id: Maybe<StringQueryOperatorInput>;
+  readonly node_locale: Maybe<StringQueryOperatorInput>;
+  readonly title: Maybe<StringQueryOperatorInput>;
+  readonly url: Maybe<StringQueryOperatorInput>;
+  readonly repositoryUrl: Maybe<StringQueryOperatorInput>;
+  readonly description: Maybe<contentfulMyWorkDescriptionTextNodeFilterInput>;
+  readonly spaceId: Maybe<StringQueryOperatorInput>;
+  readonly createdAt: Maybe<DateQueryOperatorInput>;
+  readonly updatedAt: Maybe<DateQueryOperatorInput>;
+  readonly sys: Maybe<ContentfulMyWorkSysFilterInput>;
+  readonly childrenContentfulMyWorkDescriptionTextNode: Maybe<contentfulMyWorkDescriptionTextNodeFilterListInput>;
+  readonly childContentfulMyWorkDescriptionTextNode: Maybe<contentfulMyWorkDescriptionTextNodeFilterInput>;
+  readonly parent: Maybe<NodeFilterInput>;
+  readonly children: Maybe<NodeFilterListInput>;
+  readonly internal: Maybe<InternalFilterInput>;
+};
+
+type ContentfulMyWorkSortInput = {
+  readonly fields: Maybe<ReadonlyArray<Maybe<ContentfulMyWorkFieldsEnum>>>;
   readonly order: Maybe<ReadonlyArray<Maybe<SortOrderEnum>>>;
 };
 
@@ -8013,6 +8695,294 @@ type contentfulPersonShortBioTextNodeGroupConnection_groupArgs = {
 
 type contentfulPersonShortBioTextNodeSortInput = {
   readonly fields: Maybe<ReadonlyArray<Maybe<contentfulPersonShortBioTextNodeFieldsEnum>>>;
+  readonly order: Maybe<ReadonlyArray<Maybe<SortOrderEnum>>>;
+};
+
+type contentfulMyWorkDescriptionTextNodeConnection = {
+  readonly totalCount: Scalars['Int'];
+  readonly edges: ReadonlyArray<contentfulMyWorkDescriptionTextNodeEdge>;
+  readonly nodes: ReadonlyArray<contentfulMyWorkDescriptionTextNode>;
+  readonly pageInfo: PageInfo;
+  readonly distinct: ReadonlyArray<Scalars['String']>;
+  readonly max: Maybe<Scalars['Float']>;
+  readonly min: Maybe<Scalars['Float']>;
+  readonly sum: Maybe<Scalars['Float']>;
+  readonly group: ReadonlyArray<contentfulMyWorkDescriptionTextNodeGroupConnection>;
+};
+
+
+type contentfulMyWorkDescriptionTextNodeConnection_distinctArgs = {
+  field: contentfulMyWorkDescriptionTextNodeFieldsEnum;
+};
+
+
+type contentfulMyWorkDescriptionTextNodeConnection_maxArgs = {
+  field: contentfulMyWorkDescriptionTextNodeFieldsEnum;
+};
+
+
+type contentfulMyWorkDescriptionTextNodeConnection_minArgs = {
+  field: contentfulMyWorkDescriptionTextNodeFieldsEnum;
+};
+
+
+type contentfulMyWorkDescriptionTextNodeConnection_sumArgs = {
+  field: contentfulMyWorkDescriptionTextNodeFieldsEnum;
+};
+
+
+type contentfulMyWorkDescriptionTextNodeConnection_groupArgs = {
+  skip: Maybe<Scalars['Int']>;
+  limit: Maybe<Scalars['Int']>;
+  field: contentfulMyWorkDescriptionTextNodeFieldsEnum;
+};
+
+type contentfulMyWorkDescriptionTextNodeEdge = {
+  readonly next: Maybe<contentfulMyWorkDescriptionTextNode>;
+  readonly node: contentfulMyWorkDescriptionTextNode;
+  readonly previous: Maybe<contentfulMyWorkDescriptionTextNode>;
+};
+
+type contentfulMyWorkDescriptionTextNodeFieldsEnum =
+  | 'id'
+  | 'parent.id'
+  | 'parent.parent.id'
+  | 'parent.parent.parent.id'
+  | 'parent.parent.parent.children'
+  | 'parent.parent.children'
+  | 'parent.parent.children.id'
+  | 'parent.parent.children.children'
+  | 'parent.parent.internal.content'
+  | 'parent.parent.internal.contentDigest'
+  | 'parent.parent.internal.description'
+  | 'parent.parent.internal.fieldOwners'
+  | 'parent.parent.internal.ignoreType'
+  | 'parent.parent.internal.mediaType'
+  | 'parent.parent.internal.owner'
+  | 'parent.parent.internal.type'
+  | 'parent.children'
+  | 'parent.children.id'
+  | 'parent.children.parent.id'
+  | 'parent.children.parent.children'
+  | 'parent.children.children'
+  | 'parent.children.children.id'
+  | 'parent.children.children.children'
+  | 'parent.children.internal.content'
+  | 'parent.children.internal.contentDigest'
+  | 'parent.children.internal.description'
+  | 'parent.children.internal.fieldOwners'
+  | 'parent.children.internal.ignoreType'
+  | 'parent.children.internal.mediaType'
+  | 'parent.children.internal.owner'
+  | 'parent.children.internal.type'
+  | 'parent.internal.content'
+  | 'parent.internal.contentDigest'
+  | 'parent.internal.description'
+  | 'parent.internal.fieldOwners'
+  | 'parent.internal.ignoreType'
+  | 'parent.internal.mediaType'
+  | 'parent.internal.owner'
+  | 'parent.internal.type'
+  | 'children'
+  | 'children.id'
+  | 'children.parent.id'
+  | 'children.parent.parent.id'
+  | 'children.parent.parent.children'
+  | 'children.parent.children'
+  | 'children.parent.children.id'
+  | 'children.parent.children.children'
+  | 'children.parent.internal.content'
+  | 'children.parent.internal.contentDigest'
+  | 'children.parent.internal.description'
+  | 'children.parent.internal.fieldOwners'
+  | 'children.parent.internal.ignoreType'
+  | 'children.parent.internal.mediaType'
+  | 'children.parent.internal.owner'
+  | 'children.parent.internal.type'
+  | 'children.children'
+  | 'children.children.id'
+  | 'children.children.parent.id'
+  | 'children.children.parent.children'
+  | 'children.children.children'
+  | 'children.children.children.id'
+  | 'children.children.children.children'
+  | 'children.children.internal.content'
+  | 'children.children.internal.contentDigest'
+  | 'children.children.internal.description'
+  | 'children.children.internal.fieldOwners'
+  | 'children.children.internal.ignoreType'
+  | 'children.children.internal.mediaType'
+  | 'children.children.internal.owner'
+  | 'children.children.internal.type'
+  | 'children.internal.content'
+  | 'children.internal.contentDigest'
+  | 'children.internal.description'
+  | 'children.internal.fieldOwners'
+  | 'children.internal.ignoreType'
+  | 'children.internal.mediaType'
+  | 'children.internal.owner'
+  | 'children.internal.type'
+  | 'internal.content'
+  | 'internal.contentDigest'
+  | 'internal.description'
+  | 'internal.fieldOwners'
+  | 'internal.ignoreType'
+  | 'internal.mediaType'
+  | 'internal.owner'
+  | 'internal.type'
+  | 'description'
+  | 'sys.type'
+  | 'childrenMarkdownRemark'
+  | 'childrenMarkdownRemark.id'
+  | 'childrenMarkdownRemark.frontmatter.title'
+  | 'childrenMarkdownRemark.excerpt'
+  | 'childrenMarkdownRemark.rawMarkdownBody'
+  | 'childrenMarkdownRemark.html'
+  | 'childrenMarkdownRemark.htmlAst'
+  | 'childrenMarkdownRemark.excerptAst'
+  | 'childrenMarkdownRemark.headings'
+  | 'childrenMarkdownRemark.headings.id'
+  | 'childrenMarkdownRemark.headings.value'
+  | 'childrenMarkdownRemark.headings.depth'
+  | 'childrenMarkdownRemark.timeToRead'
+  | 'childrenMarkdownRemark.tableOfContents'
+  | 'childrenMarkdownRemark.wordCount.paragraphs'
+  | 'childrenMarkdownRemark.wordCount.sentences'
+  | 'childrenMarkdownRemark.wordCount.words'
+  | 'childrenMarkdownRemark.parent.id'
+  | 'childrenMarkdownRemark.parent.parent.id'
+  | 'childrenMarkdownRemark.parent.parent.children'
+  | 'childrenMarkdownRemark.parent.children'
+  | 'childrenMarkdownRemark.parent.children.id'
+  | 'childrenMarkdownRemark.parent.children.children'
+  | 'childrenMarkdownRemark.parent.internal.content'
+  | 'childrenMarkdownRemark.parent.internal.contentDigest'
+  | 'childrenMarkdownRemark.parent.internal.description'
+  | 'childrenMarkdownRemark.parent.internal.fieldOwners'
+  | 'childrenMarkdownRemark.parent.internal.ignoreType'
+  | 'childrenMarkdownRemark.parent.internal.mediaType'
+  | 'childrenMarkdownRemark.parent.internal.owner'
+  | 'childrenMarkdownRemark.parent.internal.type'
+  | 'childrenMarkdownRemark.children'
+  | 'childrenMarkdownRemark.children.id'
+  | 'childrenMarkdownRemark.children.parent.id'
+  | 'childrenMarkdownRemark.children.parent.children'
+  | 'childrenMarkdownRemark.children.children'
+  | 'childrenMarkdownRemark.children.children.id'
+  | 'childrenMarkdownRemark.children.children.children'
+  | 'childrenMarkdownRemark.children.internal.content'
+  | 'childrenMarkdownRemark.children.internal.contentDigest'
+  | 'childrenMarkdownRemark.children.internal.description'
+  | 'childrenMarkdownRemark.children.internal.fieldOwners'
+  | 'childrenMarkdownRemark.children.internal.ignoreType'
+  | 'childrenMarkdownRemark.children.internal.mediaType'
+  | 'childrenMarkdownRemark.children.internal.owner'
+  | 'childrenMarkdownRemark.children.internal.type'
+  | 'childrenMarkdownRemark.internal.content'
+  | 'childrenMarkdownRemark.internal.contentDigest'
+  | 'childrenMarkdownRemark.internal.description'
+  | 'childrenMarkdownRemark.internal.fieldOwners'
+  | 'childrenMarkdownRemark.internal.ignoreType'
+  | 'childrenMarkdownRemark.internal.mediaType'
+  | 'childrenMarkdownRemark.internal.owner'
+  | 'childrenMarkdownRemark.internal.type'
+  | 'childMarkdownRemark.id'
+  | 'childMarkdownRemark.frontmatter.title'
+  | 'childMarkdownRemark.excerpt'
+  | 'childMarkdownRemark.rawMarkdownBody'
+  | 'childMarkdownRemark.html'
+  | 'childMarkdownRemark.htmlAst'
+  | 'childMarkdownRemark.excerptAst'
+  | 'childMarkdownRemark.headings'
+  | 'childMarkdownRemark.headings.id'
+  | 'childMarkdownRemark.headings.value'
+  | 'childMarkdownRemark.headings.depth'
+  | 'childMarkdownRemark.timeToRead'
+  | 'childMarkdownRemark.tableOfContents'
+  | 'childMarkdownRemark.wordCount.paragraphs'
+  | 'childMarkdownRemark.wordCount.sentences'
+  | 'childMarkdownRemark.wordCount.words'
+  | 'childMarkdownRemark.parent.id'
+  | 'childMarkdownRemark.parent.parent.id'
+  | 'childMarkdownRemark.parent.parent.children'
+  | 'childMarkdownRemark.parent.children'
+  | 'childMarkdownRemark.parent.children.id'
+  | 'childMarkdownRemark.parent.children.children'
+  | 'childMarkdownRemark.parent.internal.content'
+  | 'childMarkdownRemark.parent.internal.contentDigest'
+  | 'childMarkdownRemark.parent.internal.description'
+  | 'childMarkdownRemark.parent.internal.fieldOwners'
+  | 'childMarkdownRemark.parent.internal.ignoreType'
+  | 'childMarkdownRemark.parent.internal.mediaType'
+  | 'childMarkdownRemark.parent.internal.owner'
+  | 'childMarkdownRemark.parent.internal.type'
+  | 'childMarkdownRemark.children'
+  | 'childMarkdownRemark.children.id'
+  | 'childMarkdownRemark.children.parent.id'
+  | 'childMarkdownRemark.children.parent.children'
+  | 'childMarkdownRemark.children.children'
+  | 'childMarkdownRemark.children.children.id'
+  | 'childMarkdownRemark.children.children.children'
+  | 'childMarkdownRemark.children.internal.content'
+  | 'childMarkdownRemark.children.internal.contentDigest'
+  | 'childMarkdownRemark.children.internal.description'
+  | 'childMarkdownRemark.children.internal.fieldOwners'
+  | 'childMarkdownRemark.children.internal.ignoreType'
+  | 'childMarkdownRemark.children.internal.mediaType'
+  | 'childMarkdownRemark.children.internal.owner'
+  | 'childMarkdownRemark.children.internal.type'
+  | 'childMarkdownRemark.internal.content'
+  | 'childMarkdownRemark.internal.contentDigest'
+  | 'childMarkdownRemark.internal.description'
+  | 'childMarkdownRemark.internal.fieldOwners'
+  | 'childMarkdownRemark.internal.ignoreType'
+  | 'childMarkdownRemark.internal.mediaType'
+  | 'childMarkdownRemark.internal.owner'
+  | 'childMarkdownRemark.internal.type';
+
+type contentfulMyWorkDescriptionTextNodeGroupConnection = {
+  readonly totalCount: Scalars['Int'];
+  readonly edges: ReadonlyArray<contentfulMyWorkDescriptionTextNodeEdge>;
+  readonly nodes: ReadonlyArray<contentfulMyWorkDescriptionTextNode>;
+  readonly pageInfo: PageInfo;
+  readonly distinct: ReadonlyArray<Scalars['String']>;
+  readonly max: Maybe<Scalars['Float']>;
+  readonly min: Maybe<Scalars['Float']>;
+  readonly sum: Maybe<Scalars['Float']>;
+  readonly group: ReadonlyArray<contentfulMyWorkDescriptionTextNodeGroupConnection>;
+  readonly field: Scalars['String'];
+  readonly fieldValue: Maybe<Scalars['String']>;
+};
+
+
+type contentfulMyWorkDescriptionTextNodeGroupConnection_distinctArgs = {
+  field: contentfulMyWorkDescriptionTextNodeFieldsEnum;
+};
+
+
+type contentfulMyWorkDescriptionTextNodeGroupConnection_maxArgs = {
+  field: contentfulMyWorkDescriptionTextNodeFieldsEnum;
+};
+
+
+type contentfulMyWorkDescriptionTextNodeGroupConnection_minArgs = {
+  field: contentfulMyWorkDescriptionTextNodeFieldsEnum;
+};
+
+
+type contentfulMyWorkDescriptionTextNodeGroupConnection_sumArgs = {
+  field: contentfulMyWorkDescriptionTextNodeFieldsEnum;
+};
+
+
+type contentfulMyWorkDescriptionTextNodeGroupConnection_groupArgs = {
+  skip: Maybe<Scalars['Int']>;
+  limit: Maybe<Scalars['Int']>;
+  field: contentfulMyWorkDescriptionTextNodeFieldsEnum;
+};
+
+type contentfulMyWorkDescriptionTextNodeSortInput = {
+  readonly fields: Maybe<ReadonlyArray<Maybe<contentfulMyWorkDescriptionTextNodeFieldsEnum>>>;
   readonly order: Maybe<ReadonlyArray<Maybe<SortOrderEnum>>>;
 };
 
@@ -9395,12 +10365,15 @@ type PostsFromTopQuery = { readonly allContentfulMyPost: { readonly nodes: Reado
       )> }
     )> } };
 
-type AuthorFromMeQueryVariables = Exact<{ [key: string]: never; }>;
+type FindAuthorQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type AuthorFromMeQuery = { readonly contentfulAuthor: Maybe<(
-    Pick<ContentfulAuthor, 'nickName'>
-    & { readonly avatarImage: Maybe<Pick<ContentfulAsset, 'gatsbyImageData'>>, readonly description: Maybe<{ readonly childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'html'>> }> }
+type FindAuthorQuery = { readonly contentfulAuthor: Maybe<(
+    Pick<ContentfulAuthor, 'github' | 'nickName' | 'qiita' | 'twitter' | 'updatedAt' | 'id'>
+    & { readonly avatarImage: Maybe<(
+      Pick<ContentfulAsset, 'title'>
+      & { readonly file: Maybe<Pick<ContentfulAssetFile, 'url' | 'contentType'>> }
+    )>, readonly description: Maybe<{ readonly childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'html'>> }> }
   )> };
 
 type GatsbyImageSharpFixedFragment = Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;

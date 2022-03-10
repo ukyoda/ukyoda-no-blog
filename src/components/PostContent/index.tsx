@@ -5,9 +5,11 @@ type Props = {
   className?: string
 }
 
-export const PostContent = ({ className, html }: Props) => {
+const PostContentOrig: React.FC<Props> = ({ className, html }: Props) => {
   return (
     // eslint-disable-next-line react/no-danger
     <div className={className} dangerouslySetInnerHTML={{ __html: html }} />
   )
 }
+PostContentOrig.displayName = 'PostContent'
+export const PostContent = React.memo(PostContentOrig)
