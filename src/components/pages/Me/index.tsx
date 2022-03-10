@@ -11,7 +11,11 @@ type Props = {
   description: string
 }
 
-export const Me: React.FC<Props> = ({ nickName, avatarImage, description }) => {
+export const MeTemplate: React.FC<Props> = ({
+  nickName,
+  avatarImage,
+  description,
+}) => {
   const Image = useMemo(() => {
     if (avatarImage === undefined) {
       return <img src={unknownImage} alt="avatar" />
