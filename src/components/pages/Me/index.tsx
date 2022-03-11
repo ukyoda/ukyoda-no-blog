@@ -1,7 +1,8 @@
-import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image'
 import React, { useMemo } from 'react'
 
 import { PostContent } from '../../PostContent'
+
+import * as styles from './Me.module.css'
 
 type Props = {
   name: string
@@ -24,23 +25,27 @@ const MeTemplateOrig: React.FC<Props> = ({
     return <PostContent html={description} />
   }, [description])
   return (
-    <section>
+    <section className={styles.section}>
       <div>
-        <img src={avatar} alt="" />
+        <div>
+          <img src={avatar} alt="" className={styles.image} />
+        </div>
       </div>
-      <h2>{name}</h2>
       <div>
-        <p>
-          <a href={links.twitter}>twitter</a>
-        </p>
-        <p>
-          <a href={links.github}>github</a>
-        </p>
-        <p>
-          <a href={links.qiita}>qiita</a>
-        </p>
+        <h2 className={styles.name}>{name}</h2>
+        <div>
+          <p>
+            <a href={links.twitter}>twitter</a>
+          </p>
+          <p>
+            <a href={links.github}>github</a>
+          </p>
+          <p>
+            <a href={links.qiita}>qiita</a>
+          </p>
+        </div>
+        <div>{Description}</div>
       </div>
-      <div>{Description}</div>
     </section>
   )
 }
