@@ -5,6 +5,12 @@ module.exports = {
     colors: {
       link: '#1d4ed8',
     },
+    screens: {
+      sm: '640px',
+      md: '768px',
+      lg: '1024px',
+      xl: '1280px',
+    },
     extend: {
       textColor: '#888',
     },
