@@ -13,6 +13,27 @@ module.exports = {
     },
     extend: {
       textColor: '#888',
+      fontFamily: {
+        base: [
+          'Helvetica Neue',
+          'Helvetica',
+          'Arial',
+          'YuGothic',
+          'Yu Gothic',
+          'Hiragino Kaku Gothic ProN',
+          'ヒラギノ角ゴ ProN W3',
+          'メイリオ',
+          'Meiryo',
+          'ＭＳ ゴシック',
+          'sans-serif',
+        ],
+        gothic: [
+          'Arial Narrow',
+          'Arial',
+          'Arial Black',
+          'Arial Rounded MT Bold',
+        ],
+      },
     },
   },
   plugins: [],

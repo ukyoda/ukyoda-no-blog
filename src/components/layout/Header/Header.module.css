@@ -11,6 +11,8 @@
 .brand {
   padding: 10px;
   font-size: 1.4em;
+  font-family: theme('fontFamily.gothic');
+  font-weight: 600;
 }
 
 .brand:hover {
@@ -23,6 +25,8 @@
 
 .menuItem {
   padding: 10px;
+  font-family: theme('fontFamily.gothic');
+  font-weight: 600;
 }
 
 .menuItem:hover {

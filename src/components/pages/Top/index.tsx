@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { Description } from './Description'
 import * as styles from './Top.module.css'
+import { Description } from './components/Description'
 import { Logo } from './components/Logo'
 
 const TopTemplateOrig = () => {

@@ -1,12 +1,14 @@
 import React from 'react'
 
-import { SectionBody, SectionTitle } from './components/atoms/section'
+import { SectionBody, SectionTitle } from '../atoms/section'
+
+import * as styles from './Description.module.css'
 
 import { ExternalLink } from '~/components/atoms/Anchor'
 
 export const Description = () => (
   <section>
-    <SectionTitle>What&#39;s this?</SectionTitle>
+    <SectionTitle className={styles.title}>WELCOME TO MY BLOG!!</SectionTitle>
     <SectionBody>
       <p>
         このサイトはukyodaの個人ブログです。
