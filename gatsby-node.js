@@ -27,6 +27,7 @@ exports.onCreateWebpackConfig = ({ actions }) => {
     resolve: {
       alias: {
         '~': path.resolve(__dirname, 'src'),
+        '@': __dirname,
       },
       extensions: ['.ts', '.tsx', '.js', '.jsx'],
     },
