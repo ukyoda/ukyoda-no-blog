@@ -1,18 +1,43 @@
 .section {
   @apply flex flex-row justify-center items-start;
-  padding: 30px 10px;
+  padding: 30px 20px;
 }
 
-.section > * {
+@media screen and (max-width: 500px) {
+  .section {
+    @apply flex-col items-center;
+  }
+}
+
+.section > * + * {
   margin-left: 10px;
 }
 
+.image-wrapper {
+  width: 180px;
+  height: 180px;
+  margin-bottom: 20px;
+}
+
 .image {
-  width: 250px;
-  height: 250px;
+  width: 180px;
+  height: 180px;
 }
 
 .name {
   font-weight: bold;
   font-size: 32px;
+}
+
+.links {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.links > * + * {
+  margin-left: 10px;
+}
+
+.description p + p {
+  padding-top: 10px;
 }

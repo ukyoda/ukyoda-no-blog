@@ -27,13 +27,13 @@ const MeTemplateOrig: React.FC<Props> = ({
   return (
     <section className={styles.section}>
       <div>
-        <div>
+        <div className={styles.imageWrapper}>
           <img src={avatar} alt="" className={styles.image} />
         </div>
       </div>
       <div>
         <h2 className={styles.name}>{name}</h2>
-        <div>
+        <div className={styles.links}>
           <p>
             <a href={links.twitter}>twitter</a>
           </p>
@@ -44,7 +44,7 @@ const MeTemplateOrig: React.FC<Props> = ({
             <a href={links.qiita}>qiita</a>
           </p>
         </div>
-        <div>{Description}</div>
+        <div className={styles.description}>{Description}</div>
       </div>
     </section>
   )
