@@ -32,6 +32,14 @@
 .links {
   display: flex;
   margin-bottom: 20px;
+  font-size: 34px;
+}
+
+.links > a {
+  color: #000;
+  @apply inline-flex items-center justify-center;
+  width: 34px;
+  height: 34px;
 }
 
 .links > * + * {

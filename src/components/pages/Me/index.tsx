@@ -1,8 +1,19 @@
+import {
+  faGithub,
+  faGithubSquare,
+  faTwitter,
+  faTwitterSquare,
+} from '@fortawesome/free-brands-svg-icons'
+import { faSquare } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useMemo } from 'react'
 
 import { PostContent } from '../../PostContent'
 
 import * as styles from './Me.module.css'
+
+import qiitaIcon from '~/assets/images/qiita.png'
+import { ExternalLink } from '~/components/atoms/Anchor'
 
 type Props = {
   name: string
@@ -34,15 +45,15 @@ const MeTemplateOrig: React.FC<Props> = ({
       <div>
         <h2 className={styles.name}>{name}</h2>
         <div className={styles.links}>
-          <p>
-            <a href={links.twitter}>twitter</a>
-          </p>
-          <p>
-            <a href={links.github}>github</a>
-          </p>
-          <p>
-            <a href={links.qiita}>qiita</a>
-          </p>
+          <ExternalLink href={links.twitter} aria-label="Twitter">
+            <FontAwesomeIcon icon={faTwitterSquare} color="#00acee" />
+          </ExternalLink>
+          <ExternalLink href={links.github}>
+            <FontAwesomeIcon icon={faGithubSquare} />
+          </ExternalLink>
+          <ExternalLink href={links.qiita}>
+            <img src={qiitaIcon} alt="qiita" />
+          </ExternalLink>
         </div>
         <div className={styles.description}>{Description}</div>
       </div>
