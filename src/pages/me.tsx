@@ -6,6 +6,7 @@ import { PostContent } from '~/components/PostContent'
 import { NotFound } from '~/components/errors/NotFound'
 import { Body } from '~/components/layout/Body'
 import { Header } from '~/components/layout/Header'
+import { MeTemplate } from '~/components/pages/Me'
 import { validationOptional } from '~/utils/validationOptional'
 
 type Props = PageProps<GatsbyTypes.FindAuthorQuery>
@@ -50,13 +51,16 @@ const Me: React.FC<Props> = ({ data }) => {
     <div>
       <Header />
       <Body>
-        <section>
-          <div>
-            <img src={author.avatar} alt="" />
-          </div>
-          <h2>{author.name}</h2>
-          <div>{Description}</div>
-        </section>
+        <MeTemplate
+          name={author.name}
+          description={author.description}
+          avatar={author.avatar}
+          links={{
+            qiita: author.qiita,
+            github: author.github,
+            twitter: author.twitter,
+          }}
+        />
       </Body>
     </div>
   )

@@ -3,30 +3,47 @@ import React, { useMemo } from 'react'
 
 import { PostContent } from '../../PostContent'
 
-import unknownImage from '~/assets/images/unknown.png'
-
 type Props = {
-  nickName: string
-  avatarImage: IGatsbyImageData | undefined
+  name: string
   description: string
+  avatar: string
+  links: {
+    qiita: string
+    github: string
+    twitter: string
+  }
 }
 
-export const MeTemplate: React.FC<Props> = ({
-  nickName,
-  avatarImage,
+const MeTemplateOrig: React.FC<Props> = ({
+  name,
   description,
+  avatar,
+  links,
 }) => {
-  const Image = useMemo(() => {
-    if (avatarImage === undefined) {
-      return <img src={unknownImage} alt="avatar" />
-    }
-    return <GatsbyImage image={avatarImage} alt="" />
-  }, [avatarImage])
+  const Description = useMemo(() => {
+    return <PostContent html={description} />
+  }, [description])
   return (
     <section>
-      <h2>{nickName}</h2>
-      {Image}
-      <PostContent html={description} />
+      <div>
+        <img src={avatar} alt="" />
+      </div>
+      <h2>{name}</h2>
+      <div>
+        <p>
+          <a href={links.twitter}>twitter</a>
+        </p>
+        <p>
+          <a href={links.github}>github</a>
+        </p>
+        <p>
+          <a href={links.qiita}>qiita</a>
+        </p>
+      </div>
+      <div>{Description}</div>
     </section>
   )
 }
+
+MeTemplateOrig.displayName = 'MeTemplate'
+export const MeTemplate = React.memo(MeTemplateOrig)

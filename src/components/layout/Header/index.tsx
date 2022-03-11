@@ -17,7 +17,7 @@ export const Header: React.VFC = () => (
         <nav>
           <ul className={styles.nav}>
             <li className={styles.menuItem}>
-              <Link to="/me">About us</Link>
+              <Link to="/me">About me</Link>
             </li>
           </ul>
         </nav>
