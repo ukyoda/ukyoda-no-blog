@@ -4,16 +4,9 @@
 }
 
 .logo {
-  width: 500px;
-  height: 263px;
-  transform: rotateZ(7deg);
-  box-shadow: 5px 5px 10px 0px #888;
-  border-radius: 13px;
-}
-
-@media screen and (max-width: 370px) {
-  .logo {
-    max-width: 320px;
-    max-height: 157.5px;
-  }
+  /* width: 500px; */
+  /* height: 252px; */
+  /* transform: rotateZ(7deg); */
+  /* box-shadow: 5px 5px 10px 0px #888; */
+  /* border-radius: 13px; */
 }

@@ -4,8 +4,7 @@ import React from 'react'
 import { Body } from '~/components/layout/Body'
 import { Header } from '~/components/layout/Header'
 import { Layout } from '~/components/layout/Layout'
-import { Description } from '~/components/pages/Top/Description'
-import { Logo } from '~/components/pages/Top/components/Logo'
+import { TopTemplate } from '~/components/pages/Top'
 
 type Props = PageProps<GatsbyTypes.PostsFromTopQuery>
 
@@ -14,8 +13,7 @@ const Top: React.FC<Props> = () => {
     <Layout>
       <Header />
       <Body>
-        <Logo />
-        <Description />
+        <TopTemplate />
       </Body>
     </Layout>
   )

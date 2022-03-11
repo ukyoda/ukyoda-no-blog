@@ -6,7 +6,9 @@ import LogoImage from '~/assets/images/Logo.png'
 
 const LogoOrig = () => (
   <div className={styles.logoWrapper}>
-    <img className={styles.logo} src={LogoImage} alt="Wel come to my blog." />
+    <div className={styles.logo}>
+      <img src={LogoImage} alt="Wel come to my blog." />
+    </div>
   </div>
 )
 LogoOrig.displayName = 'Logo'
