@@ -4,7 +4,14 @@
 }
 
 .logo {
-  max-width: 320px;
-  height: 157.5px;
+  width: 500px;
+  height: 263px;
   transform: rotateZ(7deg);
+}
+
+@media screen and (max-width: 370px) {
+  .logo {
+    max-width: 320px;
+    max-height: 157.5px;
+  }
 }

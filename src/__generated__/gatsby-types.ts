@@ -10336,19 +10336,6 @@ type ContentfulContentTypeSortInput = {
   readonly order: Maybe<ReadonlyArray<Maybe<SortOrderEnum>>>;
 };
 
-type BlogPostBySlugQueryVariables = Exact<{
-  slug: Scalars['String'];
-  previousPostSlug: Maybe<Scalars['String']>;
-  nextPostSlug: Maybe<Scalars['String']>;
-}>;
-
-
-type BlogPostBySlugQuery = { readonly contentfulBlogPost: Maybe<(
-    Pick<ContentfulBlogPost, 'slug' | 'title' | 'publishDate' | 'tags'>
-    & { rawDate: ContentfulBlogPost['publishDate'] }
-    & { readonly author: Maybe<Pick<ContentfulPerson, 'name'>>, readonly heroImage: Maybe<Pick<ContentfulAsset, 'gatsbyImageData'>>, readonly body: Maybe<{ readonly childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'html' | 'timeToRead'>> }>, readonly description: Maybe<{ readonly childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'excerpt'>> }> }
-  )>, readonly previous: Maybe<Pick<ContentfulBlogPost, 'slug' | 'title'>>, readonly next: Maybe<Pick<ContentfulBlogPost, 'slug' | 'title'>> };
-
 type PagesQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -10375,6 +10362,19 @@ type FindAuthorQuery = { readonly contentfulAuthor: Maybe<(
       & { readonly file: Maybe<Pick<ContentfulAssetFile, 'url' | 'contentType'>> }
     )>, readonly description: Maybe<{ readonly childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'html'>> }> }
   )> };
+
+type MyPostBySlugQueryVariables = Exact<{
+  slug: Scalars['String'];
+  previousPostSlug: Maybe<Scalars['String']>;
+  nextPostSlug: Maybe<Scalars['String']>;
+}>;
+
+
+type MyPostBySlugQuery = { readonly contentfulMyPost: Maybe<(
+    Pick<ContentfulMyPost, 'slug' | 'title' | 'publishDate'>
+    & { rawDate: ContentfulMyPost['publishDate'] }
+    & { readonly body: Maybe<{ readonly childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'html'>> }> }
+  )>, readonly previous: Maybe<Pick<ContentfulMyPost, 'slug' | 'title'>>, readonly next: Maybe<Pick<ContentfulMyPost, 'slug' | 'title'>> };
 
 type GatsbyImageSharpFixedFragment = Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;
 
