@@ -1,8 +1,6 @@
 import { graphql, PageProps } from 'gatsby'
-import { GatsbyImageProps } from 'gatsby-plugin-image'
-import React, { useMemo } from 'react'
+import React from 'react'
 
-import { PostContent } from '~/components/PostContent'
 import { NotFound } from '~/components/errors/NotFound'
 import { Body } from '~/components/layout/Body'
 import { Header } from '~/components/layout/Header'

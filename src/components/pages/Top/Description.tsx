@@ -2,7 +2,7 @@ import React from 'react'
 
 import { SectionBody, SectionTitle } from './atoms/section'
 
-import { Anchor, ExternalLink } from '~/components/atoms/Anchor'
+import { ExternalLink } from '~/components/atoms/Anchor'
 
 export const Description = () => (
   <section>
