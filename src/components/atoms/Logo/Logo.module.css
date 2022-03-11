@@ -1,0 +1,10 @@
+.logoWrapper {
+  @apply flex justify-center items-center;
+  padding: 15px 0;
+}
+
+.logo {
+  max-width: 320px;
+  height: 157.5px;
+  transform: rotateZ(7deg);
+}

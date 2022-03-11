@@ -1,6 +1,7 @@
 import { graphql, PageProps } from 'gatsby'
 import React from 'react'
 
+import { Logo } from '~/components/atoms/Logo'
 import { Body } from '~/components/layout/Body'
 import { Container } from '~/components/layout/Container'
 import { Header } from '~/components/layout/Header'
@@ -14,6 +15,7 @@ const Top: React.FC = () => {
     <div>
       <Header />
       <Body>
+        <Logo />
         <Description />
       </Body>
     </div>
