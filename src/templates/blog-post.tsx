@@ -1,13 +1,12 @@
 // TODO: remove eslint-disable after the ClassComponent refactor to a FunctionalComponent
 /* eslint-disable react/prefer-stateless-function */
 import { Link, graphql, PageProps } from 'gatsby'
-import get from 'lodash/get'
 import React, { useMemo } from 'react'
-
-import * as styles from './blog-post.module.css'
 
 import { Body } from '~/components/layout/Body'
 import { Header } from '~/components/layout/Header'
+import { Layout } from '~/components/layout/Layout'
+import { generateBlogUrl } from '~/utils/generateBlogUrl'
 
 // TODO: fix this ClassComponent to FunctionalComponent
 type Props = PageProps<GatsbyTypes.MyPostBySlugQuery>
@@ -15,19 +14,19 @@ type Props = PageProps<GatsbyTypes.MyPostBySlugQuery>
 const MyPostTemplate: React.FC<Props> = ({ data }) => {
   const { contentfulMyPost: current, previous, next } = data
   const PrevLink = useMemo(() => {
-    const prevUrl = previous?.slug ? `/blog/${previous.slug}` : null
+    const prevUrl = previous?.slug ? generateBlogUrl(previous.slug) : null
     const text = previous?.title ? previous.title : null
     if (prevUrl && text) return <Link to={prevUrl}>{text}</Link>
     return null
   }, [previous])
   const NextLink = useMemo(() => {
-    const nextUrl = next?.slug ? `/blog/${next.slug}` : null
+    const nextUrl = next?.slug ? generateBlogUrl(next.slug) : null
     const text = next?.title ? next.title : null
     if (nextUrl && text) return <Link to={nextUrl}>{text}</Link>
     return null
-  }, [previous])
+  }, [next])
   return (
-    <div>
+    <Layout>
       <Header />
       <Body>
         <section>
@@ -37,7 +36,7 @@ const MyPostTemplate: React.FC<Props> = ({ data }) => {
         <div>{NextLink}</div>
         <div>{PrevLink}</div>
       </Body>
-    </div>
+    </Layout>
   )
 }
 

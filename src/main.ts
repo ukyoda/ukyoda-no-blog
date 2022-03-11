@@ -2,6 +2,8 @@ import * as path from 'path'
 
 import { GatsbyNode } from 'gatsby'
 
+import { generateBlogUrl } from './utils/generateBlogUrl'
+
 type ResultNode = {
   title: string
   slug: string
@@ -56,7 +58,7 @@ export const createPages: GatsbyNode['createPages'] = async ({
         index === posts.length - 1 ? null : posts[index + 1].slug
 
       createPage({
-        path: `/blog/${post.slug}/`,
+        path: generateBlogUrl(post.slug),
         component: blogPost,
         context: {
           slug: post.slug,

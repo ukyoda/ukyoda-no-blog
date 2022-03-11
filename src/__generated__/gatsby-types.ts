@@ -10345,7 +10345,7 @@ type PostsFromTopQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 type PostsFromTopQuery = { readonly allContentfulMyPost: { readonly nodes: ReadonlyArray<(
-      Pick<ContentfulMyPost, 'title'>
+      Pick<ContentfulMyPost, 'title' | 'slug'>
       & { readonly body: Maybe<(
         Pick<contentfulMyPostBodyTextNode, 'body'>
         & { readonly childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'html'>> }

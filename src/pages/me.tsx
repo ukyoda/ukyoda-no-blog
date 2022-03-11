@@ -6,6 +6,7 @@ import { PostContent } from '~/components/PostContent'
 import { NotFound } from '~/components/errors/NotFound'
 import { Body } from '~/components/layout/Body'
 import { Header } from '~/components/layout/Header'
+import { Layout } from '~/components/layout/Layout'
 import { MeTemplate } from '~/components/pages/Me'
 import { validationOptional } from '~/utils/validationOptional'
 
@@ -37,18 +38,11 @@ const extractAuthor = (
 
 const Me: React.FC<Props> = ({ data }) => {
   const author = extractAuthor(data)
-  const Description = useMemo(() => {
-    const description = author?.description
-    if (!description) {
-      return null
-    }
-    return <PostContent html={description} />
-  }, [author])
   if (!author) {
     return <NotFound />
   }
   return (
-    <div>
+    <Layout>
       <Header />
       <Body>
         <MeTemplate
@@ -62,7 +56,7 @@ const Me: React.FC<Props> = ({ data }) => {
           }}
         />
       </Body>
-    </div>
+    </Layout>
   )
 }
 
