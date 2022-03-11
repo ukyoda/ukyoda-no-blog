@@ -18,7 +18,6 @@ module.exports = {
   },
   rules: {
     'no-nested-ternary': 'off',
-    'react-hooks/exhaustive-deps': 'off',
     'no-console': 'warn', // console.logがあったらwarningを出す
     'arrow-body-style': 'off', // 矢印のbodyを許可
     'import/prefer-default-export': 'off', // 名前付きexportを許可
@@ -26,6 +25,7 @@ module.exports = {
     '@typescript-eslint/no-use-before-define': ['error'],
     'dot-notation': 'off',
     '@typescript-eslint/dot-notation': ['error'],
+    'import/extensions': 'off', // WANTFIX: そのうち有効にしたい
     'import/order': [
       'warn',
       {
@@ -34,15 +34,11 @@ module.exports = {
       },
     ],
     'react/react-in-jsx-scope': 'off', // jsxで使うreactを許可
-    'react/jsx-filename-extension': 'off', // jsxファイル名の拡張子を許可
+    'react/jsx-filename-extension': ['off'], // jsxファイル名の拡張子を許可
     'react/function-component-definition': 'off', // functionalコンポーネントOK（むしろ歓迎）
     'react/jsx-props-no-spreading': 'off', // propsのspreadを許可
-    'react/require-default-props': [
-      'warn',
-      {
-        ignoreFunctionalComponents: true,
-      },
-    ], // default propsを許可
+    'react/require-default-props': 'off', // default propsを許可
+    'react/prop-types': 'off',
     'jsx-a11y/label-has-associated-control': [
       // a11y関連設定 (https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/master/docs/rules/label-has-associated-control.md)
       'error',

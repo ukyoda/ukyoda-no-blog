@@ -1,0 +1,51 @@
+.section {
+  @apply flex flex-row justify-center items-start;
+  padding: 30px 20px;
+}
+
+@media screen and (max-width: theme('screens.sm')) {
+  .section {
+    @apply flex-col items-center;
+  }
+}
+
+.section > * + * {
+  margin-left: 10px;
+}
+
+.image-wrapper {
+  width: 180px;
+  height: 180px;
+  margin-bottom: 20px;
+}
+
+.image {
+  width: 180px;
+  height: 180px;
+}
+
+.name {
+  font-weight: bold;
+  font-size: 32px;
+}
+
+.links {
+  display: flex;
+  margin-bottom: 20px;
+  font-size: 34px;
+}
+
+.links > a {
+  color: #000;
+  @apply inline-flex items-center justify-center;
+  width: 34px;
+  height: 34px;
+}
+
+.links > * + * {
+  margin-left: 10px;
+}
+
+.description p + p {
+  padding-top: 10px;
+}

@@ -1,0 +1,30 @@
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.headerContents {
+  @apply flex items-center justify-between;
+}
+
+.brand {
+  padding: 10px;
+  font-size: 1.4em;
+}
+
+.brand:hover {
+  opacity: 0.8;
+}
+
+.nav {
+  display: flex;
+}
+
+.menuItem {
+  padding: 10px;
+}
+
+.menuItem:hover {
+  opacity: 0.8;
+}

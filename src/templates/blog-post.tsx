@@ -1,117 +1,69 @@
 // TODO: remove eslint-disable after the ClassComponent refactor to a FunctionalComponent
 /* eslint-disable react/prefer-stateless-function */
-import { Link, graphql } from 'gatsby'
-import get from 'lodash/get'
-import React from 'react'
+import { Link, graphql, PageProps } from 'gatsby'
+import React, { useMemo } from 'react'
 
-import Hero from '../components/hero'
-import Layout from '../components/layout'
-import Seo from '../components/seo'
-import Tags from '../components/tags'
-
-import * as styles from './blog-post.module.css'
+import { Body } from '~/components/layout/Body'
+import { Header } from '~/components/layout/Header'
+import { Layout } from '~/components/layout/Layout'
+import { generateBlogUrl } from '~/utils/generateBlogUrl'
 
 // TODO: fix this ClassComponent to FunctionalComponent
-class BlogPostTemplate extends React.Component {
-  render() {
-    const post = get(this.props, 'data.contentfulBlogPost')
-    const previous = get(this.props, 'data.previous')
-    const next = get(this.props, 'data.next')
+type Props = PageProps<GatsbyTypes.MyPostBySlugQuery>
 
-    return (
-      <Layout>
-        <Seo
-          title={post.title}
-          description={post.description.childMarkdownRemark.excerpt}
-          image={`http:${post.heroImage.resize.src}`}
-        />
-        <Hero
-          image={post.heroImage?.gatsbyImageData}
-          title={post.title}
-          content={post.description?.childMarkdownRemark?.excerpt}
-        />
-        <div className={styles.container}>
-          <span className={styles.meta}>
-            {post.author?.name} &middot;{' '}
-            <time dateTime={post.rawDate}>{post.publishDate}</time> –{' '}
-            {post.body?.childMarkdownRemark?.timeToRead} minute read
-          </span>
-          <div className={styles.article}>
-            <div
-              className={styles.body}
-              // eslint-disable-next-line react/no-danger
-              dangerouslySetInnerHTML={{
-                __html: post.body?.childMarkdownRemark?.html,
-              }}
-            />
-            <Tags tags={post.tags} />
-            {(previous || next) && (
-              <nav>
-                <ul className={styles.articleNavigation}>
-                  {previous && (
-                    <li>
-                      <Link to={`/blog/${previous.slug}`} rel="prev">
-                        ← {previous.title}
-                      </Link>
-                    </li>
-                  )}
-                  {next && (
-                    <li>
-                      <Link to={`/blog/${next.slug}`} rel="next">
-                        {next.title} →
-                      </Link>
-                    </li>
-                  )}
-                </ul>
-              </nav>
-            )}
-          </div>
-        </div>
-      </Layout>
-    )
-  }
+const MyPostTemplate: React.FC<Props> = ({ data }) => {
+  const { contentfulMyPost: current, previous, next } = data
+  const PrevLink = useMemo(() => {
+    const prevUrl = previous?.slug ? generateBlogUrl(previous.slug) : null
+    const text = previous?.title ? previous.title : null
+    if (prevUrl && text) return <Link to={prevUrl}>{text}</Link>
+    return null
+  }, [previous])
+  const NextLink = useMemo(() => {
+    const nextUrl = next?.slug ? generateBlogUrl(next.slug) : null
+    const text = next?.title ? next.title : null
+    if (nextUrl && text) return <Link to={nextUrl}>{text}</Link>
+    return null
+  }, [next])
+  return (
+    <Layout>
+      <Header />
+      <Body>
+        <section>
+          <h1>{current?.title}</h1>
+          <p>{current?.slug}</p>
+        </section>
+        <div>{NextLink}</div>
+        <div>{PrevLink}</div>
+      </Body>
+    </Layout>
+  )
 }
 
-export default BlogPostTemplate
+export default MyPostTemplate
 
 export const pageQuery = graphql`
-  query BlogPostBySlug(
+  query MyPostBySlug(
     $slug: String!
     $previousPostSlug: String
     $nextPostSlug: String
   ) {
-    contentfulBlogPost(slug: { eq: $slug }) {
+    contentfulMyPost(slug: { eq: $slug }) {
       slug
       title
-      author {
-        name
-      }
       publishDate(formatString: "MMMM Do, YYYY")
       rawDate: publishDate
-      heroImage {
-        gatsbyImageData(layout: FULL_WIDTH, placeholder: BLURRED, width: 1280)
-        resize(height: 630, width: 1200) {
-          src
-        }
-      }
       body {
         childMarkdownRemark {
           html
-          timeToRead
-        }
-      }
-      tags
-      description {
-        childMarkdownRemark {
-          excerpt
         }
       }
     }
-    previous: contentfulBlogPost(slug: { eq: $previousPostSlug }) {
+    previous: contentfulMyPost(slug: { eq: $previousPostSlug }) {
       slug
       title
     }
-    next: contentfulBlogPost(slug: { eq: $nextPostSlug }) {
+    next: contentfulMyPost(slug: { eq: $nextPostSlug }) {
       slug
       title
     }

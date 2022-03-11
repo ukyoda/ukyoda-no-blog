@@ -2,12 +2,14 @@ import * as path from 'path'
 
 import { GatsbyNode } from 'gatsby'
 
+import { generateBlogUrl } from './utils/generateBlogUrl'
+
 type ResultNode = {
   title: string
   slug: string
 }
 type AllContentfulBlogPost = {
-  allContentfulBlogPost: {
+  allContentfulMyPost: {
     nodes: ResultNode[]
   }
 }
@@ -25,7 +27,7 @@ export const createPages: GatsbyNode['createPages'] = async ({
   const result = await graphql<AllContentfulBlogPost>(
     `
       {
-        allContentfulBlogPost {
+        allContentfulMyPost(sort: { order: DESC, fields: createdAt }) {
           nodes {
             title
             slug
@@ -43,7 +45,7 @@ export const createPages: GatsbyNode['createPages'] = async ({
     return
   }
 
-  const posts = result?.data?.allContentfulBlogPost.nodes
+  const posts = result?.data?.allContentfulMyPost.nodes
 
   // Create blog posts pages
   // But only if there's at least one blog post found in Contentful
@@ -56,7 +58,7 @@ export const createPages: GatsbyNode['createPages'] = async ({
         index === posts.length - 1 ? null : posts[index + 1].slug
 
       createPage({
-        path: `/blog/${post.slug}/`,
+        path: generateBlogUrl(post.slug),
         component: blogPost,
         context: {
           slug: post.slug,

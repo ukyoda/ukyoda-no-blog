@@ -1,0 +1,17 @@
+.logoWrapper {
+  @apply flex justify-center items-center;
+  padding: 40px 0;
+}
+
+.logo {
+  /* width: 500px; */
+  /* height: 252px; */
+  transform: rotateZ(7deg);
+  box-shadow: 5px 5px 10px 0px #888;
+  border-radius: 13px;
+}
+
+.logo {
+  width: 100%;
+  height: 100%;
+}
