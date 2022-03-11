@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { SectionBody, SectionTitle } from './atoms/section'
+import { SectionBody, SectionTitle } from './components/atoms/section'
 
 import { ExternalLink } from '~/components/atoms/Anchor'
 
