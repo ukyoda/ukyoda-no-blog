@@ -1,10 +1,7 @@
 import {
-  faGithub,
   faGithubSquare,
-  faTwitter,
   faTwitterSquare,
 } from '@fortawesome/free-brands-svg-icons'
-import { faSquare } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useMemo } from 'react'
 

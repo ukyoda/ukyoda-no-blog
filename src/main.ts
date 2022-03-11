@@ -46,7 +46,7 @@ export const createPages: GatsbyNode['createPages'] = async ({
   }
 
   const posts = result?.data?.allContentfulMyPost.nodes
-  console.log(posts)
+
   // Create blog posts pages
   // But only if there's at least one blog post found in Contentful
   // `context` is available in the template as a prop and as a variable in GraphQL
