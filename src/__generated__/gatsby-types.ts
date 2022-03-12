@@ -989,13 +989,13 @@ type ContentfulMyPost = ContentfulReference & ContentfulEntry & Node & {
   readonly node_locale: Scalars['String'];
   readonly title: Maybe<Scalars['String']>;
   readonly slug: Maybe<Scalars['String']>;
+  readonly description: Maybe<Scalars['String']>;
   readonly publishDate: Maybe<Scalars['Date']>;
   readonly body: Maybe<contentfulMyPostBodyTextNode>;
   readonly spaceId: Maybe<Scalars['String']>;
   readonly createdAt: Maybe<Scalars['Date']>;
   readonly updatedAt: Maybe<Scalars['Date']>;
   readonly sys: Maybe<ContentfulMyPostSys>;
-  readonly description: Maybe<Scalars['String']>;
   /** Returns all children nodes filtered by type contentfulMyPostBodyTextNode */
   readonly childrenContentfulMyPostBodyTextNode: Maybe<ReadonlyArray<Maybe<contentfulMyPostBodyTextNode>>>;
   /** Returns the first child node of type contentfulMyPostBodyTextNode or null if there are no children of given type on this node */
@@ -1711,13 +1711,13 @@ type Query_contentfulMyPostArgs = {
   node_locale: Maybe<StringQueryOperatorInput>;
   title: Maybe<StringQueryOperatorInput>;
   slug: Maybe<StringQueryOperatorInput>;
+  description: Maybe<StringQueryOperatorInput>;
   publishDate: Maybe<DateQueryOperatorInput>;
   body: Maybe<contentfulMyPostBodyTextNodeFilterInput>;
   spaceId: Maybe<StringQueryOperatorInput>;
   createdAt: Maybe<DateQueryOperatorInput>;
   updatedAt: Maybe<DateQueryOperatorInput>;
   sys: Maybe<ContentfulMyPostSysFilterInput>;
-  description: Maybe<StringQueryOperatorInput>;
   childrenContentfulMyPostBodyTextNode: Maybe<contentfulMyPostBodyTextNodeFilterListInput>;
   childContentfulMyPostBodyTextNode: Maybe<contentfulMyPostBodyTextNodeFilterInput>;
   parent: Maybe<NodeFilterInput>;
@@ -8140,6 +8140,7 @@ type ContentfulMyPostFieldsEnum =
   | 'node_locale'
   | 'title'
   | 'slug'
+  | 'description'
   | 'publishDate'
   | 'body.id'
   | 'body.parent.id'
@@ -8248,7 +8249,6 @@ type ContentfulMyPostFieldsEnum =
   | 'sys.contentType.sys.type'
   | 'sys.contentType.sys.linkType'
   | 'sys.contentType.sys.id'
-  | 'description'
   | 'childrenContentfulMyPostBodyTextNode'
   | 'childrenContentfulMyPostBodyTextNode.id'
   | 'childrenContentfulMyPostBodyTextNode.parent.id'
@@ -8581,13 +8581,13 @@ type ContentfulMyPostFilterInput = {
   readonly node_locale: Maybe<StringQueryOperatorInput>;
   readonly title: Maybe<StringQueryOperatorInput>;
   readonly slug: Maybe<StringQueryOperatorInput>;
+  readonly description: Maybe<StringQueryOperatorInput>;
   readonly publishDate: Maybe<DateQueryOperatorInput>;
   readonly body: Maybe<contentfulMyPostBodyTextNodeFilterInput>;
   readonly spaceId: Maybe<StringQueryOperatorInput>;
   readonly createdAt: Maybe<DateQueryOperatorInput>;
   readonly updatedAt: Maybe<DateQueryOperatorInput>;
   readonly sys: Maybe<ContentfulMyPostSysFilterInput>;
-  readonly description: Maybe<StringQueryOperatorInput>;
   readonly childrenContentfulMyPostBodyTextNode: Maybe<contentfulMyPostBodyTextNodeFilterListInput>;
   readonly childContentfulMyPostBodyTextNode: Maybe<contentfulMyPostBodyTextNodeFilterInput>;
   readonly parent: Maybe<NodeFilterInput>;
@@ -11668,10 +11668,10 @@ type PostsFromTopQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 type PostsFromTopQuery = { readonly allContentfulMyPost: { readonly nodes: ReadonlyArray<(
-      Pick<ContentfulMyPost, 'title' | 'slug'>
+      Pick<ContentfulMyPost, 'title' | 'slug' | 'description'>
       & { readonly body: Maybe<(
         Pick<contentfulMyPostBodyTextNode, 'body'>
-        & { readonly childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'html'>> }
+        & { readonly childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'rawMarkdownBody'>> }
       )> }
     )> } };
 
