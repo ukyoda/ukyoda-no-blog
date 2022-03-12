@@ -40,9 +40,6 @@ const MeTemplateOrig: React.FC<Props> = ({
         <div className={styles.avatar}>
           <img src={avatar} alt="アバター画像" className={styles.avatarImage} />
         </div>
-      </div>
-      <div>
-        <h2 className={styles.name}>{name}</h2>
         <div
           className={styles.links}
           aria-label="私の開発用のSNSアカウントです。"
@@ -66,16 +63,25 @@ const MeTemplateOrig: React.FC<Props> = ({
             <img src={qiitaIcon} alt="" />
           </ExternalLink>
         </div>
+      </div>
+      <div>
+        <div className={styles.personal}>
+          <h2 className={styles.name}>{name}</h2>
+          <p>
+            <span className={styles.jobLabel}>My Job:</span>
+            Frontend Engineer
+          </p>
+        </div>
         <section className={cx(styles.subSection, styles.description)}>
-          <h3 className={styles.title}>自己紹介</h3>
+          <h3 className={styles.title}>Self Introduction:</h3>
           <PostContent html={description} />
         </section>
         <section className={styles.subSection}>
-          <h3 className={styles.title}>使えるPG言語</h3>
+          <h3 className={styles.title}>Programming Languages:</h3>
           <PostContent className={styles.list} html={pgLangs} />
         </section>
         <section className={styles.subSection}>
-          <h3 className={styles.title}>趣味</h3>
+          <h3 className={styles.title}>My Hobbies:</h3>
           <PostContent className={styles.list} html={hobbies} />
         </section>
       </div>
