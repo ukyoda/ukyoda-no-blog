@@ -16,6 +16,8 @@ type Author = {
   github: string
   twitter: string
   avatar: string
+  pgLang: string
+  hobbies: string
 }
 
 const extractAuthor = (
@@ -23,6 +25,9 @@ const extractAuthor = (
 ): Author | undefined => {
   const contentfulAuthor = data?.contentfulAuthor
   const description = contentfulAuthor?.description?.childMarkdownRemark?.html
+  const pgLang =
+    contentfulAuthor?.programmingLanguages?.childMarkdownRemark?.html
+  const hobbies = contentfulAuthor?.myHobbies?.childMarkdownRemark?.html
   const authorOptional: Partial<Author> = {
     name: contentfulAuthor?.nickName,
     description,
@@ -30,6 +35,8 @@ const extractAuthor = (
     github: contentfulAuthor?.github,
     twitter: contentfulAuthor?.twitter,
     avatar: contentfulAuthor?.avatarImage?.file?.url,
+    pgLang,
+    hobbies,
   }
   return validationOptional(authorOptional) ? authorOptional : undefined
 }
@@ -52,6 +59,8 @@ const Me: React.FC<Props> = ({ data }) => {
             github: author.github,
             twitter: author.twitter,
           }}
+          pgLangs={author.pgLang}
+          hobbies={author.hobbies}
         />
       </Body>
     </Layout>
@@ -77,6 +86,16 @@ export const query = graphql`
         title
       }
       description {
+        childMarkdownRemark {
+          html
+        }
+      }
+      programmingLanguages {
+        childMarkdownRemark {
+          html
+        }
+      }
+      myHobbies {
         childMarkdownRemark {
           html
         }

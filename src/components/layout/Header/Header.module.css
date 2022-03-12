@@ -2,13 +2,15 @@
   position: fixed;
   top: 0;
   width: 100%;
+  @apply bg-white;
 }
 
 .headerContents {
   @apply flex items-center justify-between;
 }
 
-.brand {
+.brand a {
+  display: block;
   padding: 10px;
   font-size: 1.4em;
   font-family: theme('fontFamily.gothic');
@@ -24,11 +26,15 @@
 }
 
 .menuItem {
-  padding: 10px;
   font-family: theme('fontFamily.gothic');
   font-weight: 600;
 }
 
-.menuItem:hover {
+.menuItem a {
+  display: block;
+  padding: 10px;
+}
+
+.menuItem a:hover {
   opacity: 0.8;
 }
