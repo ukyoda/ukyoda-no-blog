@@ -251,8 +251,6 @@ type Directory_ctimeArgs = {
 type Site = Node & {
   readonly buildTime: Maybe<Scalars['Date']>;
   readonly siteMetadata: Maybe<SiteSiteMetadata>;
-  readonly port: Maybe<Scalars['Int']>;
-  readonly host: Maybe<Scalars['String']>;
   readonly pathPrefix: Maybe<Scalars['String']>;
   readonly polyfill: Maybe<Scalars['Boolean']>;
   readonly id: Scalars['ID'];
@@ -1402,8 +1400,6 @@ type Query_allDirectoryArgs = {
 type Query_siteArgs = {
   buildTime: Maybe<DateQueryOperatorInput>;
   siteMetadata: Maybe<SiteSiteMetadataFilterInput>;
-  port: Maybe<IntQueryOperatorInput>;
-  host: Maybe<StringQueryOperatorInput>;
   pathPrefix: Maybe<StringQueryOperatorInput>;
   polyfill: Maybe<BooleanQueryOperatorInput>;
   id: Maybe<StringQueryOperatorInput>;
@@ -2787,8 +2783,6 @@ type SiteFieldsEnum =
   | 'buildTime'
   | 'siteMetadata.title'
   | 'siteMetadata.description'
-  | 'port'
-  | 'host'
   | 'pathPrefix'
   | 'polyfill'
   | 'id'
@@ -2922,8 +2916,6 @@ type SiteGroupConnection_groupArgs = {
 type SiteFilterInput = {
   readonly buildTime: Maybe<DateQueryOperatorInput>;
   readonly siteMetadata: Maybe<SiteSiteMetadataFilterInput>;
-  readonly port: Maybe<IntQueryOperatorInput>;
-  readonly host: Maybe<StringQueryOperatorInput>;
   readonly pathPrefix: Maybe<StringQueryOperatorInput>;
   readonly polyfill: Maybe<BooleanQueryOperatorInput>;
   readonly id: Maybe<StringQueryOperatorInput>;
@@ -11659,22 +11651,6 @@ type MyPostBySlugQuery = { readonly contentfulMyPost: Maybe<(
     & { readonly body: Maybe<{ readonly childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'html'>> }> }
   )>, readonly previous: Maybe<Pick<ContentfulMyPost, 'slug' | 'title'>>, readonly next: Maybe<Pick<ContentfulMyPost, 'slug' | 'title'>> };
 
-type PagesQueryQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type PagesQueryQuery = { readonly allSiteFunction: { readonly nodes: ReadonlyArray<Pick<SiteFunction, 'functionRoute'>> }, readonly allSitePage: { readonly nodes: ReadonlyArray<Pick<SitePage, 'path'>> } };
-
-type PostsFromTopQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type PostsFromTopQuery = { readonly allContentfulMyPost: { readonly nodes: ReadonlyArray<(
-      Pick<ContentfulMyPost, 'title' | 'slug' | 'description'>
-      & { readonly body: Maybe<(
-        Pick<contentfulMyPostBodyTextNode, 'body'>
-        & { readonly childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'rawMarkdownBody'>> }
-      )> }
-    )> } };
-
 type FindAuthorQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -11711,5 +11687,16 @@ type GatsbyImageSharpFluid_withWebp_tracedSVGFragment = Pick<ImageSharpFluid, 't
 type GatsbyImageSharpFluid_noBase64Fragment = Pick<ImageSharpFluid, 'aspectRatio' | 'src' | 'srcSet' | 'sizes'>;
 
 type GatsbyImageSharpFluid_withWebp_noBase64Fragment = Pick<ImageSharpFluid, 'aspectRatio' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp' | 'sizes'>;
+
+type PostsFromTopQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type PostsFromTopQuery = { readonly allContentfulMyPost: { readonly nodes: ReadonlyArray<(
+      Pick<ContentfulMyPost, 'title' | 'slug' | 'description'>
+      & { readonly body: Maybe<(
+        Pick<contentfulMyPostBodyTextNode, 'body'>
+        & { readonly childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'rawMarkdownBody'>> }
+      )> }
+    )> } };
 
 }
