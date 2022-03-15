@@ -18,9 +18,15 @@ type Props = {
 const TopTemplateOrig: React.FC<Props> = ({ posts }) => {
   return (
     <div className={styles.top}>
-      <Logo />
-      <Description />
-      <Histories histories={posts} />
+      <div className={styles.logoContent}>
+        <Logo />
+      </div>
+      <div className={styles.descriptionContent}>
+        <Description />
+      </div>
+      <div>
+        <Histories histories={posts} />
+      </div>
     </div>
   )
 }

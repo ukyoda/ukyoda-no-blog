@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react'
 
+import * as styles from './History.module.css'
 import { Card } from './components/Card'
 
 import { generateBlogUrl } from '~/utils/generateBlogUrl'
@@ -26,7 +27,7 @@ export const Histories: React.FC<Props> = ({ histories }) => {
   )
   return (
     <section>
-      <h2>更新履歴</h2>
+      <h2 className={styles.title}>BLOG HISTORIES</h2>
       <ul>{Items}</ul>
     </section>
   )

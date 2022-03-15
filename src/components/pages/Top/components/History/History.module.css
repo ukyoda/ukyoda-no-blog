@@ -1,0 +1,6 @@
+.title {
+  font-family: theme('fontFamily.gothic');
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 25px;
+}
