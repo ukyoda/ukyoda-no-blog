@@ -28,6 +28,7 @@ export const Histories: React.FC<Props> = ({ histories }) => {
   return (
     <section>
       <h2 className={styles.title}>BLOG HISTORIES</h2>
+      <p>最近書いたブログです。</p>
       <ul>{Items}</ul>
     </section>
   )

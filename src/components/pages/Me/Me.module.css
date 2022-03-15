@@ -47,11 +47,21 @@
 .avatarImage {
   width: 180px;
   height: 180px;
+  border-radius: 50%;
+  border: 1px solid #ddd;
+  box-shadow: 0 0 2px rgba(128, 128, 128, 0.1);
 }
 
 /* ------------------------------------- */
 /* Name and SNS Links
 /* ------------------------------------- */
+.profile-content {
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  box-shadow: 0 0 1px rgba(128, 128, 128, 0.1);
+  padding: 15px 25px;
+  background: #fff;
+}
 
 .personal {
   margin-bottom: 20px;

@@ -4,6 +4,7 @@ export const subSection: string;
 export const title: string;
 export const avatar: string;
 export const avatarImage: string;
+export const profileContent: string;
 export const personal: string;
 export const name: string;
 export const jobLabel: string;

@@ -64,7 +64,7 @@ const MeTemplateOrig: React.FC<Props> = ({
           </ExternalLink>
         </div>
       </div>
-      <div>
+      <div className={styles.profileContent}>
         <div className={styles.personal}>
           <h2 className={styles.name}>{name}</h2>
           <p>
