@@ -77,7 +77,7 @@ const MeTemplateOrig: React.FC<Props> = ({
           <PostContent html={description} />
         </section>
         <section className={styles.subSection}>
-          <h3 className={styles.title}>Programming Languages:</h3>
+          <h3 className={styles.title}>My Skills:</h3>
           <PostContent className={styles.list} html={pgLangs} />
         </section>
         <section className={styles.subSection}>
