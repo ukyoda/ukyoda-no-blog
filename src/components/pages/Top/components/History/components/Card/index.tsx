@@ -1,5 +1,7 @@
 import React from 'react'
 
+import * as styles from './Card.module.css'
+
 type Props = {
   title: string
   url: string
@@ -8,13 +10,11 @@ type Props = {
 
 export const Card: React.FC<Props> = ({ title, url, body }) => {
   return (
-    <div className="card">
-      <div className="card-content">
-        <p className="title">
-          <a href={url}>{title}</a>
-        </p>
-        <p className="body">{body}</p>
-      </div>
+    <div className={styles.card}>
+      <a href={url} className={styles.cardContent}>
+        <p className={styles.cardTitle}>{title}</p>
+        <p className={styles.cardBody}>{body}</p>
+      </a>
     </div>
   )
 }

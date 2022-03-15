@@ -7,4 +7,8 @@
   html {
     font-family: theme('fontFamily.base');
   }
+
+  body {
+    background: rgb(245 246 246);
+  }
 }

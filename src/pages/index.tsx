@@ -42,7 +42,7 @@ export default Top
 
 export const query = graphql`
   query PostsFromTop {
-    allContentfulMyPost {
+    allContentfulMyPost(sort: { order: DESC, fields: createdAt }) {
       nodes {
         body {
           body
