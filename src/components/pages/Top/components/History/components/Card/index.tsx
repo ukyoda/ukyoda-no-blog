@@ -11,10 +11,12 @@ type Props = {
 export const Card: React.FC<Props> = ({ title, url, body }) => {
   return (
     <div className={styles.card}>
-      <a href={url} className={styles.cardContent}>
-        <p className={styles.cardTitle}>{title}</p>
-        <p className={styles.cardBody}>{body}</p>
-      </a>
+      <p className={styles.cardTitle}>
+        <a href={url} title={title}>
+          {title}
+        </a>
+      </p>
+      <p className={styles.cardBody}>{body}</p>
     </div>
   )
 }
