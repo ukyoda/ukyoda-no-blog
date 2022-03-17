@@ -1,13 +1,12 @@
+import { StaticImage } from 'gatsby-plugin-image'
 import React from 'react'
 
 import * as styles from './Logo.module.css'
 
-import LogoImage from '~/assets/images/Logo.png'
-
 const LogoOrig = () => (
   <div className={styles.logoWrapper}>
     <div className={styles.logo}>
-      <img src={LogoImage} alt="ロゴ画像" />
+      <StaticImage src="../../../../../assets/images/Logo.png" alt="ロゴ画像" />
     </div>
   </div>
 )

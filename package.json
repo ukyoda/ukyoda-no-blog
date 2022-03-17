@@ -13,6 +13,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.0.0",
     "@fortawesome/react-fontawesome": "^0.1.17",
     "gatsby": "^4.0.0",
+    "gatsby-plugin-alias-imports": "^1.0.5",
     "gatsby-plugin-dts-css-modules": "^2.2.0",
     "gatsby-plugin-image": "^2.0.0",
     "gatsby-plugin-linaria": "^3.2.0",
