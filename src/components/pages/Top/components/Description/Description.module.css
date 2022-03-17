@@ -2,7 +2,7 @@
   font-family: theme('fontFamily.gothic');
   font-weight: 600;
   font-size: 28px;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 
 .paragraph + * {

@@ -1,5 +1,5 @@
 .top {
-  padding: 0 30px;
+  padding: 0 30px 32px;
 }
 
 .top .logo-content {
@@ -7,5 +7,5 @@
 }
 
 .top .description-content {
-  margin-bottom: 25px;
+  margin-bottom: 32px;
 }
