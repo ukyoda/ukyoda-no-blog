@@ -18,6 +18,7 @@ const Top: React.FC<Props> = ({ data }) => {
         title: item?.title,
         slug: item?.slug,
         description: description ?? body,
+        publishDate: item?.publishDate,
       }
     })
     .filter((item): item is Post => validationOptional(item))
@@ -53,6 +54,7 @@ export const query = graphql`
         title
         slug
         description
+        publishDate(formatString: "YYYY-MM-DD HH:mm")
       }
     }
   }

@@ -9,6 +9,7 @@ type Post = {
   title: string
   slug: string
   description: string
+  publishDate: string
 }
 
 type Props = {
@@ -18,11 +19,18 @@ type Props = {
 export const Histories: React.FC<Props> = ({ histories }) => {
   const Items = useMemo(
     () =>
-      histories.map<React.ReactNode>(({ slug, title, description }) => (
-        <li key={slug}>
-          <Card title={title} url={generateBlogUrl(slug)} body={description} />
-        </li>
-      )),
+      histories.map<React.ReactNode>(
+        ({ slug, title, description, publishDate }) => (
+          <li key={slug}>
+            <Card
+              title={title}
+              url={generateBlogUrl(slug)}
+              body={description}
+              publishDate={publishDate}
+            />
+          </li>
+        )
+      ),
     [histories]
   )
   return (

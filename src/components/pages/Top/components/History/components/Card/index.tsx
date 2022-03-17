@@ -6,9 +6,10 @@ type Props = {
   title: string
   url: string
   body: string
+  publishDate: string
 }
 
-export const Card: React.FC<Props> = ({ title, url, body }) => {
+export const Card: React.FC<Props> = ({ title, url, body, publishDate }) => {
   return (
     <div className={styles.card}>
       <p className={styles.cardTitle}>
@@ -17,6 +18,7 @@ export const Card: React.FC<Props> = ({ title, url, body }) => {
         </a>
       </p>
       <p className={styles.cardBody}>{body}</p>
+      <p className={styles.publishDate}>{publishDate}</p>
     </div>
   )
 }

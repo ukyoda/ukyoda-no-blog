@@ -9,6 +9,7 @@ export type Post = {
   title: string
   slug: string
   description: string
+  publishDate: string
 }
 
 type Props = {

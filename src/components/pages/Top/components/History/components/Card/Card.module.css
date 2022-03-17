@@ -33,3 +33,8 @@
   justify-content: center;
   margin-bottom: 16px;
 }
+
+.publish-date {
+  font-size: 12px;
+  @apply text-gray-400 text-right;
+}
