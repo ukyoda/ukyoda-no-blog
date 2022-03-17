@@ -3,14 +3,14 @@ import {
   faTwitterSquare,
 } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { StaticImage } from 'gatsby-plugin-image'
 import { cx } from 'linaria'
-import React, { useMemo } from 'react'
+import React from 'react'
 
 import { PostContent } from '../../PostContent'
 
 import * as styles from './Me.module.css'
 
-import qiitaIcon from '~/assets/images/qiita.png'
 import { ExternalLink } from '~/components/atoms/Anchor'
 
 type Props = {
@@ -60,7 +60,11 @@ const MeTemplateOrig: React.FC<Props> = ({
             href={links.qiita}
             ariaLabel="私のQiitaアカウントです。"
           >
-            <img src={qiitaIcon} alt="" />
+            <StaticImage
+              src="../../../assets/images/qiita.png"
+              alt=""
+              placeholder="tracedSVG"
+            />
           </ExternalLink>
         </div>
       </div>
