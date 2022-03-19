@@ -35,7 +35,7 @@ export const Histories: React.FC<Props> = ({ histories }) => {
   )
   return (
     <section>
-      <h2 className={styles.title}>BLOG HISTORIES</h2>
+      <h2 className={styles.title}>BLOGS</h2>
       <p>技術的な気づき、勉強、趣味など適当になんか書く。</p>
       <div className={styles.histories}>
         <ul className={styles.historyList}>{Items}</ul>
