@@ -1,9 +1,9 @@
 import { Link } from 'gatsby'
-import { cx } from 'linaria'
 import React, { useMemo } from 'react'
 
+import { markdownStyles } from '../../atoms/Markdown'
+
 import * as styles from './Blog.module.css'
-import { Markdown } from './Markdown'
 
 import { PostContent } from '~/components/PostContent'
 import { Body } from '~/components/layout/Body'
@@ -68,16 +68,16 @@ export const BlogTemplate: React.FC<BlogContent> = ({
             <div className={styles.contexts}>
               <div className={styles.publishDate}>{publishDate}</div>
               <div className={styles.control}>
-                <div className={styles.prev}>{Prev}</div>
+                <div>{Prev}</div>
                 <span className={styles.separator}>|</span>
-                <div className={styles.next}>{Next}</div>
+                <div>{Next}</div>
               </div>
             </div>
             <h1 className={styles.title}>{title}</h1>
           </header>
-          <Markdown>
+          <main className={markdownStyles}>
             <PostContent html={body} />
-          </Markdown>
+          </main>
         </article>
       </Body>
     </Layout>

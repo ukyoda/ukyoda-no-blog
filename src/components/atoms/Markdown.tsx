@@ -1,6 +1,6 @@
-import { styled } from 'linaria/react'
+import { css } from 'linaria'
 
-export const Markdown = styled.main`
+export const markdownStyles = css`
   * + * {
     padding-top: 10px;
   }
