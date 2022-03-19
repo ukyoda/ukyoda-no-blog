@@ -1,3 +1,11 @@
 .top {
-  padding: 0 30px;
+  padding: 0 30px 32px;
+}
+
+.top .logo-content {
+  margin: 90px 0 50px;
+}
+
+.top .description-content {
+  margin-bottom: 32px;
 }

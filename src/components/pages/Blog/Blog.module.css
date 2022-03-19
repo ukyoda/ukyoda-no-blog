@@ -1,0 +1,47 @@
+.article {
+  padding: 30px 25px;
+}
+
+.header {
+  margin-bottom: 24px;
+}
+
+.title {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.contexts {
+  @apply flex flex-row justify-between items-center;
+  margin-bottom: 5px;
+}
+
+@media screen and (max-width: theme('screens.sm')) {
+  .contexts {
+    @apply flex-col justify-start items-start;
+  }
+}
+
+.publishDate {
+  font-size: 14px;
+  color: #828282;
+  margin-bottom: 5px;
+}
+
+.control {
+  display: flex;
+  flex-direction: row;
+}
+
+.separator {
+  margin: 0 10px;
+}
+
+.link {
+  color: #0070f3;
+}
+
+.not-link {
+  color: #828282;
+}

@@ -53,8 +53,8 @@ export const createPages: GatsbyNode['createPages'] = async ({
 
   if (posts) {
     posts.forEach((post, index) => {
-      const previousPostSlug = index === 0 ? null : posts[index - 1].slug
-      const nextPostSlug =
+      const nextPostSlug = index === 0 ? null : posts[index - 1].slug
+      const previousPostSlug =
         index === posts.length - 1 ? null : posts[index + 1].slug
 
       createPage({

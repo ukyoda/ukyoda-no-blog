@@ -1,42 +1,65 @@
 // TODO: remove eslint-disable after the ClassComponent refactor to a FunctionalComponent
 /* eslint-disable react/prefer-stateless-function */
-import { Link, graphql, PageProps } from 'gatsby'
+import { graphql, PageProps } from 'gatsby'
 import React, { useMemo } from 'react'
 
-import { Body } from '~/components/layout/Body'
-import { Header } from '~/components/layout/Header'
-import { Layout } from '~/components/layout/Layout'
+import { NotFound } from '~/components/errors/NotFound'
+import { BlogContent, BlogTemplate } from '~/components/pages/Blog'
 import { generateBlogUrl } from '~/utils/generateBlogUrl'
-
+import { validationOptional } from '~/utils/validationOptional'
 // TODO: fix this ClassComponent to FunctionalComponent
 type Props = PageProps<GatsbyTypes.MyPostBySlugQuery>
 
 const MyPostTemplate: React.FC<Props> = ({ data }) => {
   const { contentfulMyPost: current, previous, next } = data
-  const PrevLink = useMemo(() => {
-    const prevUrl = previous?.slug ? generateBlogUrl(previous.slug) : null
-    const text = previous?.title ? previous.title : null
-    if (prevUrl && text) return <Link to={prevUrl}>{text}</Link>
-    return null
+  const prevLink = useMemo(() => {
+    if (previous?.title && previous?.slug) {
+      return {
+        title: previous.title,
+        pathname: generateBlogUrl(previous.slug),
+      }
+    }
+    return undefined
   }, [previous])
-  const NextLink = useMemo(() => {
-    const nextUrl = next?.slug ? generateBlogUrl(next.slug) : null
-    const text = next?.title ? next.title : null
-    if (nextUrl && text) return <Link to={nextUrl}>{text}</Link>
-    return null
+  const nextLink = useMemo(() => {
+    if (next?.title && next?.slug) {
+      return {
+        title: next.title,
+        pathname: generateBlogUrl(next.slug),
+      }
+    }
+    return undefined
   }, [next])
+
+  const blogContent: Partial<BlogContent> = {
+    title: current?.title,
+    body: current?.body?.childMarkdownRemark?.html,
+    publishDate: current?.publishDate,
+    prev: prevLink,
+    next: nextLink,
+  }
+
+  const isValid = validationOptional(blogContent, (key, value) => {
+    switch (key) {
+      case 'next':
+      case 'prev':
+        return true
+      default:
+        return !!value
+    }
+  })
+  if (!isValid) {
+    return <NotFound />
+  }
+
   return (
-    <Layout>
-      <Header />
-      <Body>
-        <section>
-          <h1>{current?.title}</h1>
-          <p>{current?.slug}</p>
-        </section>
-        <div>{NextLink}</div>
-        <div>{PrevLink}</div>
-      </Body>
-    </Layout>
+    <BlogTemplate
+      title={blogContent.title}
+      body={blogContent.body}
+      publishDate={blogContent.publishDate}
+      prev={blogContent.prev}
+      next={blogContent.next}
+    />
   )
 }
 
@@ -51,7 +74,7 @@ export const pageQuery = graphql`
     contentfulMyPost(slug: { eq: $slug }) {
       slug
       title
-      publishDate(formatString: "MMMM Do, YYYY")
+      publishDate(formatString: "YYYY-MM-DD HH:mm")
       rawDate: publishDate
       body {
         childMarkdownRemark {

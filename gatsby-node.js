@@ -24,13 +24,7 @@ exports.createSchemaCustomization = createSchemaCustomization
 //robertmarshall.dev/blog/fix-warn-chunk-commons-mini-css-extract-plugin-error-in-gatsby-js/
 exports.onCreateWebpackConfig = ({ actions }) => {
   actions.setWebpackConfig({
-    resolve: {
-      alias: {
-        '~': path.resolve(__dirname, 'src'),
-        '@': __dirname,
-      },
-      extensions: ['.ts', '.tsx', '.js', '.jsx'],
-    },
+    resolve: {},
     plugins: [
       new FilterWarningsPlugin({
         exclude:
