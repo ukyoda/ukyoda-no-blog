@@ -12318,6 +12318,19 @@ type ContentfulContentTypeSortInput = {
   readonly order: Maybe<ReadonlyArray<Maybe<SortOrderEnum>>>;
 };
 
+type MyPostBySlugQueryVariables = Exact<{
+  slug: Scalars['String'];
+  previousPostSlug: Maybe<Scalars['String']>;
+  nextPostSlug: Maybe<Scalars['String']>;
+}>;
+
+
+type MyPostBySlugQuery = { readonly contentfulMyPost: Maybe<(
+    Pick<ContentfulMyPost, 'slug' | 'title' | 'publishDate'>
+    & { rawDate: ContentfulMyPost['publishDate'] }
+    & { readonly body: Maybe<{ readonly childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'html'>> }> }
+  )>, readonly previous: Maybe<Pick<ContentfulMyPost, 'slug' | 'title'>>, readonly next: Maybe<Pick<ContentfulMyPost, 'slug' | 'title'>> };
+
 type FindAuthorQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -12328,17 +12341,6 @@ type FindAuthorQuery = { readonly contentfulAuthor: Maybe<(
       & { readonly file: Maybe<Pick<ContentfulAssetFile, 'url' | 'contentType'>> }
     )>, readonly description: Maybe<{ readonly childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'html'>> }>, readonly programmingLanguages: Maybe<{ readonly childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'html'>> }>, readonly myHobbies: Maybe<{ readonly childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'html'>> }>, readonly myWorks: Maybe<{ readonly childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'html'>> }> }
   )> };
-
-type PostsFromTopQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type PostsFromTopQuery = { readonly allContentfulMyPost: { readonly nodes: ReadonlyArray<(
-      Pick<ContentfulMyPost, 'title' | 'slug' | 'description' | 'publishDate'>
-      & { readonly body: Maybe<(
-        Pick<contentfulMyPostBodyTextNode, 'body'>
-        & { readonly childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'rawMarkdownBody'>> }
-      )> }
-    )> } };
 
 type GatsbyImageSharpFixedFragment = Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;
 
@@ -12366,18 +12368,16 @@ type GatsbyImageSharpFluid_noBase64Fragment = Pick<ImageSharpFluid, 'aspectRatio
 
 type GatsbyImageSharpFluid_withWebp_noBase64Fragment = Pick<ImageSharpFluid, 'aspectRatio' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp' | 'sizes'>;
 
-type MyPostBySlugQueryVariables = Exact<{
-  slug: Scalars['String'];
-  previousPostSlug: Maybe<Scalars['String']>;
-  nextPostSlug: Maybe<Scalars['String']>;
-}>;
+type PostsFromTopQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type MyPostBySlugQuery = { readonly contentfulMyPost: Maybe<(
-    Pick<ContentfulMyPost, 'slug' | 'title' | 'publishDate'>
-    & { rawDate: ContentfulMyPost['publishDate'] }
-    & { readonly body: Maybe<{ readonly childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'html'>> }> }
-  )>, readonly previous: Maybe<Pick<ContentfulMyPost, 'slug' | 'title'>>, readonly next: Maybe<Pick<ContentfulMyPost, 'slug' | 'title'>> };
+type PostsFromTopQuery = { readonly allContentfulMyPost: { readonly nodes: ReadonlyArray<(
+      Pick<ContentfulMyPost, 'title' | 'slug' | 'description' | 'publishDate'>
+      & { readonly body: Maybe<(
+        Pick<contentfulMyPostBodyTextNode, 'body'>
+        & { readonly childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'rawMarkdownBody'>> }
+      )> }
+    )> } };
 
 type PagesQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
