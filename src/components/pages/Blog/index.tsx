@@ -1,5 +1,9 @@
 import { Link } from 'gatsby'
+import { cx } from 'linaria'
 import React, { useMemo } from 'react'
+
+import * as styles from './Blog.module.css'
+import { Markdown } from './Markdown'
 
 import { PostContent } from '~/components/PostContent'
 import { Body } from '~/components/layout/Body'
@@ -27,32 +31,54 @@ export const BlogTemplate: React.FC<BlogContent> = ({
   prev,
   next,
 }) => {
-  const PrevLink = useMemo(() => {
-    if (prev) {
-      return <Link to={prev.pathname}>{prev.title}</Link>
+  const Next = useMemo(() => {
+    if (next?.pathname) {
+      return (
+        <Link to={next.pathname} className={styles.link}>
+          次の記事
+        </Link>
+      )
     }
-    return null
-  }, [prev])
-  const NextLink = useMemo(() => {
-    if (next) {
-      return <Link to={next.pathname}>{next.title}</Link>
-    }
-    return null
+    return (
+      <span aria-hidden className={styles.notLink}>
+        次の記事
+      </span>
+    )
   }, [next])
+  const Prev = useMemo(() => {
+    if (prev?.pathname) {
+      return (
+        <Link to={prev.pathname} className={styles.link}>
+          前の記事
+        </Link>
+      )
+    }
+    return (
+      <span aria-hidden className={styles.notLink}>
+        前の記事
+      </span>
+    )
+  }, [prev])
   return (
     <Layout>
       <Header />
       <Body>
-        <section>
-          <h1>{title}</h1>
-          <div>
+        <article className={styles.article}>
+          <header className={styles.header}>
+            <div className={styles.contexts}>
+              <div className={styles.publishDate}>{publishDate}</div>
+              <div className={styles.control}>
+                <div className={styles.prev}>{Prev}</div>
+                <span className={styles.separator}>|</span>
+                <div className={styles.next}>{Next}</div>
+              </div>
+            </div>
+            <h1 className={styles.title}>{title}</h1>
+          </header>
+          <Markdown>
             <PostContent html={body} />
-          </div>
-        </section>
-        <div>
-          <div>{PrevLink}</div>
-          <div>{NextLink}</div>
-        </div>
+          </Markdown>
+        </article>
       </Body>
     </Layout>
   )

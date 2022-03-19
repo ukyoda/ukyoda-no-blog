@@ -12,3 +12,9 @@
     background: rgb(245 246 246);
   }
 }
+
+body :not(pre) > code[class='language-text'] {
+  @apply bg-gray-300 text-black px-2;
+  font-family: theme('fontFamily.code');
+  text-shadow: none;
+}

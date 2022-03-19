@@ -1,12 +1,9 @@
 // TODO: remove eslint-disable after the ClassComponent refactor to a FunctionalComponent
 /* eslint-disable react/prefer-stateless-function */
-import { Link, graphql, PageProps } from 'gatsby'
+import { graphql, PageProps } from 'gatsby'
 import React, { useMemo } from 'react'
 
 import { NotFound } from '~/components/errors/NotFound'
-import { Body } from '~/components/layout/Body'
-import { Header } from '~/components/layout/Header'
-import { Layout } from '~/components/layout/Layout'
 import { BlogContent, BlogTemplate } from '~/components/pages/Blog'
 import { generateBlogUrl } from '~/utils/generateBlogUrl'
 import { validationOptional } from '~/utils/validationOptional'
@@ -22,6 +19,7 @@ const MyPostTemplate: React.FC<Props> = ({ data }) => {
         pathname: generateBlogUrl(previous.slug),
       }
     }
+    return undefined
   }, [previous])
   const nextLink = useMemo(() => {
     if (next?.title && next?.slug) {
@@ -30,7 +28,9 @@ const MyPostTemplate: React.FC<Props> = ({ data }) => {
         pathname: generateBlogUrl(next.slug),
       }
     }
+    return undefined
   }, [next])
+
   const blogContent: Partial<BlogContent> = {
     title: current?.title,
     body: current?.body?.childMarkdownRemark?.html,
@@ -38,6 +38,7 @@ const MyPostTemplate: React.FC<Props> = ({ data }) => {
     prev: prevLink,
     next: nextLink,
   }
+
   const isValid = validationOptional(blogContent, (key, value) => {
     switch (key) {
       case 'next':
