@@ -12,6 +12,7 @@ import { PostContent } from '../../PostContent'
 import * as styles from './Me.module.css'
 
 import { ExternalLink } from '~/components/atoms/Anchor'
+import { markdownStyles } from '~/components/atoms/Markdown'
 
 type Props = {
   name: string
@@ -24,6 +25,7 @@ type Props = {
   }
   pgLangs: string
   hobbies: string
+  myWorks: string
 }
 
 const MeTemplateOrig: React.FC<Props> = ({
@@ -33,6 +35,7 @@ const MeTemplateOrig: React.FC<Props> = ({
   links,
   pgLangs,
   hobbies,
+  myWorks,
 }) => {
   return (
     <section className={styles.section}>
@@ -82,11 +85,15 @@ const MeTemplateOrig: React.FC<Props> = ({
         </section>
         <section className={styles.subSection}>
           <h3 className={styles.title}>My Skills:</h3>
-          <PostContent className={styles.list} html={pgLangs} />
+          <PostContent className={markdownStyles} html={pgLangs} />
         </section>
         <section className={styles.subSection}>
           <h3 className={styles.title}>My Hobbies:</h3>
-          <PostContent className={styles.list} html={hobbies} />
+          <PostContent className={markdownStyles} html={hobbies} />
+        </section>
+        <section className={styles.subSection}>
+          <h3 className={styles.title}>My Works:</h3>
+          <PostContent className={markdownStyles} html={myWorks} />
         </section>
       </div>
     </section>

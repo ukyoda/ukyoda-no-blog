@@ -70,6 +70,12 @@ export const markdownStyles = css`
     top: 2px;
   }
 
+  li > ul,
+  li > ol {
+    margin-top: 0;
+    padding-top: 0;
+  }
+
   p {
     margin: 10px 0;
   }
