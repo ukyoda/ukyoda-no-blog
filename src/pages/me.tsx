@@ -1,6 +1,7 @@
 import { graphql, PageProps } from 'gatsby'
 import React from 'react'
 
+import { Seo } from '~/components/Seo'
 import { NotFound } from '~/components/errors/NotFound'
 import { Body } from '~/components/layout/Body'
 import { Header } from '~/components/layout/Header'
@@ -50,24 +51,27 @@ const Me: React.FC<Props> = ({ data }) => {
     return <NotFound />
   }
   return (
-    <Layout>
-      <Header />
-      <Body>
-        <MeTemplate
-          name={author.name}
-          description={author.description}
-          avatar={author.avatar}
-          links={{
-            qiita: author.qiita,
-            github: author.github,
-            twitter: author.twitter,
-          }}
-          pgLangs={author.pgLang}
-          hobbies={author.hobbies}
-          myWorks={author.myWorks}
-        />
-      </Body>
-    </Layout>
+    <>
+      <Seo image={`https:${author.avatar}`} />
+      <Layout>
+        <Header />
+        <Body>
+          <MeTemplate
+            name={author.name}
+            description={author.description}
+            avatar={author.avatar}
+            links={{
+              qiita: author.qiita,
+              github: author.github,
+              twitter: author.twitter,
+            }}
+            pgLangs={author.pgLang}
+            hobbies={author.hobbies}
+            myWorks={author.myWorks}
+          />
+        </Body>
+      </Layout>
+    </>
   )
 }
 

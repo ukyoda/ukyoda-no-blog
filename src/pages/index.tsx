@@ -1,6 +1,7 @@
 import { graphql, PageProps } from 'gatsby'
 import React from 'react'
 
+import { Seo } from '~/components/Seo'
 import { Body } from '~/components/layout/Body'
 import { Header } from '~/components/layout/Header'
 import { Layout } from '~/components/layout/Layout'
@@ -28,14 +29,17 @@ const Top: React.FC<Props> = ({ data }) => {
         description: item.description.replace(/\n/g, '').slice(0, 100),
       }
     })
-
+  const avatar = data?.author?.avatarImage?.file?.url
   return (
-    <Layout>
-      <Header />
-      <Body>
-        <TopTemplate posts={posts} />
-      </Body>
-    </Layout>
+    <>
+      <Seo image={avatar} />
+      <Layout>
+        <Header />
+        <Body>
+          <TopTemplate posts={posts} />
+        </Body>
+      </Layout>
+    </>
   )
 }
 
@@ -43,6 +47,13 @@ export default Top
 
 export const query = graphql`
   query PostsFromTop {
+    author: contentfulAuthor {
+      avatar: avatarImage {
+        file {
+          url
+        }
+      }
+    }
     allContentfulMyPost(sort: { order: DESC, fields: createdAt }) {
       nodes {
         body {
