@@ -13,10 +13,11 @@ type Props = PageProps<GatsbyTypes.MyPostBySlugQuery>
 
 type PostData = BlogContent & {
   description: string
+  avatar: string
 }
 
 const MyPostTemplate: React.FC<Props> = ({ data }) => {
-  const { contentfulMyPost: current, previous, next } = data
+  const { author, contentfulMyPost: current, previous, next } = data
   const prevLink = useMemo(() => {
     if (previous?.title && previous?.slug) {
       return {
@@ -43,12 +44,14 @@ const MyPostTemplate: React.FC<Props> = ({ data }) => {
     prev: prevLink,
     next: nextLink,
     description: current?.description,
+    avatar: author?.avatar?.file?.url,
   }
 
   const isValid = validationOptional(blogContent, (key, value) => {
     switch (key) {
       case 'next':
       case 'prev':
+      case 'description':
         return true
       default:
         return !!value
@@ -60,7 +63,11 @@ const MyPostTemplate: React.FC<Props> = ({ data }) => {
 
   return (
     <>
-      <Seo title={blogContent.title} description={blogContent.description} />
+      <Seo
+        title={blogContent.title}
+        description={blogContent.description}
+        image={`https:${blogContent.avatar}`}
+      />
       <BlogTemplate
         title={blogContent.title}
         body={blogContent.body}
@@ -80,6 +87,13 @@ export const pageQuery = graphql`
     $previousPostSlug: String
     $nextPostSlug: String
   ) {
+    author: contentfulAuthor {
+      avatar: avatarImage {
+        file {
+          url
+        }
+      }
+    }
     contentfulMyPost(slug: { eq: $slug }) {
       slug
       title

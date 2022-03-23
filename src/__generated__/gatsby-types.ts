@@ -8968,16 +8968,18 @@ type ContentfulContentTypeSortInput = {
   readonly order: Maybe<ReadonlyArray<Maybe<SortOrderEnum>>>;
 };
 
-type PostsFromTopQueryVariables = Exact<{ [key: string]: never; }>;
+type MyPostBySlugQueryVariables = Exact<{
+  slug: Scalars['String'];
+  previousPostSlug: Maybe<Scalars['String']>;
+  nextPostSlug: Maybe<Scalars['String']>;
+}>;
 
 
-type PostsFromTopQuery = { readonly allContentfulMyPost: { readonly nodes: ReadonlyArray<(
-      Pick<ContentfulMyPost, 'title' | 'slug' | 'description' | 'publishDate'>
-      & { readonly body: Maybe<(
-        Pick<contentfulMyPostBodyTextNode, 'body'>
-        & { readonly childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'rawMarkdownBody'>> }
-      )> }
-    )> } };
+type MyPostBySlugQuery = { readonly author: Maybe<{ readonly avatar: Maybe<{ readonly file: Maybe<Pick<ContentfulAssetFile, 'url'>> }> }>, readonly contentfulMyPost: Maybe<(
+    Pick<ContentfulMyPost, 'slug' | 'title' | 'description' | 'publishDate'>
+    & { rawDate: ContentfulMyPost['publishDate'] }
+    & { readonly body: Maybe<{ readonly childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'html'>> }> }
+  )>, readonly previous: Maybe<Pick<ContentfulMyPost, 'slug' | 'title'>>, readonly next: Maybe<Pick<ContentfulMyPost, 'slug' | 'title'>> };
 
 type FindAuthorQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -8990,18 +8992,16 @@ type FindAuthorQuery = { readonly contentfulAuthor: Maybe<(
     )>, readonly description: Maybe<{ readonly childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'html'>> }>, readonly programmingLanguages: Maybe<{ readonly childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'html'>> }>, readonly myHobbies: Maybe<{ readonly childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'html'>> }>, readonly myWorks: Maybe<{ readonly childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'html'>> }> }
   )> };
 
-type MyPostBySlugQueryVariables = Exact<{
-  slug: Scalars['String'];
-  previousPostSlug: Maybe<Scalars['String']>;
-  nextPostSlug: Maybe<Scalars['String']>;
-}>;
+type PostsFromTopQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type MyPostBySlugQuery = { readonly contentfulMyPost: Maybe<(
-    Pick<ContentfulMyPost, 'slug' | 'title' | 'description' | 'publishDate'>
-    & { rawDate: ContentfulMyPost['publishDate'] }
-    & { readonly body: Maybe<{ readonly childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'html'>> }> }
-  )>, readonly previous: Maybe<Pick<ContentfulMyPost, 'slug' | 'title'>>, readonly next: Maybe<Pick<ContentfulMyPost, 'slug' | 'title'>> };
+type PostsFromTopQuery = { readonly author: Maybe<{ readonly avatar: Maybe<{ readonly file: Maybe<Pick<ContentfulAssetFile, 'url'>> }> }>, readonly allContentfulMyPost: { readonly nodes: ReadonlyArray<(
+      Pick<ContentfulMyPost, 'title' | 'slug' | 'description' | 'publishDate'>
+      & { readonly body: Maybe<(
+        Pick<contentfulMyPostBodyTextNode, 'body'>
+        & { readonly childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'rawMarkdownBody'>> }
+      )> }
+    )> } };
 
 type GatsbyImageSharpFixedFragment = Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;
 

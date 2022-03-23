@@ -52,7 +52,7 @@ const Me: React.FC<Props> = ({ data }) => {
   }
   return (
     <>
-      <Seo />
+      <Seo image={`https:${author.avatar}`} />
       <Layout>
         <Header />
         <Body>

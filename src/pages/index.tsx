@@ -29,10 +29,10 @@ const Top: React.FC<Props> = ({ data }) => {
         description: item.description.replace(/\n/g, '').slice(0, 100),
       }
     })
-
+  const avatar = data?.author?.avatarImage?.file?.url
   return (
     <>
-      <Seo />
+      <Seo image={avatar} />
       <Layout>
         <Header />
         <Body>
@@ -47,6 +47,13 @@ export default Top
 
 export const query = graphql`
   query PostsFromTop {
+    author: contentfulAuthor {
+      avatar: avatarImage {
+        file {
+          url
+        }
+      }
+    }
     allContentfulMyPost(sort: { order: DESC, fields: createdAt }) {
       nodes {
         body {
