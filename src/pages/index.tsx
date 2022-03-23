@@ -1,6 +1,7 @@
 import { graphql, PageProps } from 'gatsby'
 import React from 'react'
 
+import { Seo } from '~/components/Seo'
 import { Body } from '~/components/layout/Body'
 import { Header } from '~/components/layout/Header'
 import { Layout } from '~/components/layout/Layout'
@@ -30,12 +31,15 @@ const Top: React.FC<Props> = ({ data }) => {
     })
 
   return (
-    <Layout>
-      <Header />
-      <Body>
-        <TopTemplate posts={posts} />
-      </Body>
-    </Layout>
+    <>
+      <Seo />
+      <Layout>
+        <Header />
+        <Body>
+          <TopTemplate posts={posts} />
+        </Body>
+      </Layout>
+    </>
   )
 }
 

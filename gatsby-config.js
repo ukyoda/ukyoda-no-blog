@@ -36,8 +36,10 @@ if (!spaceId || !accessToken) {
 
 module.exports = {
   siteMetadata: {
-    title: 'Gatsby Contentful Starter',
-    description: 'Official Contentful Gatsby Starter',
+    title: "ukyoda's blog",
+    description:
+      'このブログはukyodaのブログサイトです。技術的なこととか、生活的なこととか、そういったことを書いていきます。',
+    siteUrl: 'https://ukyoda.com',
   },
   pathPrefix: '/gatsby-contentful-starter',
   plugins: [
@@ -87,5 +89,6 @@ module.exports = {
     'gatsby-plugin-typegen',
     'gatsby-plugin-postcss',
     'gatsby-plugin-dts-css-modules',
+    'gatsby-plugin-sitemap',
   ],
 }

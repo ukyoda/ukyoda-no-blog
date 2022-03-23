@@ -3,12 +3,17 @@
 import { graphql, PageProps } from 'gatsby'
 import React, { useMemo } from 'react'
 
+import { Seo } from '~/components/Seo'
 import { NotFound } from '~/components/errors/NotFound'
 import { BlogContent, BlogTemplate } from '~/components/pages/Blog'
 import { generateBlogUrl } from '~/utils/generateBlogUrl'
 import { validationOptional } from '~/utils/validationOptional'
 // TODO: fix this ClassComponent to FunctionalComponent
 type Props = PageProps<GatsbyTypes.MyPostBySlugQuery>
+
+type PostData = BlogContent & {
+  description: string
+}
 
 const MyPostTemplate: React.FC<Props> = ({ data }) => {
   const { contentfulMyPost: current, previous, next } = data
@@ -31,12 +36,13 @@ const MyPostTemplate: React.FC<Props> = ({ data }) => {
     return undefined
   }, [next])
 
-  const blogContent: Partial<BlogContent> = {
+  const blogContent: Partial<PostData> = {
     title: current?.title,
     body: current?.body?.childMarkdownRemark?.html,
     publishDate: current?.publishDate,
     prev: prevLink,
     next: nextLink,
+    description: current?.description,
   }
 
   const isValid = validationOptional(blogContent, (key, value) => {
@@ -53,13 +59,16 @@ const MyPostTemplate: React.FC<Props> = ({ data }) => {
   }
 
   return (
-    <BlogTemplate
-      title={blogContent.title}
-      body={blogContent.body}
-      publishDate={blogContent.publishDate}
-      prev={blogContent.prev}
-      next={blogContent.next}
-    />
+    <>
+      <Seo title={blogContent.title} description={blogContent.description} />
+      <BlogTemplate
+        title={blogContent.title}
+        body={blogContent.body}
+        publishDate={blogContent.publishDate}
+        prev={blogContent.prev}
+        next={blogContent.next}
+      />
+    </>
   )
 }
 
@@ -74,6 +83,7 @@ export const pageQuery = graphql`
     contentfulMyPost(slug: { eq: $slug }) {
       slug
       title
+      description
       publishDate(formatString: "YYYY-MM-DD HH:mm")
       rawDate: publishDate
       body {
