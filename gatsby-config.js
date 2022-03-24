@@ -39,7 +39,7 @@ module.exports = {
     title: "ukyoda's blog",
     description:
       'このブログはukyodaのブログサイトです。技術的なこととか、生活的なこととか、そういったことを書いていきます。',
-    siteUrl: 'https://ukyoda.com',
+    siteUrl: 'https://blog.ukyoda.com',
   },
   pathPrefix: '/gatsby-contentful-starter',
   plugins: [
