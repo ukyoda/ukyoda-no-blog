@@ -29,7 +29,7 @@ const Top: React.FC<Props> = ({ data }) => {
         description: item.description.replace(/\n/g, '').slice(0, 100),
       }
     })
-  const avatar = data?.author?.avatarImage?.file?.url
+  const avatar = `https:${data?.author?.avatar?.file?.url}`
   return (
     <>
       <Seo image={avatar} />

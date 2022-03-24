@@ -17,13 +17,10 @@ export const Seo = ({ description, title, image }: Props) => {
     { name: 'og:title', content: siteTitle },
     { name: 'og:description', content: siteDescription },
     { name: 'og:type', content: 'website' },
-    { name: 'twitter:card', content: 'summary_large_image' },
-    { name: 'twitter:title', content: siteTitle },
-    { name: 'twitter:description', content: siteDescription },
+    { name: 'twitter:card', content: 'summary' },
   ]
   if (image) {
     meta.push({ name: 'og:image', content: image })
-    meta.push({ name: 'twitter:image', content: image })
   }
   return (
     <Helmet htmlAttributes={{ lang: 'ja' }} title={siteTitle} meta={meta} />
