@@ -90,5 +90,6 @@ module.exports = {
     'gatsby-plugin-postcss',
     'gatsby-plugin-dts-css-modules',
     'gatsby-plugin-sitemap',
+    'gatsby-plugin-robots-txt',
   ],
 }
