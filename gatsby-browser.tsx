@@ -21,4 +21,5 @@ export const wrapRootElement = ({ element }) => {
 
 const Layout = styled.div`
   min-height: calc(100% - 90px);
+  background: rgb(245 246 246);
 `
