@@ -4,29 +4,29 @@ import { atom, selector, useRecoilState, useRecoilValue } from 'recoil'
 import * as styles from './Modal.module.css'
 
 import { RecoilAtomKeys, RecoilSelectorKeys } from '~/constants/RecoilKeys'
-import { useMount } from '~/utils/useMount'
 
 type Modal = {
-  isOpen: boolean
+  backDrop: boolean
   render?: () => React.ReactNode
 }
 
 const modalAtom = atom<Modal>({
   key: RecoilAtomKeys.modalState,
   default: {
-    isOpen: false,
+    backDrop: false,
     render: undefined,
   },
 })
 
-type ModalRenderer = (dissmiss: () => void) => React.ReactNode
+export type DissmissFunction = () => void
+type ModalRenderer = (dissmiss: DissmissFunction) => React.ReactNode
 type ShowModalType = () => void
 
 const modalOpenSelector = selector({
   key: RecoilSelectorKeys.modalStateSelector,
   get: ({ get }) => {
-    const { isOpen } = get(modalAtom)
-    return isOpen
+    const { render } = get(modalAtom)
+    return !!render
   },
 })
 
@@ -35,46 +35,42 @@ const modalRenderSelector = selector({
   get: ({ get }) => get(modalAtom).render,
 })
 
-export const useModal = (render: ModalRenderer): [boolean, ShowModalType] => {
-  const [{ isOpen }, setState] = useRecoilState(modalAtom)
+type UseModalArgs = {
+  render: ModalRenderer
+  backDrop?: boolean
+}
+
+export const useModal = ({
+  render,
+  backDrop,
+}: UseModalArgs): [boolean, ShowModalType] => {
+  const [, setState] = useRecoilState(modalAtom)
+  const isOpen = useRecoilValue(modalOpenSelector)
   const dissmiss = useCallback(() => {
     setState((modalState) => ({
       ...modalState,
-      isOpen: false,
+      render: undefined,
     }))
   }, [setState])
 
-  const modalRender = useCallback(() => render(dissmiss), [dissmiss, render])
+  const modalRender = useCallback(() => render(dissmiss), [dissmiss])
 
   const showModal = useCallback(() => {
     setState((modalState) => ({
       ...modalState,
-      isOpen: true,
-    }))
-  }, [setState])
-
-  useMount(() => {
-    setState((current) => ({
-      ...current,
       render: modalRender,
+      backDrop: !!backDrop,
     }))
-    return () => {
-      setState((current) => ({
-        ...current,
-        render: undefined,
-      }))
-    }
-  })
+  }, [backDrop, modalRender, setState])
 
   return [isOpen, showModal]
 }
 
 export const ModalContainer: React.FC = () => {
   const modalRender = useRecoilValue(modalRenderSelector)
-  const isOpen = useRecoilValue(modalOpenSelector)
   return (
     <>
-      {modalRender && isOpen && (
+      {modalRender && (
         <div className={styles.modalBackdrop}>
           <div className={styles.modal}>{modalRender()}</div>
         </div>
