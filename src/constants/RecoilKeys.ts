@@ -1,9 +1,9 @@
 export const RecoilAtomKeys = {
-  modalState: 'modalState',
-  modalRender: 'modalRender',
+  modalAtoms: 'modalAtoms',
 } as const
 
 export const RecoilSelectorKeys = {
   modalRenderSelector: 'modalRenderSelector',
   modalStateSelector: 'modalStateSelector',
+  modalOptionSelector: 'modalOptionSelector',
 } as const

@@ -21,7 +21,8 @@ type Props = {
 }
 
 const TopTemplateOrig: React.FC<Props> = ({ posts }) => {
-  const [, showModal2] = useModal({
+  const [, showModal2] = useDialog({
+    backDrop: true,
     render: (dissmiss) => (
       <div>
         <h1>test</h1>
@@ -31,7 +32,7 @@ const TopTemplateOrig: React.FC<Props> = ({ posts }) => {
       </div>
     ),
   })
-  const [, showModal] = useModal({
+  const [, showModal] = useDialog({
     render: (dissmiss) => (
       <div>
         <h1>test2</h1>

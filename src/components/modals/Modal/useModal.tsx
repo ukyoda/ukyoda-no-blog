@@ -1,4 +1,5 @@
-import React, { useCallback } from 'react'
+import cx from 'classnames'
+import React, { useCallback, useMemo } from 'react'
 import { atom, selector, useRecoilState, useRecoilValue } from 'recoil'
 
 import * as styles from './Modal.module.css'
@@ -11,7 +12,7 @@ type Modal = {
 }
 
 const modalAtom = atom<Modal>({
-  key: RecoilAtomKeys.modalState,
+  key: RecoilAtomKeys.modalAtoms,
   default: {
     backDrop: false,
     render: undefined,
@@ -33,6 +34,16 @@ const modalOpenSelector = selector({
 const modalRenderSelector = selector({
   key: RecoilSelectorKeys.modalRenderSelector,
   get: ({ get }) => get(modalAtom).render,
+})
+
+const modalOptionSelector = selector({
+  key: RecoilSelectorKeys.modalOptionSelector,
+  get: ({ get }) => {
+    const { backDrop } = get(modalAtom)
+    return {
+      backDrop,
+    }
+  },
 })
 
 type UseModalArgs = {
@@ -68,13 +79,16 @@ export const useModal = ({
 
 export const ModalContainer: React.FC = () => {
   const modalRender = useRecoilValue(modalRenderSelector)
-  return (
-    <>
-      {modalRender && (
-        <div className={styles.modalBackdrop}>
-          <div className={styles.modal}>{modalRender()}</div>
-        </div>
-      )}
-    </>
-  )
+  const { backDrop } = useRecoilValue(modalOptionSelector)
+
+  const View = useMemo(() => {
+    if (!modalRender) {
+      return null
+    }
+    if (backDrop) {
+      return <div className={styles.modalBackdrop}>{modalRender()}</div>
+    }
+    return modalRender()
+  }, [backDrop, modalRender])
+  return <>{View}</>
 }
