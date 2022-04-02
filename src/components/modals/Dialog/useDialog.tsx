@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react'
 
 import { DissmissFunction, useModal } from '../Modal/useModal'
-import { Dialog } from '../atoms/atoms'
+import { Dialog } from '../atoms'
 
 type DialogRender = (dissmiss: DissmissFunction) => React.ReactNode
 
