@@ -17,6 +17,7 @@
 
 .made-by {
   @apply flex items-center;
+  margin-top: 5px;
 }
 
 .made-by small {
