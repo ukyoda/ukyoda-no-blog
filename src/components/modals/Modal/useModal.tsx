@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo } from 'react'
 import { atom, selector, useRecoilState, useRecoilValue } from 'recoil'
 
-import { ModalBackDrop } from '../atoms'
+import { Modal, ModalBackDrop } from '../atoms'
 
 import { RecoilAtomKeys, RecoilSelectorKeys } from '~/constants/RecoilKeys'
 
@@ -54,9 +54,13 @@ export const ModalContainer: React.FC = () => {
       return null
     }
     if (backDrop) {
-      return <ModalBackDrop>{modalRender()}</ModalBackDrop>
+      return (
+        <ModalBackDrop>
+          <Modal>{modalRender()}</Modal>
+        </ModalBackDrop>
+      )
     }
-    return modalRender()
+    return <Modal>{modalRender()}</Modal>
   }, [backDrop, modalRender])
   return <>{View}</>
 }
