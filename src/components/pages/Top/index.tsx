@@ -1,13 +1,9 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 
 import * as styles from './Top.module.css'
 import { Description } from './components/Description'
 import { Histories } from './components/History'
 import { Logo } from './components/Logo'
-
-import { useDialog } from '~/components/modals/Dialog/useDialog'
-import { useModal } from '~/components/modals/Modal/useModal'
-import { useMount } from '~/utils/useMount'
 
 export type Post = {
   title: string
