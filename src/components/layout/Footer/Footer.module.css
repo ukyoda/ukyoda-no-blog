@@ -1,0 +1,34 @@
+.footer-wrapper {
+  background-color: #fafafa;
+  padding: 14px 20px;
+  font-size: 10px;
+  color: #666;
+  box-shadow: 0 -2px 3px rgb(0 0 0 / 12%), 0 0 2px rgb(0 0 0 / 24%);
+}
+
+.footer {
+  @apply container mx-auto;
+  @apply flex flex-row justify-between;
+}
+
+.small {
+  display: block;
+}
+
+.made-by {
+  @apply flex items-center;
+}
+
+.made-by small {
+  font-size: 16px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.notice {
+  @apply flex flex-col justify-center;
+}
+
+.notice small {
+  font-size: 11px;
+}
