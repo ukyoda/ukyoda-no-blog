@@ -6,10 +6,16 @@
 @layer base {
   html {
     font-family: theme('fontFamily.base');
+    height: 100%;
   }
 
   body {
     background: rgb(245 246 246);
+    height: 100%;
+  }
+
+  #___gatsby {
+    height: 100%;
   }
 }
 

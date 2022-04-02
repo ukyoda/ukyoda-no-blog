@@ -76,7 +76,6 @@ const MyPostTemplate: React.FC<Props> = ({ data }) => {
         prev={blogContent.prev}
         next={blogContent.next}
       />
-      <Footer />
     </>
   )
 }
