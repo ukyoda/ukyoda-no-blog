@@ -3,7 +3,6 @@ import React from 'react'
 
 import { Seo } from '~/components/Seo'
 import { Body } from '~/components/layout/Body'
-import { Header } from '~/components/layout/Header'
 import { Layout } from '~/components/layout/Layout'
 import { TopTemplate, Post } from '~/components/pages/Top'
 import { validationOptional } from '~/utils/validationOptional'
@@ -34,7 +33,6 @@ const Top: React.FC<Props> = ({ data }) => {
     <>
       <Seo image={avatar} />
       <Layout>
-        <Header />
         <Body>
           <TopTemplate posts={posts} />
         </Body>
