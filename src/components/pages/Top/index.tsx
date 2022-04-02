@@ -21,37 +21,6 @@ type Props = {
 }
 
 const TopTemplateOrig: React.FC<Props> = ({ posts }) => {
-  const [, showModal2] = useDialog({
-    backDrop: true,
-    render: (dissmiss) => (
-      <div>
-        <h1>test</h1>
-        <button type="button" onClick={dissmiss}>
-          close
-        </button>
-      </div>
-    ),
-  })
-  const [, showModal] = useDialog({
-    render: (dissmiss) => (
-      <div>
-        <h1>test2</h1>
-        <button
-          type="button"
-          onClick={() => {
-            dissmiss()
-            showModal2()
-          }}
-        >
-          close
-        </button>
-      </div>
-    ),
-  })
-  useMount(() => {
-    showModal()
-  })
-
   return (
     <div className={styles.top}>
       <div className={styles.logoContent}>

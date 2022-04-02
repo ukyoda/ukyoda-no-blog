@@ -2,7 +2,7 @@ import cx from 'classnames'
 import React, { useCallback, useMemo } from 'react'
 import { atom, selector, useRecoilState, useRecoilValue } from 'recoil'
 
-import * as styles from './Modal.module.css'
+import { ModalBackDrop } from '../atoms/atoms'
 
 import { RecoilAtomKeys, RecoilSelectorKeys } from '~/constants/RecoilKeys'
 
@@ -86,7 +86,7 @@ export const ModalContainer: React.FC = () => {
       return null
     }
     if (backDrop) {
-      return <div className={styles.modalBackdrop}>{modalRender()}</div>
+      return <ModalBackDrop>{modalRender()}</ModalBackDrop>
     }
     return modalRender()
   }, [backDrop, modalRender])

@@ -1,8 +1,7 @@
 import React, { useCallback } from 'react'
 
 import { DissmissFunction, useModal } from '../Modal/useModal'
-
-import * as styles from './Dialog.module.css'
+import { Dialog } from '../atoms/atoms'
 
 type DialogRender = (dissmiss: DissmissFunction) => React.ReactNode
 
@@ -17,7 +16,7 @@ export const useDialog = ({
   backDrop,
 }: UseDialogArgType): UseDialogTypes => {
   const modalRender = useCallback((dissmiss: DissmissFunction) => {
-    return <div className={styles.dialog}>{render(dissmiss)}</div>
+    return <Dialog>{render(dissmiss)}</Dialog>
   }, [])
   return useModal({
     backDrop,
