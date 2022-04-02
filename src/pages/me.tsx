@@ -4,7 +4,6 @@ import React from 'react'
 import { Seo } from '~/components/Seo'
 import { NotFound } from '~/components/errors/NotFound'
 import { Body } from '~/components/layout/Body'
-import { Header } from '~/components/layout/Header'
 import { Layout } from '~/components/layout/Layout'
 import { MeTemplate } from '~/components/pages/Me'
 import { validationOptional } from '~/utils/validationOptional'
@@ -54,7 +53,6 @@ const Me: React.FC<Props> = ({ data }) => {
     <>
       <Seo image={`https:${author.avatar}`} />
       <Layout>
-        <Header />
         <Body>
           <MeTemplate
             name={author.name}

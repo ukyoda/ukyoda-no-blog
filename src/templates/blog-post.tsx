@@ -5,6 +5,7 @@ import React, { useMemo } from 'react'
 
 import { Seo } from '~/components/Seo'
 import { NotFound } from '~/components/errors/NotFound'
+import { Footer } from '~/components/layout/Footer'
 import { BlogContent, BlogTemplate } from '~/components/pages/Blog'
 import { generateBlogUrl } from '~/utils/generateBlogUrl'
 import { validationOptional } from '~/utils/validationOptional'
@@ -75,6 +76,7 @@ const MyPostTemplate: React.FC<Props> = ({ data }) => {
         prev={blogContent.prev}
         next={blogContent.next}
       />
+      <Footer />
     </>
   )
 }
