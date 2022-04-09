@@ -91,5 +91,14 @@ module.exports = {
     'gatsby-plugin-dts-css-modules',
     'gatsby-plugin-sitemap',
     'gatsby-plugin-robots-txt',
+    {
+      resolve: 'gatsby-plugin-google-analytics',
+      options: {
+        trackingId: process.env.GA_ID,
+        head: true,
+        exclude: ['/preview/**', '/do-not-track/me/too/'],
+        enableWebVitalsTracking: true,
+      },
+    },
   ],
 }

@@ -8,7 +8,7 @@ module.exports = {
     'plugin:import/typescript',
     'prettier',
   ],
-  plugins: ['@typescript-eslint'],
+  plugins: ['@typescript-eslint', 'react-hooks'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 2019,
@@ -39,6 +39,8 @@ module.exports = {
     'react/jsx-props-no-spreading': 'off', // propsのspreadを許可
     'react/require-default-props': 'off', // default propsを許可
     'react/prop-types': 'off',
+    'react-hooks/rules-of-hooks': 'error', // Checks rules of Hooks
+    'react-hooks/exhaustive-deps': 'warn', // Checks effect dependencies
     'jsx-a11y/label-has-associated-control': [
       // a11y関連設定 (https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/master/docs/rules/label-has-associated-control.md)
       'error',
