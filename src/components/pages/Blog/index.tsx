@@ -61,7 +61,6 @@ export const BlogTemplate: React.FC<BlogContent> = ({
   }, [prev])
   return (
     <Layout>
-      <Header />
       <Body>
         <article className={styles.article}>
           <header className={styles.header}>

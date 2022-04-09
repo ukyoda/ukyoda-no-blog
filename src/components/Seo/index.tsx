@@ -18,6 +18,10 @@ export const Seo = ({ description, title, image }: Props) => {
     { name: 'og:description', content: siteDescription },
     { name: 'og:type', content: 'website' },
     { name: 'twitter:card', content: 'summary' },
+    {
+      name: 'google-site-verification',
+      content: '8SMmWiAo9uWCy-TfOC-R0UKcIhMCUpwAa1n5zPxP_8w',
+    },
   ]
   if (image) {
     meta.push({ name: 'og:image', content: image })
