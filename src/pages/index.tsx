@@ -3,7 +3,6 @@ import React from 'react'
 
 import { Seo } from '~/components/Seo'
 import { Body } from '~/components/layout/Body'
-import { Header } from '~/components/layout/Header'
 import { Layout } from '~/components/layout/Layout'
 import { TopTemplate, Post } from '~/components/pages/Top'
 import { validationOptional } from '~/utils/validationOptional'
@@ -29,12 +28,11 @@ const Top: React.FC<Props> = ({ data }) => {
         description: item.description.replace(/\n/g, '').slice(0, 100),
       }
     })
-  const avatar = data?.author?.avatarImage?.file?.url
+  const avatar = `https:${data?.author?.avatar?.file?.url}`
   return (
     <>
       <Seo image={avatar} />
       <Layout>
-        <Header />
         <Body>
           <TopTemplate posts={posts} />
         </Body>
