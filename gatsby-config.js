@@ -33,13 +33,14 @@ if (!spaceId || !accessToken) {
     'Contentful spaceId and the access token need to be provided.'
   )
 }
+const siteUrl = 'https://blog.ukyoda.com'
 
 module.exports = {
   siteMetadata: {
     title: "ukyoda's blog",
     description:
       'このブログはukyodaのブログサイトです。技術的なこととか、生活的なこととか、そういったことを書いていきます。',
-    siteUrl: 'https://blog.ukyoda.com',
+    siteUrl,
   },
   pathPrefix: '/gatsby-contentful-starter',
   plugins: [
@@ -89,7 +90,50 @@ module.exports = {
     'gatsby-plugin-typegen',
     'gatsby-plugin-postcss',
     'gatsby-plugin-dts-css-modules',
-    'gatsby-plugin-sitemap',
+    {
+      resolve: 'gatsby-plugin-sitemap',
+      options: {
+        query: `
+          {
+            allSitePage {
+              nodes {
+                path
+              }
+            }
+            allContentfulMyPost {
+              nodes {
+                updatedAt
+                slug
+              }
+            }
+          }
+        `,
+        resolveSiteUrl: () => siteUrl,
+        resolvePages: ({
+          allSitePage: { nodes: allPages },
+          allContentfulMyPost: { nodes: allPosts },
+        }) => {
+          const times = allPosts.reduce((obj, { updatedAt, slug }) => {
+            obj[`/blog/${slug}`] = updatedAt
+            return obj
+          }, {})
+          return allPages.map(({ path }) => {
+            if (times[path]) {
+              return { path, lastmod: times[path] }
+            } else {
+              return { path, lastmod: new Date().toISOString() }
+            }
+          })
+        },
+        serialize: ({ path, lastmod }) => {
+          return {
+            url: path,
+            priority: 0.7,
+            lastmod,
+          }
+        },
+      },
+    },
     'gatsby-plugin-robots-txt',
     {
       resolve: 'gatsby-plugin-google-analytics',
