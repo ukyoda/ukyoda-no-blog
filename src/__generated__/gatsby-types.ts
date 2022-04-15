@@ -255,6 +255,8 @@ type Directory_ctimeArgs = {
 type Site = Node & {
   readonly buildTime: Maybe<Scalars['Date']>;
   readonly siteMetadata: Maybe<SiteSiteMetadata>;
+  readonly port: Maybe<Scalars['Int']>;
+  readonly host: Maybe<Scalars['String']>;
   readonly pathPrefix: Maybe<Scalars['String']>;
   readonly polyfill: Maybe<Scalars['Boolean']>;
   readonly jsxRuntime: Maybe<Scalars['String']>;
@@ -1243,6 +1245,8 @@ type Query_allDirectoryArgs = {
 type Query_siteArgs = {
   buildTime: Maybe<DateQueryOperatorInput>;
   siteMetadata: Maybe<SiteSiteMetadataFilterInput>;
+  port: Maybe<IntQueryOperatorInput>;
+  host: Maybe<StringQueryOperatorInput>;
   pathPrefix: Maybe<StringQueryOperatorInput>;
   polyfill: Maybe<BooleanQueryOperatorInput>;
   jsxRuntime: Maybe<StringQueryOperatorInput>;
@@ -2529,6 +2533,8 @@ type SiteFieldsEnum =
   | 'siteMetadata.title'
   | 'siteMetadata.description'
   | 'siteMetadata.siteUrl'
+  | 'port'
+  | 'host'
   | 'pathPrefix'
   | 'polyfill'
   | 'jsxRuntime'
@@ -2663,6 +2669,8 @@ type SiteGroupConnection_groupArgs = {
 type SiteFilterInput = {
   readonly buildTime: Maybe<DateQueryOperatorInput>;
   readonly siteMetadata: Maybe<SiteSiteMetadataFilterInput>;
+  readonly port: Maybe<IntQueryOperatorInput>;
+  readonly host: Maybe<StringQueryOperatorInput>;
   readonly pathPrefix: Maybe<StringQueryOperatorInput>;
   readonly polyfill: Maybe<BooleanQueryOperatorInput>;
   readonly jsxRuntime: Maybe<StringQueryOperatorInput>;
@@ -8971,17 +8979,6 @@ type PostsFromTopQuery = { readonly author: Maybe<{ readonly avatar: Maybe<{ rea
       )> }
     )> } };
 
-type FindAuthorQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type FindAuthorQuery = { readonly contentfulAuthor: Maybe<(
-    Pick<ContentfulAuthor, 'github' | 'nickName' | 'qiita' | 'twitter' | 'updatedAt' | 'id'>
-    & { readonly avatarImage: Maybe<(
-      Pick<ContentfulAsset, 'title'>
-      & { readonly file: Maybe<Pick<ContentfulAssetFile, 'url' | 'contentType'>> }
-    )>, readonly description: Maybe<{ readonly childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'html'>> }>, readonly programmingLanguages: Maybe<{ readonly childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'html'>> }>, readonly myHobbies: Maybe<{ readonly childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'html'>> }>, readonly myWorks: Maybe<{ readonly childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'html'>> }> }
-  )> };
-
 type MyPostBySlugQueryVariables = Exact<{
   slug: Scalars['String'];
   previousPostSlug: Maybe<Scalars['String']>;
@@ -8994,6 +8991,17 @@ type MyPostBySlugQuery = { readonly author: Maybe<{ readonly avatar: Maybe<{ rea
     & { rawDate: ContentfulMyPost['publishDate'] }
     & { readonly body: Maybe<{ readonly childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'html'>> }> }
   )>, readonly previous: Maybe<Pick<ContentfulMyPost, 'slug' | 'title'>>, readonly next: Maybe<Pick<ContentfulMyPost, 'slug' | 'title'>> };
+
+type FindAuthorQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type FindAuthorQuery = { readonly contentfulAuthor: Maybe<(
+    Pick<ContentfulAuthor, 'github' | 'nickName' | 'qiita' | 'twitter' | 'updatedAt' | 'id'>
+    & { readonly avatarImage: Maybe<(
+      Pick<ContentfulAsset, 'title'>
+      & { readonly file: Maybe<Pick<ContentfulAssetFile, 'url' | 'contentType'>> }
+    )>, readonly description: Maybe<{ readonly childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'html'>> }>, readonly programmingLanguages: Maybe<{ readonly childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'html'>> }>, readonly myHobbies: Maybe<{ readonly childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'html'>> }>, readonly myWorks: Maybe<{ readonly childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'html'>> }> }
+  )> };
 
 type GatsbyImageSharpFixedFragment = Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;
 
@@ -9020,5 +9028,10 @@ type GatsbyImageSharpFluid_withWebp_tracedSVGFragment = Pick<ImageSharpFluid, 't
 type GatsbyImageSharpFluid_noBase64Fragment = Pick<ImageSharpFluid, 'aspectRatio' | 'src' | 'srcSet' | 'sizes'>;
 
 type GatsbyImageSharpFluid_withWebp_noBase64Fragment = Pick<ImageSharpFluid, 'aspectRatio' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp' | 'sizes'>;
+
+type PagesQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type PagesQueryQuery = { readonly allSiteFunction: { readonly nodes: ReadonlyArray<Pick<SiteFunction, 'functionRoute'>> }, readonly allSitePage: { readonly nodes: ReadonlyArray<Pick<SitePage, 'path'>> } };
 
 }
