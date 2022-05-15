@@ -2,11 +2,16 @@ require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`,
 })
 
+const isPreviewMode =
+  (process.env.GATSBY_USE_PREVIEW ?? '').toLowerCase() === 'true'
+
 const contentfulConfig = {
   spaceId: process.env.CONTENTFUL_SPACE_ID,
-  accessToken:
-    process.env.CONTENTFUL_ACCESS_TOKEN ||
-    process.env.CONTENTFUL_DELIVERY_TOKEN,
+  accessToken: isPreviewMode
+    ? process.env.CONTENTFUL_PREVIEW_ACCESS_TOKEN
+    : process.env.CONTENTFUL_ACCESS_TOKEN,
+  environment: process.env.CONTENTFUL_ENVIRONMENT || 'master',
+  host: isPreviewMode ? 'preview.contentful.com' : 'cdn.contentful.com',
 }
 
 // If you want to use the preview API please define
