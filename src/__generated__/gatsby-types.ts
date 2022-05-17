@@ -9222,13 +9222,10 @@ type ContentfulContentTypeSortInput = {
 type PostsFromTopQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type PostsFromTopQuery = { readonly author: Maybe<{ readonly avatar: Maybe<{ readonly file: Maybe<Pick<ContentfulAssetFile, 'url'>> }> }>, readonly allContentfulMyPost: { readonly nodes: ReadonlyArray<(
-      Pick<ContentfulMyPost, 'title' | 'slug' | 'description' | 'publishDate'>
-      & { readonly body: Maybe<(
-        Pick<contentfulMyPostBodyTextNode, 'body'>
-        & { readonly childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'rawMarkdownBody'>> }
-      )> }
-    )> } };
+type PostsFromTopQuery = { readonly author: Maybe<{ readonly avatar: Maybe<{ readonly file: Maybe<Pick<ContentfulAssetFile, 'url'>> }> }>, readonly allContentfulMyPost: { readonly edges: ReadonlyArray<{ readonly node: (
+        Pick<ContentfulMyPost, 'title' | 'slug' | 'description' | 'publishDate'>
+        & { readonly body: Maybe<{ readonly childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'rawMarkdownBody'>> }>, readonly metadata: Maybe<{ readonly tags: Maybe<ReadonlyArray<Maybe<Pick<ContentfulTag, 'id' | 'name'>>>> }> }
+      ) }> } };
 
 type FindAuthorQueryVariables = Exact<{ [key: string]: never; }>;
 

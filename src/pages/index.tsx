@@ -10,15 +10,15 @@ import { validationOptional } from '~/utils/validationOptional'
 type Props = PageProps<GatsbyTypes.PostsFromTopQuery>
 
 const Top: React.FC<Props> = ({ data }) => {
-  const posts = (data?.allContentfulMyPost?.nodes ?? [])
+  const posts = (data?.allContentfulMyPost?.edges ?? [])
     .map<Partial<Post>>((item) => {
-      const body = item?.body?.childMarkdownRemark?.rawMarkdownBody
-      const description = item?.description
+      const body = item?.node?.body?.childMarkdownRemark?.rawMarkdownBody ?? ''
+      const description = item?.node?.description
       return {
-        title: item?.title,
-        slug: item?.slug,
-        description: description ?? body,
-        publishDate: item?.publishDate,
+        title: item?.node?.title,
+        slug: item?.node?.slug,
+        description: description ?? body.slice(0, 64),
+        publishDate: item?.node?.publishDate,
       }
     })
     .filter((item): item is Post => validationOptional(item))
@@ -53,17 +53,24 @@ export const query = graphql`
       }
     }
     allContentfulMyPost(sort: { order: DESC, fields: createdAt }) {
-      nodes {
-        body {
-          body
-          childMarkdownRemark {
-            rawMarkdownBody
+      edges {
+        node {
+          body {
+            childMarkdownRemark {
+              rawMarkdownBody
+            }
+          }
+          title
+          slug
+          description
+          publishDate(formatString: "YYYY-MM-DD HH:mm")
+          metadata {
+            tags {
+              id
+              name
+            }
           }
         }
-        title
-        slug
-        description
-        publishDate(formatString: "YYYY-MM-DD HH:mm")
       }
     }
   }
