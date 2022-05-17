@@ -878,6 +878,7 @@ type ContentfulMyPost = ContentfulReference & ContentfulEntry & Node & {
   readonly createdAt: Maybe<Scalars['Date']>;
   readonly updatedAt: Maybe<Scalars['Date']>;
   readonly sys: Maybe<ContentfulMyPostSys>;
+  readonly metadata: Maybe<ContentfulMyPostMetadata>;
   /** Returns all children nodes filtered by type contentfulMyPostBodyTextNode */
   readonly childrenContentfulMyPostBodyTextNode: Maybe<ReadonlyArray<Maybe<contentfulMyPostBodyTextNode>>>;
   /** Returns the first child node of type contentfulMyPostBodyTextNode or null if there are no children of given type on this node */
@@ -925,6 +926,10 @@ type ContentfulMyPostSysContentTypeSys = {
   readonly type: Maybe<Scalars['String']>;
   readonly linkType: Maybe<Scalars['String']>;
   readonly id: Maybe<Scalars['String']>;
+};
+
+type ContentfulMyPostMetadata = {
+  readonly tags: Maybe<ReadonlyArray<Maybe<ContentfulTag>>>;
 };
 
 type ContentfulMyWork = ContentfulReference & ContentfulEntry & Node & {
@@ -978,6 +983,15 @@ type ContentfulMyWorkSysContentTypeSys = {
   readonly type: Maybe<Scalars['String']>;
   readonly linkType: Maybe<Scalars['String']>;
   readonly id: Maybe<Scalars['String']>;
+};
+
+type ContentfulTag = Node & {
+  readonly name: Scalars['String'];
+  readonly contentful_id: Scalars['String'];
+  readonly id: Scalars['ID'];
+  readonly parent: Maybe<Node>;
+  readonly children: ReadonlyArray<Node>;
+  readonly internal: Internal;
 };
 
 type contentfulMyWorkDescriptionTextNode = Node & {
@@ -1126,6 +1140,8 @@ type Query = {
   readonly allContentfulMyPost: ContentfulMyPostConnection;
   readonly contentfulMyWork: Maybe<ContentfulMyWork>;
   readonly allContentfulMyWork: ContentfulMyWorkConnection;
+  readonly contentfulTag: Maybe<ContentfulTag>;
+  readonly allContentfulTag: ContentfulTagConnection;
   readonly contentfulMyWorkDescriptionTextNode: Maybe<contentfulMyWorkDescriptionTextNode>;
   readonly allContentfulMyWorkDescriptionTextNode: contentfulMyWorkDescriptionTextNodeConnection;
   readonly contentfulMyPostBodyTextNode: Maybe<contentfulMyPostBodyTextNode>;
@@ -1496,6 +1512,7 @@ type Query_contentfulMyPostArgs = {
   createdAt: Maybe<DateQueryOperatorInput>;
   updatedAt: Maybe<DateQueryOperatorInput>;
   sys: Maybe<ContentfulMyPostSysFilterInput>;
+  metadata: Maybe<ContentfulMyPostMetadataFilterInput>;
   childrenContentfulMyPostBodyTextNode: Maybe<contentfulMyPostBodyTextNodeFilterListInput>;
   childContentfulMyPostBodyTextNode: Maybe<contentfulMyPostBodyTextNodeFilterInput>;
   parent: Maybe<NodeFilterInput>;
@@ -1535,6 +1552,24 @@ type Query_contentfulMyWorkArgs = {
 type Query_allContentfulMyWorkArgs = {
   filter: Maybe<ContentfulMyWorkFilterInput>;
   sort: Maybe<ContentfulMyWorkSortInput>;
+  skip: Maybe<Scalars['Int']>;
+  limit: Maybe<Scalars['Int']>;
+};
+
+
+type Query_contentfulTagArgs = {
+  name: Maybe<StringQueryOperatorInput>;
+  contentful_id: Maybe<StringQueryOperatorInput>;
+  id: Maybe<StringQueryOperatorInput>;
+  parent: Maybe<NodeFilterInput>;
+  children: Maybe<NodeFilterListInput>;
+  internal: Maybe<InternalFilterInput>;
+};
+
+
+type Query_allContentfulTagArgs = {
+  filter: Maybe<ContentfulTagFilterInput>;
+  sort: Maybe<ContentfulTagSortInput>;
   skip: Maybe<Scalars['Int']>;
   limit: Maybe<Scalars['Int']>;
 };
@@ -5983,6 +6018,23 @@ type ContentfulMyPostSysContentTypeSysFilterInput = {
   readonly id: Maybe<StringQueryOperatorInput>;
 };
 
+type ContentfulMyPostMetadataFilterInput = {
+  readonly tags: Maybe<ContentfulTagFilterListInput>;
+};
+
+type ContentfulTagFilterListInput = {
+  readonly elemMatch: Maybe<ContentfulTagFilterInput>;
+};
+
+type ContentfulTagFilterInput = {
+  readonly name: Maybe<StringQueryOperatorInput>;
+  readonly contentful_id: Maybe<StringQueryOperatorInput>;
+  readonly id: Maybe<StringQueryOperatorInput>;
+  readonly parent: Maybe<NodeFilterInput>;
+  readonly children: Maybe<NodeFilterListInput>;
+  readonly internal: Maybe<InternalFilterInput>;
+};
+
 type contentfulMyPostBodyTextNodeFilterListInput = {
   readonly elemMatch: Maybe<contentfulMyPostBodyTextNodeFilterInput>;
 };
@@ -6147,6 +6199,23 @@ type ContentfulMyPostFieldsEnum =
   | 'sys.contentType.sys.type'
   | 'sys.contentType.sys.linkType'
   | 'sys.contentType.sys.id'
+  | 'metadata.tags'
+  | 'metadata.tags.name'
+  | 'metadata.tags.contentful_id'
+  | 'metadata.tags.id'
+  | 'metadata.tags.parent.id'
+  | 'metadata.tags.parent.children'
+  | 'metadata.tags.children'
+  | 'metadata.tags.children.id'
+  | 'metadata.tags.children.children'
+  | 'metadata.tags.internal.content'
+  | 'metadata.tags.internal.contentDigest'
+  | 'metadata.tags.internal.description'
+  | 'metadata.tags.internal.fieldOwners'
+  | 'metadata.tags.internal.ignoreType'
+  | 'metadata.tags.internal.mediaType'
+  | 'metadata.tags.internal.owner'
+  | 'metadata.tags.internal.type'
   | 'childrenContentfulMyPostBodyTextNode'
   | 'childrenContentfulMyPostBodyTextNode.id'
   | 'childrenContentfulMyPostBodyTextNode.parent.id'
@@ -6486,6 +6555,7 @@ type ContentfulMyPostFilterInput = {
   readonly createdAt: Maybe<DateQueryOperatorInput>;
   readonly updatedAt: Maybe<DateQueryOperatorInput>;
   readonly sys: Maybe<ContentfulMyPostSysFilterInput>;
+  readonly metadata: Maybe<ContentfulMyPostMetadataFilterInput>;
   readonly childrenContentfulMyPostBodyTextNode: Maybe<contentfulMyPostBodyTextNodeFilterListInput>;
   readonly childContentfulMyPostBodyTextNode: Maybe<contentfulMyPostBodyTextNodeFilterInput>;
   readonly parent: Maybe<NodeFilterInput>;
@@ -7039,6 +7109,187 @@ type ContentfulMyWorkFilterInput = {
 
 type ContentfulMyWorkSortInput = {
   readonly fields: Maybe<ReadonlyArray<Maybe<ContentfulMyWorkFieldsEnum>>>;
+  readonly order: Maybe<ReadonlyArray<Maybe<SortOrderEnum>>>;
+};
+
+type ContentfulTagConnection = {
+  readonly totalCount: Scalars['Int'];
+  readonly edges: ReadonlyArray<ContentfulTagEdge>;
+  readonly nodes: ReadonlyArray<ContentfulTag>;
+  readonly pageInfo: PageInfo;
+  readonly distinct: ReadonlyArray<Scalars['String']>;
+  readonly max: Maybe<Scalars['Float']>;
+  readonly min: Maybe<Scalars['Float']>;
+  readonly sum: Maybe<Scalars['Float']>;
+  readonly group: ReadonlyArray<ContentfulTagGroupConnection>;
+};
+
+
+type ContentfulTagConnection_distinctArgs = {
+  field: ContentfulTagFieldsEnum;
+};
+
+
+type ContentfulTagConnection_maxArgs = {
+  field: ContentfulTagFieldsEnum;
+};
+
+
+type ContentfulTagConnection_minArgs = {
+  field: ContentfulTagFieldsEnum;
+};
+
+
+type ContentfulTagConnection_sumArgs = {
+  field: ContentfulTagFieldsEnum;
+};
+
+
+type ContentfulTagConnection_groupArgs = {
+  skip: Maybe<Scalars['Int']>;
+  limit: Maybe<Scalars['Int']>;
+  field: ContentfulTagFieldsEnum;
+};
+
+type ContentfulTagEdge = {
+  readonly next: Maybe<ContentfulTag>;
+  readonly node: ContentfulTag;
+  readonly previous: Maybe<ContentfulTag>;
+};
+
+type ContentfulTagFieldsEnum =
+  | 'name'
+  | 'contentful_id'
+  | 'id'
+  | 'parent.id'
+  | 'parent.parent.id'
+  | 'parent.parent.parent.id'
+  | 'parent.parent.parent.children'
+  | 'parent.parent.children'
+  | 'parent.parent.children.id'
+  | 'parent.parent.children.children'
+  | 'parent.parent.internal.content'
+  | 'parent.parent.internal.contentDigest'
+  | 'parent.parent.internal.description'
+  | 'parent.parent.internal.fieldOwners'
+  | 'parent.parent.internal.ignoreType'
+  | 'parent.parent.internal.mediaType'
+  | 'parent.parent.internal.owner'
+  | 'parent.parent.internal.type'
+  | 'parent.children'
+  | 'parent.children.id'
+  | 'parent.children.parent.id'
+  | 'parent.children.parent.children'
+  | 'parent.children.children'
+  | 'parent.children.children.id'
+  | 'parent.children.children.children'
+  | 'parent.children.internal.content'
+  | 'parent.children.internal.contentDigest'
+  | 'parent.children.internal.description'
+  | 'parent.children.internal.fieldOwners'
+  | 'parent.children.internal.ignoreType'
+  | 'parent.children.internal.mediaType'
+  | 'parent.children.internal.owner'
+  | 'parent.children.internal.type'
+  | 'parent.internal.content'
+  | 'parent.internal.contentDigest'
+  | 'parent.internal.description'
+  | 'parent.internal.fieldOwners'
+  | 'parent.internal.ignoreType'
+  | 'parent.internal.mediaType'
+  | 'parent.internal.owner'
+  | 'parent.internal.type'
+  | 'children'
+  | 'children.id'
+  | 'children.parent.id'
+  | 'children.parent.parent.id'
+  | 'children.parent.parent.children'
+  | 'children.parent.children'
+  | 'children.parent.children.id'
+  | 'children.parent.children.children'
+  | 'children.parent.internal.content'
+  | 'children.parent.internal.contentDigest'
+  | 'children.parent.internal.description'
+  | 'children.parent.internal.fieldOwners'
+  | 'children.parent.internal.ignoreType'
+  | 'children.parent.internal.mediaType'
+  | 'children.parent.internal.owner'
+  | 'children.parent.internal.type'
+  | 'children.children'
+  | 'children.children.id'
+  | 'children.children.parent.id'
+  | 'children.children.parent.children'
+  | 'children.children.children'
+  | 'children.children.children.id'
+  | 'children.children.children.children'
+  | 'children.children.internal.content'
+  | 'children.children.internal.contentDigest'
+  | 'children.children.internal.description'
+  | 'children.children.internal.fieldOwners'
+  | 'children.children.internal.ignoreType'
+  | 'children.children.internal.mediaType'
+  | 'children.children.internal.owner'
+  | 'children.children.internal.type'
+  | 'children.internal.content'
+  | 'children.internal.contentDigest'
+  | 'children.internal.description'
+  | 'children.internal.fieldOwners'
+  | 'children.internal.ignoreType'
+  | 'children.internal.mediaType'
+  | 'children.internal.owner'
+  | 'children.internal.type'
+  | 'internal.content'
+  | 'internal.contentDigest'
+  | 'internal.description'
+  | 'internal.fieldOwners'
+  | 'internal.ignoreType'
+  | 'internal.mediaType'
+  | 'internal.owner'
+  | 'internal.type';
+
+type ContentfulTagGroupConnection = {
+  readonly totalCount: Scalars['Int'];
+  readonly edges: ReadonlyArray<ContentfulTagEdge>;
+  readonly nodes: ReadonlyArray<ContentfulTag>;
+  readonly pageInfo: PageInfo;
+  readonly distinct: ReadonlyArray<Scalars['String']>;
+  readonly max: Maybe<Scalars['Float']>;
+  readonly min: Maybe<Scalars['Float']>;
+  readonly sum: Maybe<Scalars['Float']>;
+  readonly group: ReadonlyArray<ContentfulTagGroupConnection>;
+  readonly field: Scalars['String'];
+  readonly fieldValue: Maybe<Scalars['String']>;
+};
+
+
+type ContentfulTagGroupConnection_distinctArgs = {
+  field: ContentfulTagFieldsEnum;
+};
+
+
+type ContentfulTagGroupConnection_maxArgs = {
+  field: ContentfulTagFieldsEnum;
+};
+
+
+type ContentfulTagGroupConnection_minArgs = {
+  field: ContentfulTagFieldsEnum;
+};
+
+
+type ContentfulTagGroupConnection_sumArgs = {
+  field: ContentfulTagFieldsEnum;
+};
+
+
+type ContentfulTagGroupConnection_groupArgs = {
+  skip: Maybe<Scalars['Int']>;
+  limit: Maybe<Scalars['Int']>;
+  field: ContentfulTagFieldsEnum;
+};
+
+type ContentfulTagSortInput = {
+  readonly fields: Maybe<ReadonlyArray<Maybe<ContentfulTagFieldsEnum>>>;
   readonly order: Maybe<ReadonlyArray<Maybe<SortOrderEnum>>>;
 };
 
@@ -8979,6 +9230,17 @@ type PostsFromTopQuery = { readonly author: Maybe<{ readonly avatar: Maybe<{ rea
       )> }
     )> } };
 
+type FindAuthorQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type FindAuthorQuery = { readonly contentfulAuthor: Maybe<(
+    Pick<ContentfulAuthor, 'github' | 'nickName' | 'qiita' | 'twitter' | 'updatedAt' | 'id'>
+    & { readonly avatarImage: Maybe<(
+      Pick<ContentfulAsset, 'title'>
+      & { readonly file: Maybe<Pick<ContentfulAssetFile, 'url' | 'contentType'>> }
+    )>, readonly description: Maybe<{ readonly childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'html'>> }>, readonly programmingLanguages: Maybe<{ readonly childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'html'>> }>, readonly myHobbies: Maybe<{ readonly childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'html'>> }>, readonly myWorks: Maybe<{ readonly childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'html'>> }> }
+  )> };
+
 type MyPostBySlugQueryVariables = Exact<{
   slug: Scalars['String'];
   previousPostSlug: Maybe<Scalars['String']>;
@@ -8991,17 +9253,6 @@ type MyPostBySlugQuery = { readonly author: Maybe<{ readonly avatar: Maybe<{ rea
     & { rawDate: ContentfulMyPost['publishDate'] }
     & { readonly body: Maybe<{ readonly childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'html'>> }> }
   )>, readonly previous: Maybe<Pick<ContentfulMyPost, 'slug' | 'title'>>, readonly next: Maybe<Pick<ContentfulMyPost, 'slug' | 'title'>> };
-
-type FindAuthorQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type FindAuthorQuery = { readonly contentfulAuthor: Maybe<(
-    Pick<ContentfulAuthor, 'github' | 'nickName' | 'qiita' | 'twitter' | 'updatedAt' | 'id'>
-    & { readonly avatarImage: Maybe<(
-      Pick<ContentfulAsset, 'title'>
-      & { readonly file: Maybe<Pick<ContentfulAssetFile, 'url' | 'contentType'>> }
-    )>, readonly description: Maybe<{ readonly childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'html'>> }>, readonly programmingLanguages: Maybe<{ readonly childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'html'>> }>, readonly myHobbies: Maybe<{ readonly childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'html'>> }>, readonly myWorks: Maybe<{ readonly childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'html'>> }> }
-  )> };
 
 type GatsbyImageSharpFixedFragment = Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;
 
