@@ -7,7 +7,7 @@ import { StaticImage } from 'gatsby-plugin-image'
 import { cx } from 'linaria'
 import React from 'react'
 
-import { PostContent } from '../../PostContent'
+import { PostContent } from '../../molecules/PostContent'
 
 import * as styles from './Me.module.css'
 

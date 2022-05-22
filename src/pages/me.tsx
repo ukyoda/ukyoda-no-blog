@@ -1,8 +1,8 @@
 import { graphql, PageProps } from 'gatsby'
 import React from 'react'
 
-import { Seo } from '~/components/Seo'
 import { NotFound } from '~/components/errors/NotFound'
+import { Seo } from '~/components/molecules/Seo'
 import { Body } from '~/components/molecules/layout/Body'
 import { Layout } from '~/components/molecules/layout/Layout'
 import { MeTemplate } from '~/components/templates/Me'
