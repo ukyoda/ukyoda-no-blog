@@ -7,7 +7,7 @@ import { generateBlogUrl } from '../../utils/generateBlogUrl'
 // TODO: ここ、もう少し良い型定義考えたい
 type AllContentfulBlogPost = {
   allContentfulMyPost: {
-    nodes: {
+    nodes?: {
       title: string
       slug: string
     }[]
@@ -39,10 +39,6 @@ export const generateMyPost = async ({
       `There was an error loading your Contentful tags`,
       result.errors
     )
-    return
-  }
-  if (typeof result.data === 'undefined') {
-    reporter.panicOnBuild(`There was an error loading your Contentful posts`)
     return
   }
   const posts = result?.data?.allContentfulMyPost.nodes
