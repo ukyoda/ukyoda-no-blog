@@ -5,7 +5,7 @@ import React, { useMemo } from 'react'
 
 import { Seo } from '~/components/Seo'
 import { NotFound } from '~/components/errors/NotFound'
-import { BlogContent, BlogTemplate } from '~/components/pages/Blog'
+import { BlogContent, BlogTemplate } from '~/components/templates/Blog'
 import { generateBlogUrl } from '~/utils/generateBlogUrl'
 import { validationOptional } from '~/utils/validationOptional'
 // TODO: fix this ClassComponent to FunctionalComponent

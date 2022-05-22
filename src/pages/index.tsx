@@ -4,7 +4,8 @@ import React from 'react'
 import { Seo } from '~/components/Seo'
 import { Body } from '~/components/layout/Body'
 import { Layout } from '~/components/layout/Layout'
-import { TopTemplate, Post } from '~/components/pages/Top'
+import { TopTemplate, Post } from '~/components/templates/Top'
+import { isTag, Tag } from '~/model/Tag'
 import { validationOptional } from '~/utils/validationOptional'
 
 type Props = PageProps<GatsbyTypes.PostsFromTopQuery>
@@ -14,11 +15,20 @@ const Top: React.FC<Props> = ({ data }) => {
     .map<Partial<Post>>((item) => {
       const body = item?.node?.body?.childMarkdownRemark?.rawMarkdownBody ?? ''
       const description = item?.node?.description
+      const tags =
+        item?.node?.metadata?.tags?.reduce((acc, cur: unknown) => {
+          if (isTag(cur)) {
+            acc.push(cur)
+          }
+          return acc
+        }, [] as Tag[]) ?? []
+
       return {
         title: item?.node?.title,
         slug: item?.node?.slug,
         description: description ?? body.slice(0, 64),
         publishDate: item?.node?.publishDate,
+        tags,
       }
     })
     .filter((item): item is Post => validationOptional(item))
