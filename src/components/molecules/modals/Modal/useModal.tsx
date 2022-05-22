@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo } from 'react'
 import { atom, selector, useRecoilState, useRecoilValue } from 'recoil'
 
-import { Modal, ModalBackDrop } from '../atoms'
+import { Modal, ModalBackDrop } from './atoms'
 
 import { RecoilAtomKeys, RecoilSelectorKeys } from '~/constants/RecoilKeys'
 
