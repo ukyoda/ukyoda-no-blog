@@ -6,9 +6,9 @@ import { markdownStyles } from '../../atoms/Markdown'
 import * as styles from './Blog.module.css'
 
 import { PostContent } from '~/components/PostContent'
-import { Body } from '~/components/layout/Body'
-import { Header } from '~/components/layout/Header'
-import { Layout } from '~/components/layout/Layout'
+import { Body } from '~/components/molecules/layout/Body'
+import { Header } from '~/components/molecules/layout/Header'
+import { Layout } from '~/components/molecules/layout/Layout'
 
 export type BlogContent = {
   title: string

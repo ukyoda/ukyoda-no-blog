@@ -3,8 +3,8 @@ import React from 'react'
 
 import { Seo } from '~/components/Seo'
 import { NotFound } from '~/components/errors/NotFound'
-import { Body } from '~/components/layout/Body'
-import { Layout } from '~/components/layout/Layout'
+import { Body } from '~/components/molecules/layout/Body'
+import { Layout } from '~/components/molecules/layout/Layout'
 import { MeTemplate } from '~/components/templates/Me'
 import { validationOptional } from '~/utils/validationOptional'
 
