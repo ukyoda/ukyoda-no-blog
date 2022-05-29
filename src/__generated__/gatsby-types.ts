@@ -879,6 +879,7 @@ type ContentfulMyPost = ContentfulReference & ContentfulEntry & Node & {
   readonly updatedAt: Maybe<Scalars['Date']>;
   readonly sys: Maybe<ContentfulMyPostSys>;
   readonly metadata: Maybe<ContentfulMyPostMetadata>;
+  readonly medias: Maybe<ReadonlyArray<Maybe<ContentfulAsset>>>;
   /** Returns all children nodes filtered by type contentfulMyPostBodyTextNode */
   readonly childrenContentfulMyPostBodyTextNode: Maybe<ReadonlyArray<Maybe<contentfulMyPostBodyTextNode>>>;
   /** Returns the first child node of type contentfulMyPostBodyTextNode or null if there are no children of given type on this node */
@@ -1513,6 +1514,7 @@ type Query_contentfulMyPostArgs = {
   updatedAt: Maybe<DateQueryOperatorInput>;
   sys: Maybe<ContentfulMyPostSysFilterInput>;
   metadata: Maybe<ContentfulMyPostMetadataFilterInput>;
+  medias: Maybe<ContentfulAssetFilterListInput>;
   childrenContentfulMyPostBodyTextNode: Maybe<contentfulMyPostBodyTextNodeFilterListInput>;
   childContentfulMyPostBodyTextNode: Maybe<contentfulMyPostBodyTextNodeFilterInput>;
   parent: Maybe<NodeFilterInput>;
@@ -6035,6 +6037,10 @@ type ContentfulTagFilterInput = {
   readonly internal: Maybe<InternalFilterInput>;
 };
 
+type ContentfulAssetFilterListInput = {
+  readonly elemMatch: Maybe<ContentfulAssetFilterInput>;
+};
+
 type contentfulMyPostBodyTextNodeFilterListInput = {
   readonly elemMatch: Maybe<contentfulMyPostBodyTextNodeFilterInput>;
 };
@@ -6216,6 +6222,59 @@ type ContentfulMyPostFieldsEnum =
   | 'metadata.tags.internal.mediaType'
   | 'metadata.tags.internal.owner'
   | 'metadata.tags.internal.type'
+  | 'medias'
+  | 'medias.contentful_id'
+  | 'medias.id'
+  | 'medias.spaceId'
+  | 'medias.createdAt'
+  | 'medias.updatedAt'
+  | 'medias.file.url'
+  | 'medias.file.details.size'
+  | 'medias.file.fileName'
+  | 'medias.file.contentType'
+  | 'medias.title'
+  | 'medias.description'
+  | 'medias.node_locale'
+  | 'medias.sys.type'
+  | 'medias.sys.revision'
+  | 'medias.gatsbyImageData'
+  | 'medias.parent.id'
+  | 'medias.parent.parent.id'
+  | 'medias.parent.parent.children'
+  | 'medias.parent.children'
+  | 'medias.parent.children.id'
+  | 'medias.parent.children.children'
+  | 'medias.parent.internal.content'
+  | 'medias.parent.internal.contentDigest'
+  | 'medias.parent.internal.description'
+  | 'medias.parent.internal.fieldOwners'
+  | 'medias.parent.internal.ignoreType'
+  | 'medias.parent.internal.mediaType'
+  | 'medias.parent.internal.owner'
+  | 'medias.parent.internal.type'
+  | 'medias.children'
+  | 'medias.children.id'
+  | 'medias.children.parent.id'
+  | 'medias.children.parent.children'
+  | 'medias.children.children'
+  | 'medias.children.children.id'
+  | 'medias.children.children.children'
+  | 'medias.children.internal.content'
+  | 'medias.children.internal.contentDigest'
+  | 'medias.children.internal.description'
+  | 'medias.children.internal.fieldOwners'
+  | 'medias.children.internal.ignoreType'
+  | 'medias.children.internal.mediaType'
+  | 'medias.children.internal.owner'
+  | 'medias.children.internal.type'
+  | 'medias.internal.content'
+  | 'medias.internal.contentDigest'
+  | 'medias.internal.description'
+  | 'medias.internal.fieldOwners'
+  | 'medias.internal.ignoreType'
+  | 'medias.internal.mediaType'
+  | 'medias.internal.owner'
+  | 'medias.internal.type'
   | 'childrenContentfulMyPostBodyTextNode'
   | 'childrenContentfulMyPostBodyTextNode.id'
   | 'childrenContentfulMyPostBodyTextNode.parent.id'
@@ -6556,6 +6615,7 @@ type ContentfulMyPostFilterInput = {
   readonly updatedAt: Maybe<DateQueryOperatorInput>;
   readonly sys: Maybe<ContentfulMyPostSysFilterInput>;
   readonly metadata: Maybe<ContentfulMyPostMetadataFilterInput>;
+  readonly medias: Maybe<ContentfulAssetFilterListInput>;
   readonly childrenContentfulMyPostBodyTextNode: Maybe<contentfulMyPostBodyTextNodeFilterListInput>;
   readonly childContentfulMyPostBodyTextNode: Maybe<contentfulMyPostBodyTextNodeFilterInput>;
   readonly parent: Maybe<NodeFilterInput>;
@@ -9227,6 +9287,17 @@ type PostsFromTopQuery = { readonly author: Maybe<{ readonly avatar: Maybe<{ rea
         & { readonly body: Maybe<{ readonly childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'rawMarkdownBody'>> }>, readonly metadata: Maybe<{ readonly tags: Maybe<ReadonlyArray<Maybe<Pick<ContentfulTag, 'id' | 'name'>>>> }> }
       ) }> } };
 
+type FindAuthorQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type FindAuthorQuery = { readonly contentfulAuthor: Maybe<(
+    Pick<ContentfulAuthor, 'github' | 'nickName' | 'qiita' | 'twitter' | 'updatedAt' | 'id'>
+    & { readonly avatarImage: Maybe<(
+      Pick<ContentfulAsset, 'title'>
+      & { readonly file: Maybe<Pick<ContentfulAssetFile, 'url' | 'contentType'>> }
+    )>, readonly description: Maybe<{ readonly childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'html'>> }>, readonly programmingLanguages: Maybe<{ readonly childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'html'>> }>, readonly myHobbies: Maybe<{ readonly childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'html'>> }>, readonly myWorks: Maybe<{ readonly childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'html'>> }> }
+  )> };
+
 type MyPostBySlugQueryVariables = Exact<{
   slug: Scalars['String'];
   previousPostSlug: Maybe<Scalars['String']>;
@@ -9246,17 +9317,6 @@ type MyPostsByTagQueryVariables = Exact<{
 
 
 type MyPostsByTagQuery = { readonly allContentfulMyPost: { readonly nodes: ReadonlyArray<Pick<ContentfulMyPost, 'title' | 'slug' | 'spaceId' | 'contentful_id'>> } };
-
-type FindAuthorQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type FindAuthorQuery = { readonly contentfulAuthor: Maybe<(
-    Pick<ContentfulAuthor, 'github' | 'nickName' | 'qiita' | 'twitter' | 'updatedAt' | 'id'>
-    & { readonly avatarImage: Maybe<(
-      Pick<ContentfulAsset, 'title'>
-      & { readonly file: Maybe<Pick<ContentfulAssetFile, 'url' | 'contentType'>> }
-    )>, readonly description: Maybe<{ readonly childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'html'>> }>, readonly programmingLanguages: Maybe<{ readonly childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'html'>> }>, readonly myHobbies: Maybe<{ readonly childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'html'>> }>, readonly myWorks: Maybe<{ readonly childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'html'>> }> }
-  )> };
 
 type GatsbyImageSharpFixedFragment = Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;
 

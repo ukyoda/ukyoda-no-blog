@@ -6,6 +6,7 @@ import { Body } from '~/components/molecules/layout/Body'
 import { Layout } from '~/components/molecules/layout/Layout'
 import { TopTemplate, Post } from '~/components/templates/Top'
 import { isTag, Tag } from '~/model/Tag'
+import { generateTagUrl } from '~/utils/generateBlogUrl'
 import { validationOptional } from '~/utils/validationOptional'
 
 type Props = PageProps<GatsbyTypes.PostsFromTopQuery>
@@ -28,7 +29,10 @@ const Top: React.FC<Props> = ({ data }) => {
         slug: item?.node?.slug,
         description: description ?? body.slice(0, 64),
         publishDate: item?.node?.publishDate,
-        tags,
+        tags: tags.map(({ name }) => ({
+          name,
+          pathname: generateTagUrl(name),
+        })),
       }
     })
     .filter((item): item is Post => validationOptional(item))

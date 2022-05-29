@@ -4,3 +4,4 @@ export const cardContent: string;
 export const cardTitle: string;
 export const cardBody: string;
 export const publishDate: string;
+export const tags: string;

@@ -1,37 +1,39 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, ComponentProps } from 'react'
 
 import * as styles from './History.module.css'
-import { Card } from './components/Card'
 
+import { Card } from '~/components/molecules/Card'
 import { generateBlogUrl } from '~/utils/generateBlogUrl'
 
-type Post = {
+type HistoryItem = {
   title: string
   slug: string
   description: string
   publishDate: string
+  tags?: ComponentProps<typeof Card>['tags']
 }
 
 type Props = {
-  histories: Post[]
+  postHistories: HistoryItem[]
 }
 
-export const Histories: React.FC<Props> = ({ histories }) => {
+export const PostHistories: React.FC<Props> = ({ postHistories }) => {
   const Items = useMemo(
     () =>
-      histories.map<React.ReactNode>(
-        ({ slug, title, description, publishDate }) => (
+      postHistories.map<React.ReactNode>(
+        ({ slug, title, description, publishDate, tags }) => (
           <li key={slug}>
             <Card
               title={title}
               url={generateBlogUrl(slug)}
               body={description}
               publishDate={publishDate}
+              tags={tags}
             />
           </li>
         )
       ),
-    [histories]
+    [postHistories]
   )
   return (
     <section>
