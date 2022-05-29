@@ -2,7 +2,7 @@ import React from 'react'
 
 import * as styles from './Top.module.css'
 import { Description } from './components/Description'
-import { Histories } from './components/History'
+import { PostHistories } from './components/History'
 import { Logo } from './components/Logo'
 
 export type Post = {
@@ -10,6 +10,10 @@ export type Post = {
   slug: string
   description: string
   publishDate: string
+  tags?: {
+    name: string
+    pathname: string
+  }[]
 }
 
 type Props = {
@@ -26,7 +30,7 @@ const TopTemplateOrig: React.FC<Props> = ({ posts }) => {
         <Description />
       </div>
       <div>
-        <Histories histories={posts} />
+        <PostHistories postHistories={posts} />
       </div>
     </div>
   )

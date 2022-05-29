@@ -41,6 +41,8 @@ module.exports = {
     'react/prop-types': 'off',
     'react-hooks/rules-of-hooks': 'error', // Checks rules of Hooks
     'react-hooks/exhaustive-deps': 'warn', // Checks effect dependencies
+    'react/display-name': 'off', // displayNameを許可
+    'react/no-array-index-key': 'off', // arrayのindexをkeyにすることを許可
     'jsx-a11y/label-has-associated-control': [
       // a11y関連設定 (https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/master/docs/rules/label-has-associated-control.md)
       'error',
