@@ -9227,17 +9227,6 @@ type PostsFromTopQuery = { readonly author: Maybe<{ readonly avatar: Maybe<{ rea
         & { readonly body: Maybe<{ readonly childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'rawMarkdownBody'>> }>, readonly metadata: Maybe<{ readonly tags: Maybe<ReadonlyArray<Maybe<Pick<ContentfulTag, 'id' | 'name'>>>> }> }
       ) }> } };
 
-type FindAuthorQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type FindAuthorQuery = { readonly contentfulAuthor: Maybe<(
-    Pick<ContentfulAuthor, 'github' | 'nickName' | 'qiita' | 'twitter' | 'updatedAt' | 'id'>
-    & { readonly avatarImage: Maybe<(
-      Pick<ContentfulAsset, 'title'>
-      & { readonly file: Maybe<Pick<ContentfulAssetFile, 'url' | 'contentType'>> }
-    )>, readonly description: Maybe<{ readonly childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'html'>> }>, readonly programmingLanguages: Maybe<{ readonly childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'html'>> }>, readonly myHobbies: Maybe<{ readonly childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'html'>> }>, readonly myWorks: Maybe<{ readonly childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'html'>> }> }
-  )> };
-
 type MyPostBySlugQueryVariables = Exact<{
   slug: Scalars['String'];
   previousPostSlug: Maybe<Scalars['String']>;
@@ -9258,10 +9247,16 @@ type MyPostsByTagQueryVariables = Exact<{
 
 type MyPostsByTagQuery = { readonly allContentfulMyPost: { readonly nodes: ReadonlyArray<Pick<ContentfulMyPost, 'title' | 'slug' | 'spaceId' | 'contentful_id'>> } };
 
-type PagesQueryQueryVariables = Exact<{ [key: string]: never; }>;
+type FindAuthorQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type PagesQueryQuery = { readonly allSiteFunction: { readonly nodes: ReadonlyArray<Pick<SiteFunction, 'functionRoute'>> }, readonly allSitePage: { readonly nodes: ReadonlyArray<Pick<SitePage, 'path'>> } };
+type FindAuthorQuery = { readonly contentfulAuthor: Maybe<(
+    Pick<ContentfulAuthor, 'github' | 'nickName' | 'qiita' | 'twitter' | 'updatedAt' | 'id'>
+    & { readonly avatarImage: Maybe<(
+      Pick<ContentfulAsset, 'title'>
+      & { readonly file: Maybe<Pick<ContentfulAssetFile, 'url' | 'contentType'>> }
+    )>, readonly description: Maybe<{ readonly childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'html'>> }>, readonly programmingLanguages: Maybe<{ readonly childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'html'>> }>, readonly myHobbies: Maybe<{ readonly childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'html'>> }>, readonly myWorks: Maybe<{ readonly childMarkdownRemark: Maybe<Pick<MarkdownRemark, 'html'>> }> }
+  )> };
 
 type GatsbyImageSharpFixedFragment = Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;
 
@@ -9288,5 +9283,10 @@ type GatsbyImageSharpFluid_withWebp_tracedSVGFragment = Pick<ImageSharpFluid, 't
 type GatsbyImageSharpFluid_noBase64Fragment = Pick<ImageSharpFluid, 'aspectRatio' | 'src' | 'srcSet' | 'sizes'>;
 
 type GatsbyImageSharpFluid_withWebp_noBase64Fragment = Pick<ImageSharpFluid, 'aspectRatio' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp' | 'sizes'>;
+
+type PagesQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type PagesQueryQuery = { readonly allSiteFunction: { readonly nodes: ReadonlyArray<Pick<SiteFunction, 'functionRoute'>> }, readonly allSitePage: { readonly nodes: ReadonlyArray<Pick<SitePage, 'path'>> } };
 
 }

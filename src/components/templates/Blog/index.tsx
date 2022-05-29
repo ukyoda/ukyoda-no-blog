@@ -5,10 +5,9 @@ import { markdownStyles } from '../../atoms/Markdown'
 
 import * as styles from './Blog.module.css'
 
-import { PostContent } from '~/components/PostContent'
-import { Body } from '~/components/layout/Body'
-import { Header } from '~/components/layout/Header'
-import { Layout } from '~/components/layout/Layout'
+import { PostContent } from '~/components/molecules/PostContent'
+import { Body } from '~/components/molecules/layout/Body'
+import { Layout } from '~/components/molecules/layout/Layout'
 
 export type BlogContent = {
   title: string

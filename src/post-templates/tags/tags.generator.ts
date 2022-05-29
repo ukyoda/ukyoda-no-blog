@@ -43,8 +43,7 @@ export const generateTags = async ({
   const tags = result?.data?.allContentfulTag.nodes
 
   if (tags) {
-    tags.forEach((tag, index) => {
-      console.log(tag, generateTagUrl(tag.name))
+    tags.forEach((tag) => {
       createPage({
         path: generateTagUrl(tag.name),
         component: template,
