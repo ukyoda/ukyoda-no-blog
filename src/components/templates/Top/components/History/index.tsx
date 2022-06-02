@@ -3,6 +3,7 @@ import React, { useMemo, ComponentProps } from 'react'
 import * as styles from './History.module.css'
 
 import { Card } from '~/components/molecules/Card'
+import { CardList } from '~/components/molecules/CardList'
 import { generateBlogUrl } from '~/utils/generateBlogUrl'
 
 type HistoryItem = {
@@ -18,21 +19,15 @@ type Props = {
 }
 
 export const PostHistories: React.FC<Props> = ({ postHistories }) => {
-  const Items = useMemo(
+  const items = useMemo(
     () =>
-      postHistories.map<React.ReactNode>(
-        ({ slug, title, description, publishDate, tags }) => (
-          <li key={slug}>
-            <Card
-              title={title}
-              url={generateBlogUrl(slug)}
-              body={description}
-              publishDate={publishDate}
-              tags={tags}
-            />
-          </li>
-        )
-      ),
+      postHistories.map(({ title, slug, description, publishDate, tags }) => ({
+        title,
+        url: generateBlogUrl(slug),
+        body: description,
+        publishDate,
+        tags,
+      })),
     [postHistories]
   )
   return (
@@ -40,7 +35,7 @@ export const PostHistories: React.FC<Props> = ({ postHistories }) => {
       <h2 className={styles.title}>BLOGS</h2>
       <p>技術的な気づき、勉強、趣味など適当になんか書く。</p>
       <div className={styles.histories}>
-        <ul className={styles.historyList}>{Items}</ul>
+        <CardList keyPrefix="blogTop" items={items} />
       </div>
     </section>
   )
