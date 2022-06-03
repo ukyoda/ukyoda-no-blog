@@ -14,6 +14,10 @@ module.exports = {
         '2xl': '1024px',
       },
       textColor: '#888',
+      fontSize: {
+        lg: '32px',
+        md: '28px',
+      },
       fontFamily: {
         base: [
           'Helvetica Neue',

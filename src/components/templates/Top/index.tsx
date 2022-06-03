@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 
 import * as styles from './Top.module.css'
-import { Description } from './components/Description'
 import { PostHistories } from './components/History'
 import { Logo } from './components/Logo'
+
+import { CardList } from '~/components/molecules/CardList'
+import { generateBlogUrl } from '~/utils/generateBlogUrl'
 
 export type Post = {
   title: string
@@ -21,17 +23,36 @@ type Props = {
 }
 
 const TopTemplateOrig: React.FC<Props> = ({ posts }) => {
+  const items = useMemo(() => {
+    return posts.map(({ title, slug, description, publishDate, tags }) => ({
+      title,
+      url: generateBlogUrl(slug),
+      body: description,
+      publishDate,
+      tags,
+    }))
+  }, [posts])
   return (
     <div className={styles.top}>
-      <div className={styles.logoContent}>
+      <section className={styles.logoContent}>
         <Logo />
-      </div>
-      <div className={styles.descriptionContent}>
-        <Description />
-      </div>
-      <div>
-        <PostHistories postHistories={posts} />
-      </div>
+      </section>
+      <section className={styles.descriptionContent}>
+        <h2 className={styles.title}>WELCOME TO MY BLOG!!</h2>
+        <p className={styles.paragraph}>
+          このサイトはukyodaの個人ブログです。何気ない日常のこととか、技術的な何かとか、
+          徒然なるままにちょっとずつ更新していきます。過度な期待はしないでください。
+        </p>
+      </section>
+      <section className={styles.posts}>
+        <h2 className={styles.title}>MY POSTS</h2>
+        <p className={styles.paragraph}>
+          技術的な気づき、勉強、趣味など適当になんか書く。
+        </p>
+        <div>
+          <CardList keyPrefix="blogTop" items={items} />
+        </div>
+      </section>
     </div>
   )
 }

@@ -4,7 +4,7 @@ import * as styles from './Card.module.css'
 
 import { Tag } from '~/components/atoms/Tag'
 
-type Props = {
+type CardProps = {
   title: string
   url: string
   body: string
@@ -12,7 +12,7 @@ type Props = {
   tags?: ComponentProps<typeof Tag>[]
 }
 
-export const Card: React.FC<Props> = React.memo(
+export const Card: React.VFC<CardProps> = React.memo(
   ({ title, url, body, publishDate, tags = [] }) => {
     const Tags = tags.map(({ name, pathname }, idx) => {
       return <Tag name={name} pathname={pathname} key={`idx-${idx}`} />
