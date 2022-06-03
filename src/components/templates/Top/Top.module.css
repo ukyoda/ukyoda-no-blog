@@ -2,11 +2,17 @@
   padding: 0 30px 32px;
 }
 
-.top .logo-content {
+.logo-content {
   margin: 90px 0 50px;
 }
 
-.top .description-content {
+@media screen and (max-width: theme('screens.sm')) {
+  .logo-content {
+    margin: 0 0 30px;
+  }
+}
+
+.description-content {
   margin-bottom: 32px;
 }
 
