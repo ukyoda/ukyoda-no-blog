@@ -1,0 +1,13 @@
+.article {
+  padding: 30px 25px;
+}
+
+.header {
+  margin-bottom: 24px;
+}
+
+.title {
+  font-size: theme('fontSize.lg');
+  font-weight: bold;
+  margin-bottom: 20px;
+}
