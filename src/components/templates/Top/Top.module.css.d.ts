@@ -2,3 +2,6 @@
 export const top: string;
 export const logoContent: string;
 export const descriptionContent: string;
+export const title: string;
+export const paragraph: string;
+export const posts: string;

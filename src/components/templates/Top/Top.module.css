@@ -9,3 +9,18 @@
 .top .description-content {
   margin-bottom: 32px;
 }
+
+.title {
+  font-family: theme('fontFamily.gothic');
+  font-weight: 600;
+  font-size: theme('fontSize.md');
+  margin-bottom: 16px;
+}
+
+.paragraph + * {
+  margin-top: 10px;
+}
+
+.posts {
+  margin-top: 16px;
+}

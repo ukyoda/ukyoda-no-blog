@@ -5,9 +5,9 @@ import * as styles from './Logo.module.css'
 
 const LogoOrig = () => (
   <div className={styles.logoWrapper}>
-    <div className={styles.logo}>
+    <h1 className={styles.logo}>
       <StaticImage src="../../../../../assets/images/Logo.png" alt="ロゴ画像" />
-    </div>
+    </h1>
   </div>
 )
 LogoOrig.displayName = 'Logo'
